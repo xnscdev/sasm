@@ -27,6 +27,8 @@ sasm_SOURCES =		\
 	inst-int.cc	\
 	inst-jmp.cc	\
 	inst-jmpf.cc	\
+	inst-lea.cc	\
+	inst-mov.cc	\
 	inst-mul.cc	\
 	inst-neg.cc	\
 	inst-not.cc	\
@@ -36,6 +38,8 @@ sasm_SOURCES =		\
 	inst-repz.cc	\
 	inst-ret.cc	\
 	inst-out.cc	\
+	inst-test.cc	\
+	inst-xchg.cc	\
 	insts-arith.cc	\
 	insts-ascii.cc	\
 	insts-jf.cc	\
