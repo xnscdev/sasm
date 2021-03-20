@@ -223,6 +223,24 @@ COFF32Object::add_symbol (AsmLabel *sym)
   return symtab.size () - 1;
 }
 
+uint32_t
+COFF32Object::relocate_from (uint32_t symbol, std::string section,
+                             uint32_t offset, unsigned char type)
+{
+  /* Get relocation section */
+  uint32_t from_sectid = search_section (section);
+  if (from_sectid == 0)
+    return 0;
+
+  /* Add relocation table entry */
+  coff_reloc rel;
+  rel.r_vaddr = offset;
+  rel.r_symndx = symbol;
+  rel.r_type = type;
+  shtable[from_sectid - 1].relocs.push_back (rel);
+  return from_sectid;
+}
+
 bool
 COFF32Object::write (FILE *stream)
 {
