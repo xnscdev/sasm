@@ -221,6 +221,9 @@ Elf32_Word
 ELF32Object::relocate_from (Elf32_Word target, std::string section,
                             Elf32_Addr offset, unsigned char type)
 {
+  Elf32_Word targsym = section_symbol (target);
+  if (targsym == 0)
+    return 0;
   Elf32_Word from_sectid = search_section (section);
   if (from_sectid == 0)
     return 0;
@@ -230,7 +233,7 @@ ELF32Object::relocate_from (Elf32_Word target, std::string section,
   ELF32Section &rel_section = shtable[rel_sectid];
   Elf32_Rel rel;
   rel.r_offset = offset;
-  rel.r_info = ELF32_R_INFO (target, type);
+  rel.r_info = ELF32_R_INFO (targsym, type);
   rel_section.info = from_sectid;
   for (size_t i = 0; i < sizeof (Elf32_Rel); i++)
     rel_section.data.push_back (((unsigned char *) &rel)[i]);
