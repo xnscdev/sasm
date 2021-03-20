@@ -20,16 +20,54 @@
 #include "gen-obj.hh"
 
 bool
-Object::assemble_inst (AsmInst *inst, uint32_t section)
+Object::elf_assemble (AsmInst *inst)
+{
+  Elf32_Word from = elf.search_section (section);
+  if (from == 0)
+    return false;
+  bool ret = elf.assemble_inst (inst, from);
+  if (reloc)
+    {
+      Elf32_Word target = elf.search_section (reloc_section);
+      if (target == 0)
+	return false;
+      elf.relocate_from (target, section, reloc_inst, R_386_32);
+    }
+  reloc = false;
+  return ret;
+}
+
+bool
+Object::coff_assemble (AsmInst *inst)
+{
+  uint32_t from = coff.search_section (section);
+  if (from == 0)
+    return false;
+  bool ret = coff.assemble_inst (inst, from);
+  if (reloc)
+    {
+    }
+  reloc = false;
+  return ret;
+}
+
+void
+Object::switch_section (std::string new_sect)
+{
+  section = new_sect;
+}
+
+bool
+Object::assemble_inst (AsmInst *inst)
 {
   switch (type)
     {
     case ObjectFileFormat::BINARY32:
       return assemble (inst, binary, ctx);
     case ObjectFileFormat::ELF32:
-      return elf.assemble_inst (inst, section);
+      return elf_assemble (inst);
     case ObjectFileFormat::COFF32:
-      return coff.assemble_inst (inst, section);
+      return coff_assemble (inst);
     default:
       return false;
     }

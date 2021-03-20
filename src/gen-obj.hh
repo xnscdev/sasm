@@ -39,13 +39,18 @@ class Object
   std::vector <unsigned char> binary;
   ELF32Object elf;
   COFF32Object coff;
+  std::string section;
+
+  bool elf_assemble (AsmInst *inst);
+  bool coff_assemble (AsmInst *inst);
 
 public:
   ObjectFileFormat type;
 
   Object (ObjectFileFormat type, std::string filename) :
     elf (filename), coff (filename), type (type) {}
-  bool assemble_inst (AsmInst *inst, uint32_t section);
+  void switch_section (std::string new_sect);
+  bool assemble_inst (AsmInst *inst);
   bool write (FILE *stream);
 };
 

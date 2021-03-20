@@ -111,7 +111,7 @@ write_operand (const AsmRegister *reg, const AsmStorage *rm,
 	  result.push_back (regid | 5);
 	  write_int32_le (loc->disp, result);
 	  if (loc->relocate)
-	    mark_reloc (curraddr + 1);
+	    mark_reloc (curraddr + 1, loc->section);
 	  return true;
 	}
 
@@ -172,7 +172,8 @@ write_operand (const AsmRegister *reg, const AsmStorage *rm,
 	  else if (loc->base->id == AsmRegister::EBP->id)
 	    write_int32_le (0, result);
 	  if (loc->relocate)
-	    mark_reloc (curraddr + (loc->index != nullptr ? 2 : 1));
+	    mark_reloc (curraddr + (loc->index != nullptr ? 2 : 1),
+			loc->section);
 	}
       return true;
     }

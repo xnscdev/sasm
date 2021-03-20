@@ -143,6 +143,7 @@ public:
   long long disp;
   AsmRegister *segment;
   size_t size;
+  std::string section;
   bool relocate;
 
   AsmMemoryLoc (AsmRegister *base, AsmRegister *index, unsigned char scale,
@@ -153,7 +154,7 @@ public:
 		long long disp, AsmRegister *segment, AsmLabel *label,
 		size_t size) :
     base (base), index (index), scale (scale), disp (disp + label->addr),
-    segment (segment), size (size), relocate (true) {}
+    segment (segment), size (size), section (label->section), relocate (true) {}
   size_t width (void);
 };
 

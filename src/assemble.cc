@@ -19,25 +19,22 @@
 #include "assemble.hh"
 
 uint32_t curraddr;
-
-static uint32_t reloc_inst;
-static bool reloc;
+uint32_t reloc_inst;
+std::string reloc_section;
+bool reloc;
 
 bool
 assemble (AsmInst *inst, std::vector <unsigned char> &result,
 	  const AsmContext &ctx)
 {
   curraddr += inst->width (ctx);
-  bool ret = inst->assemble (result, ctx);
-  if (reloc)
-    ; /* TODO Add relocation entry */
-  reloc = false;
-  return ret;
+  return inst->assemble (result, ctx);
 }
 
 void
-mark_reloc (uint32_t ip)
+mark_reloc (uint32_t ip, std::string section)
 {
   reloc_inst = ip;
+  reloc_section = section;
   reloc = true;
 }

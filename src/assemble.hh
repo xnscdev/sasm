@@ -22,9 +22,12 @@
 #include "inst.hh"
 
 extern uint32_t curraddr;
+extern uint32_t reloc_inst;
+extern std::string reloc_section;
+extern bool reloc;
 
 bool assemble (AsmInst *inst, std::vector <unsigned char> &result,
 	       const AsmContext &ctx);
-void mark_reloc (uint32_t ip);
+void mark_reloc (uint32_t ip, std::string section);
 
 #endif
