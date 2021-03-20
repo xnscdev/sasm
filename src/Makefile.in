@@ -110,18 +110,18 @@ libsasm_a_AR = $(AR) $(ARFLAGS)
 libsasm_a_LIBADD =
 am_libsasm_a_OBJECTS = assemble.$(OBJEXT) dtv-define.$(OBJEXT) \
 	dtv-times.$(OBJEXT) gen-coff.$(OBJEXT) gen-elf.$(OBJEXT) \
-	inst-call.$(OBJEXT) inst-callf.$(OBJEXT) inst-dec.$(OBJEXT) \
-	inst-div.$(OBJEXT) inst-idiv.$(OBJEXT) inst-imul.$(OBJEXT) \
-	inst-in.$(OBJEXT) inst-inc.$(OBJEXT) inst-int.$(OBJEXT) \
-	inst-jmp.$(OBJEXT) inst-jmpf.$(OBJEXT) inst-lea.$(OBJEXT) \
-	inst-mov.$(OBJEXT) inst-mul.$(OBJEXT) inst-neg.$(OBJEXT) \
-	inst-not.$(OBJEXT) inst-pop.$(OBJEXT) inst-push.$(OBJEXT) \
-	inst-repnz.$(OBJEXT) inst-repz.$(OBJEXT) inst-ret.$(OBJEXT) \
-	inst-out.$(OBJEXT) inst-test.$(OBJEXT) inst-xchg.$(OBJEXT) \
-	insts-arith.$(OBJEXT) insts-ascii.$(OBJEXT) insts-jf.$(OBJEXT) \
-	insts-loop.$(OBJEXT) insts-rotshf.$(OBJEXT) \
-	insts-str.$(OBJEXT) insts-zo.$(OBJEXT) memloc.$(OBJEXT) \
-	registers.$(OBJEXT) util.$(OBJEXT)
+	gen-obj.$(OBJEXT) inst-call.$(OBJEXT) inst-callf.$(OBJEXT) \
+	inst-dec.$(OBJEXT) inst-div.$(OBJEXT) inst-idiv.$(OBJEXT) \
+	inst-imul.$(OBJEXT) inst-in.$(OBJEXT) inst-inc.$(OBJEXT) \
+	inst-int.$(OBJEXT) inst-jmp.$(OBJEXT) inst-jmpf.$(OBJEXT) \
+	inst-lea.$(OBJEXT) inst-mov.$(OBJEXT) inst-mul.$(OBJEXT) \
+	inst-neg.$(OBJEXT) inst-not.$(OBJEXT) inst-pop.$(OBJEXT) \
+	inst-push.$(OBJEXT) inst-repnz.$(OBJEXT) inst-repz.$(OBJEXT) \
+	inst-ret.$(OBJEXT) inst-out.$(OBJEXT) inst-test.$(OBJEXT) \
+	inst-xchg.$(OBJEXT) insts-arith.$(OBJEXT) \
+	insts-ascii.$(OBJEXT) insts-jf.$(OBJEXT) insts-loop.$(OBJEXT) \
+	insts-rotshf.$(OBJEXT) insts-str.$(OBJEXT) insts-zo.$(OBJEXT) \
+	memloc.$(OBJEXT) registers.$(OBJEXT) util.$(OBJEXT)
 libsasm_a_OBJECTS = $(am_libsasm_a_OBJECTS)
 am_sasm_OBJECTS = driver.$(OBJEXT) error.$(OBJEXT) intel-lex.$(OBJEXT) \
 	intel-parse.$(OBJEXT)
@@ -145,25 +145,25 @@ am__maybe_remake_depfiles = depfiles
 am__depfiles_remade = ./$(DEPDIR)/assemble.Po ./$(DEPDIR)/driver.Po \
 	./$(DEPDIR)/dtv-define.Po ./$(DEPDIR)/dtv-times.Po \
 	./$(DEPDIR)/error.Po ./$(DEPDIR)/gen-coff.Po \
-	./$(DEPDIR)/gen-elf.Po ./$(DEPDIR)/inst-call.Po \
-	./$(DEPDIR)/inst-callf.Po ./$(DEPDIR)/inst-dec.Po \
-	./$(DEPDIR)/inst-div.Po ./$(DEPDIR)/inst-idiv.Po \
-	./$(DEPDIR)/inst-imul.Po ./$(DEPDIR)/inst-in.Po \
-	./$(DEPDIR)/inst-inc.Po ./$(DEPDIR)/inst-int.Po \
-	./$(DEPDIR)/inst-jmp.Po ./$(DEPDIR)/inst-jmpf.Po \
-	./$(DEPDIR)/inst-lea.Po ./$(DEPDIR)/inst-mov.Po \
-	./$(DEPDIR)/inst-mul.Po ./$(DEPDIR)/inst-neg.Po \
-	./$(DEPDIR)/inst-not.Po ./$(DEPDIR)/inst-out.Po \
-	./$(DEPDIR)/inst-pop.Po ./$(DEPDIR)/inst-push.Po \
-	./$(DEPDIR)/inst-repnz.Po ./$(DEPDIR)/inst-repz.Po \
-	./$(DEPDIR)/inst-ret.Po ./$(DEPDIR)/inst-test.Po \
-	./$(DEPDIR)/inst-xchg.Po ./$(DEPDIR)/insts-arith.Po \
-	./$(DEPDIR)/insts-ascii.Po ./$(DEPDIR)/insts-jf.Po \
-	./$(DEPDIR)/insts-loop.Po ./$(DEPDIR)/insts-rotshf.Po \
-	./$(DEPDIR)/insts-str.Po ./$(DEPDIR)/insts-zo.Po \
-	./$(DEPDIR)/intel-lex.Po ./$(DEPDIR)/intel-parse.Po \
-	./$(DEPDIR)/memloc.Po ./$(DEPDIR)/registers.Po \
-	./$(DEPDIR)/util.Po
+	./$(DEPDIR)/gen-elf.Po ./$(DEPDIR)/gen-obj.Po \
+	./$(DEPDIR)/inst-call.Po ./$(DEPDIR)/inst-callf.Po \
+	./$(DEPDIR)/inst-dec.Po ./$(DEPDIR)/inst-div.Po \
+	./$(DEPDIR)/inst-idiv.Po ./$(DEPDIR)/inst-imul.Po \
+	./$(DEPDIR)/inst-in.Po ./$(DEPDIR)/inst-inc.Po \
+	./$(DEPDIR)/inst-int.Po ./$(DEPDIR)/inst-jmp.Po \
+	./$(DEPDIR)/inst-jmpf.Po ./$(DEPDIR)/inst-lea.Po \
+	./$(DEPDIR)/inst-mov.Po ./$(DEPDIR)/inst-mul.Po \
+	./$(DEPDIR)/inst-neg.Po ./$(DEPDIR)/inst-not.Po \
+	./$(DEPDIR)/inst-out.Po ./$(DEPDIR)/inst-pop.Po \
+	./$(DEPDIR)/inst-push.Po ./$(DEPDIR)/inst-repnz.Po \
+	./$(DEPDIR)/inst-repz.Po ./$(DEPDIR)/inst-ret.Po \
+	./$(DEPDIR)/inst-test.Po ./$(DEPDIR)/inst-xchg.Po \
+	./$(DEPDIR)/insts-arith.Po ./$(DEPDIR)/insts-ascii.Po \
+	./$(DEPDIR)/insts-jf.Po ./$(DEPDIR)/insts-loop.Po \
+	./$(DEPDIR)/insts-rotshf.Po ./$(DEPDIR)/insts-str.Po \
+	./$(DEPDIR)/insts-zo.Po ./$(DEPDIR)/intel-lex.Po \
+	./$(DEPDIR)/intel-parse.Po ./$(DEPDIR)/memloc.Po \
+	./$(DEPDIR)/registers.Po ./$(DEPDIR)/util.Po
 am__mv = mv -f
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
@@ -346,6 +346,8 @@ libsasm_a_SOURCES = \
 	gen-coff.hh	\
 	gen-elf.cc	\
 	gen-elf.hh	\
+	gen-obj.cc	\
+	gen-obj.hh	\
 	inst.hh		\
 	inst-call.cc	\
 	inst-callf.cc	\
@@ -497,6 +499,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/error.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gen-coff.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gen-elf.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gen-obj.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/inst-call.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/inst-callf.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/inst-dec.Po@am__quote@ # am--include-marker
@@ -702,6 +705,7 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/error.Po
 	-rm -f ./$(DEPDIR)/gen-coff.Po
 	-rm -f ./$(DEPDIR)/gen-elf.Po
+	-rm -f ./$(DEPDIR)/gen-obj.Po
 	-rm -f ./$(DEPDIR)/inst-call.Po
 	-rm -f ./$(DEPDIR)/inst-callf.Po
 	-rm -f ./$(DEPDIR)/inst-dec.Po
@@ -790,6 +794,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/error.Po
 	-rm -f ./$(DEPDIR)/gen-coff.Po
 	-rm -f ./$(DEPDIR)/gen-elf.Po
+	-rm -f ./$(DEPDIR)/gen-obj.Po
 	-rm -f ./$(DEPDIR)/inst-call.Po
 	-rm -f ./$(DEPDIR)/inst-callf.Po
 	-rm -f ./$(DEPDIR)/inst-dec.Po

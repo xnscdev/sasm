@@ -21,6 +21,8 @@ libsasm_a_SOURCES =	\
 	gen-coff.hh	\
 	gen-elf.cc	\
 	gen-elf.hh	\
+	gen-obj.cc	\
+	gen-obj.hh	\
 	inst.hh		\
 	inst-call.cc	\
 	inst-callf.cc	\
