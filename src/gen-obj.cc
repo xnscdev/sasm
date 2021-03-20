@@ -110,6 +110,10 @@ Object::coff_assemble (AsmInst *inst)
   bool ret = coff.assemble_inst (inst, from);
   if (reloc)
     {
+      uint32_t target = coff.search_section (reloc_section);
+      if (target == 0)
+	return false;
+      coff.relocate_from (target, section, reloc_inst, IMAGE_REL_I386_DIR32);
     }
   reloc = false;
   return ret;
