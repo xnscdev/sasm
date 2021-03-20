@@ -18,6 +18,8 @@ sasm_SOURCES =		\
 	error.cc	\
 	error.hh	\
 	expr.hh		\
+	gen-coff.cc	\
+	gen-coff.hh	\
 	gen-elf.cc	\
 	gen-elf.hh	\
 	inst.hh		\
