@@ -136,125 +136,79 @@ extern int yydebug;
     T_DWORD = 263,                 /* "dword"  */
     T_NEAR = 264,                  /* "near"  */
     T_FAR = 265,                   /* "far"  */
-    T_ADC = 266,                   /* "adc"  */
-    T_ADD = 267,                   /* "add"  */
-    T_AND = 268,                   /* "and"  */
-    T_CMP = 269,                   /* "cmp"  */
-    T_OR = 270,                    /* "or"  */
-    T_SBB = 271,                   /* "sbb"  */
-    T_SUB = 272,                   /* "sub"  */
-    T_XOR = 273,                   /* "xor"  */
-    T_JO = 274,                    /* "jo"  */
-    T_JNO = 275,                   /* "jno"  */
-    T_JC = 276,                    /* "jc"  */
-    T_JNC = 277,                   /* "jnc"  */
-    T_JZ = 278,                    /* "jz"  */
-    T_JNZ = 279,                   /* "jnz"  */
-    T_JNA = 280,                   /* "jna"  */
-    T_JA = 281,                    /* "ja"  */
-    T_JS = 282,                    /* "js"  */
-    T_JNS = 283,                   /* "jns"  */
-    T_JP = 284,                    /* "jp"  */
-    T_JNP = 285,                   /* "jnp"  */
-    T_JL = 286,                    /* "jl"  */
-    T_JNL = 287,                   /* "jnl"  */
-    T_JNG = 288,                   /* "jng"  */
-    T_JG = 289,                    /* "jg"  */
-    T_AAA = 290,                   /* "aaa"  */
-    T_AAD = 291,                   /* "aad"  */
-    T_AAM = 292,                   /* "aam"  */
-    T_AAS = 293,                   /* "aas"  */
-    T_CALL = 294,                  /* "call"  */
-    T_CBW = 295,                   /* "cbw"  */
-    T_CDQ = 296,                   /* "cdq"  */
-    T_CLC = 297,                   /* "clc"  */
-    T_CLD = 298,                   /* "cld"  */
-    T_CLI = 299,                   /* "cli"  */
-    T_CMPS = 300,                  /* "cmps"  */
-    T_CWD = 301,                   /* "cwd"  */
-    T_CWDE = 302,                  /* "cwde"  */
-    T_DEC = 303,                   /* "dec"  */
-    T_DIV = 304,                   /* "div"  */
-    T_ENTER = 305,                 /* "enter"  */
-    T_HLT = 306,                   /* "hlt"  */
-    T_IDIV = 307,                  /* "idiv"  */
-    T_IMUL = 308,                  /* "imul"  */
-    T_IN = 309,                    /* "in"  */
-    T_INC = 310,                   /* "inc"  */
-    T_INS = 311,                   /* "ins"  */
-    T_INT = 312,                   /* "int"  */
-    T_INT3 = 313,                  /* "int3"  */
-    T_INTO = 314,                  /* "into"  */
-    T_IRET = 315,                  /* "iret"  */
-    T_JMP = 316,                   /* "jmp"  */
-    T_LAHF = 317,                  /* "lahf"  */
-    T_LEA = 318,                   /* "lea"  */
-    T_LEAVE = 319,                 /* "leave"  */
-    T_LODS = 320,                  /* "lods"  */
-    T_LOOP = 321,                  /* "loop"  */
-    T_LOOPNZ = 322,                /* "loopnz"  */
-    T_LOOPZ = 323,                 /* "loopz"  */
-    T_MOV = 324,                   /* "mov"  */
-    T_MOVS = 325,                  /* "movs"  */
-    T_MUL = 326,                   /* "mul"  */
-    T_NEG = 327,                   /* "neg"  */
-    T_NOT = 328,                   /* "not"  */
-    T_OUT = 329,                   /* "out"  */
-    T_OUTS = 330,                  /* "outs"  */
-    T_POP = 331,                   /* "pop"  */
-    T_POPA = 332,                  /* "popa"  */
-    T_POPF = 333,                  /* "popf"  */
-    T_PUSH = 334,                  /* "push"  */
-    T_PUSHA = 335,                 /* "pusha"  */
-    T_PUSHF = 336,                 /* "pushf"  */
-    T_RCL = 337,                   /* "rcl"  */
-    T_RCR = 338,                   /* "rcr"  */
-    T_REPNZ = 339,                 /* "repnz"  */
-    T_REPZ = 340,                  /* "repz"  */
-    T_RET = 341,                   /* "ret"  */
-    T_ROL = 342,                   /* "rol"  */
-    T_ROR = 343,                   /* "ror"  */
-    T_SAHF = 344,                  /* "sahf"  */
-    T_SAR = 345,                   /* "sar"  */
-    T_SCAS = 346,                  /* "scas"  */
-    T_SHL = 347,                   /* "shl"  */
-    T_SHR = 348,                   /* "shr"  */
-    T_STC = 349,                   /* "stc"  */
-    T_STD = 350,                   /* "std"  */
-    T_STOS = 351,                  /* "stos"  */
-    T_STI = 352,                   /* "sti"  */
-    T_TEST = 353,                  /* "test"  */
-    T_XCHG = 354,                  /* "xchg"  */
-    T_XLAT = 355,                  /* "xlat"  */
-    T_CS = 356,                    /* "cs"  */
-    T_DS = 357,                    /* "ds"  */
-    T_ES = 358,                    /* "es"  */
-    T_FS = 359,                    /* "fs"  */
-    T_GS = 360,                    /* "gs"  */
-    T_AL = 361,                    /* "al"  */
-    T_CL = 362,                    /* "cl"  */
-    T_DL = 363,                    /* "dl"  */
-    T_BL = 364,                    /* "bl"  */
-    T_AH = 365,                    /* "ah"  */
-    T_CH = 366,                    /* "ch"  */
-    T_DH = 367,                    /* "dh"  */
-    T_BH = 368,                    /* "bh"  */
-    T_AX = 369,                    /* "ax"  */
-    T_CX = 370,                    /* "cx"  */
-    T_DX = 371,                    /* "dx"  */
-    T_BX = 372,                    /* "bx"  */
-    T_SP = 373,                    /* "sp"  */
-    T_BP = 374,                    /* "bp"  */
-    T_SI = 375,                    /* "si"  */
-    T_DI = 376,                    /* "di"  */
-    T_EAX = 377,                   /* "eax"  */
-    T_ECX = 378,                   /* "ecx"  */
-    T_EDX = 379,                   /* "edx"  */
-    T_EBX = 380,                   /* "ebx"  */
-    T_ESP = 381,                   /* "esp"  */
-    T_EBP = 382,                   /* "ebp"  */
-    T_ESI = 383,                   /* "esi"  */
-    T_EDI = 384                    /* "edi"  */
+    T_ARTH = 266,                  /* "instruction mnemonic"  */
+    T_JF = 267,                    /* T_JF  */
+    T_ZO = 268,                    /* T_ZO  */
+    T_AAD = 269,                   /* T_AAD  */
+    T_AAM = 270,                   /* T_AAM  */
+    T_CALL = 271,                  /* T_CALL  */
+    T_CMPS = 272,                  /* T_CMPS  */
+    T_DEC = 273,                   /* T_DEC  */
+    T_DIV = 274,                   /* T_DIV  */
+    T_IDIV = 275,                  /* T_IDIV  */
+    T_IMUL = 276,                  /* T_IMUL  */
+    T_IN = 277,                    /* T_IN  */
+    T_INC = 278,                   /* T_INC  */
+    T_INS = 279,                   /* T_INS  */
+    T_INT = 280,                   /* T_INT  */
+    T_JMP = 281,                   /* T_JMP  */
+    T_LEA = 282,                   /* T_LEA  */
+    T_LODS = 283,                  /* T_LODS  */
+    T_LOOP = 284,                  /* T_LOOP  */
+    T_LOOPNZ = 285,                /* T_LOOPNZ  */
+    T_LOOPZ = 286,                 /* T_LOOPZ  */
+    T_MOV = 287,                   /* T_MOV  */
+    T_MOVS = 288,                  /* T_MOVS  */
+    T_MUL = 289,                   /* T_MUL  */
+    T_NEG = 290,                   /* T_NEG  */
+    T_NOT = 291,                   /* T_NOT  */
+    T_OUT = 292,                   /* T_OUT  */
+    T_OUTS = 293,                  /* T_OUTS  */
+    T_POP = 294,                   /* T_POP  */
+    T_PUSH = 295,                  /* T_PUSH  */
+    T_RCL = 296,                   /* T_RCL  */
+    T_RCR = 297,                   /* T_RCR  */
+    T_REPNZ = 298,                 /* T_REPNZ  */
+    T_REPZ = 299,                  /* T_REPZ  */
+    T_RET = 300,                   /* T_RET  */
+    T_ROL = 301,                   /* T_ROL  */
+    T_ROR = 302,                   /* T_ROR  */
+    T_SAR = 303,                   /* T_SAR  */
+    T_SCAS = 304,                  /* T_SCAS  */
+    T_SHL = 305,                   /* T_SHL  */
+    T_SHR = 306,                   /* T_SHR  */
+    T_STOS = 307,                  /* T_STOS  */
+    T_TEST = 308,                  /* T_TEST  */
+    T_XCHG = 309,                  /* T_XCHG  */
+    T_CS = 310,                    /* "register"  */
+    T_DS = 311,                    /* T_DS  */
+    T_ES = 312,                    /* T_ES  */
+    T_FS = 313,                    /* T_FS  */
+    T_GS = 314,                    /* T_GS  */
+    T_AL = 315,                    /* T_AL  */
+    T_CL = 316,                    /* T_CL  */
+    T_DL = 317,                    /* T_DL  */
+    T_BL = 318,                    /* T_BL  */
+    T_AH = 319,                    /* T_AH  */
+    T_CH = 320,                    /* T_CH  */
+    T_DH = 321,                    /* T_DH  */
+    T_BH = 322,                    /* T_BH  */
+    T_AX = 323,                    /* T_AX  */
+    T_CX = 324,                    /* T_CX  */
+    T_DX = 325,                    /* T_DX  */
+    T_BX = 326,                    /* T_BX  */
+    T_SP = 327,                    /* T_SP  */
+    T_BP = 328,                    /* T_BP  */
+    T_SI = 329,                    /* T_SI  */
+    T_DI = 330,                    /* T_DI  */
+    T_EAX = 331,                   /* T_EAX  */
+    T_ECX = 332,                   /* T_ECX  */
+    T_EDX = 333,                   /* T_EDX  */
+    T_EBX = 334,                   /* T_EBX  */
+    T_ESP = 335,                   /* T_ESP  */
+    T_EBP = 336,                   /* T_EBP  */
+    T_ESI = 337,                   /* T_ESI  */
+    T_EDI = 338                    /* T_EDI  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -271,125 +225,79 @@ extern int yydebug;
 #define T_DWORD 263
 #define T_NEAR 264
 #define T_FAR 265
-#define T_ADC 266
-#define T_ADD 267
-#define T_AND 268
-#define T_CMP 269
-#define T_OR 270
-#define T_SBB 271
-#define T_SUB 272
-#define T_XOR 273
-#define T_JO 274
-#define T_JNO 275
-#define T_JC 276
-#define T_JNC 277
-#define T_JZ 278
-#define T_JNZ 279
-#define T_JNA 280
-#define T_JA 281
-#define T_JS 282
-#define T_JNS 283
-#define T_JP 284
-#define T_JNP 285
-#define T_JL 286
-#define T_JNL 287
-#define T_JNG 288
-#define T_JG 289
-#define T_AAA 290
-#define T_AAD 291
-#define T_AAM 292
-#define T_AAS 293
-#define T_CALL 294
-#define T_CBW 295
-#define T_CDQ 296
-#define T_CLC 297
-#define T_CLD 298
-#define T_CLI 299
-#define T_CMPS 300
-#define T_CWD 301
-#define T_CWDE 302
-#define T_DEC 303
-#define T_DIV 304
-#define T_ENTER 305
-#define T_HLT 306
-#define T_IDIV 307
-#define T_IMUL 308
-#define T_IN 309
-#define T_INC 310
-#define T_INS 311
-#define T_INT 312
-#define T_INT3 313
-#define T_INTO 314
-#define T_IRET 315
-#define T_JMP 316
-#define T_LAHF 317
-#define T_LEA 318
-#define T_LEAVE 319
-#define T_LODS 320
-#define T_LOOP 321
-#define T_LOOPNZ 322
-#define T_LOOPZ 323
-#define T_MOV 324
-#define T_MOVS 325
-#define T_MUL 326
-#define T_NEG 327
-#define T_NOT 328
-#define T_OUT 329
-#define T_OUTS 330
-#define T_POP 331
-#define T_POPA 332
-#define T_POPF 333
-#define T_PUSH 334
-#define T_PUSHA 335
-#define T_PUSHF 336
-#define T_RCL 337
-#define T_RCR 338
-#define T_REPNZ 339
-#define T_REPZ 340
-#define T_RET 341
-#define T_ROL 342
-#define T_ROR 343
-#define T_SAHF 344
-#define T_SAR 345
-#define T_SCAS 346
-#define T_SHL 347
-#define T_SHR 348
-#define T_STC 349
-#define T_STD 350
-#define T_STOS 351
-#define T_STI 352
-#define T_TEST 353
-#define T_XCHG 354
-#define T_XLAT 355
-#define T_CS 356
-#define T_DS 357
-#define T_ES 358
-#define T_FS 359
-#define T_GS 360
-#define T_AL 361
-#define T_CL 362
-#define T_DL 363
-#define T_BL 364
-#define T_AH 365
-#define T_CH 366
-#define T_DH 367
-#define T_BH 368
-#define T_AX 369
-#define T_CX 370
-#define T_DX 371
-#define T_BX 372
-#define T_SP 373
-#define T_BP 374
-#define T_SI 375
-#define T_DI 376
-#define T_EAX 377
-#define T_ECX 378
-#define T_EDX 379
-#define T_EBX 380
-#define T_ESP 381
-#define T_EBP 382
-#define T_ESI 383
-#define T_EDI 384
+#define T_ARTH 266
+#define T_JF 267
+#define T_ZO 268
+#define T_AAD 269
+#define T_AAM 270
+#define T_CALL 271
+#define T_CMPS 272
+#define T_DEC 273
+#define T_DIV 274
+#define T_IDIV 275
+#define T_IMUL 276
+#define T_IN 277
+#define T_INC 278
+#define T_INS 279
+#define T_INT 280
+#define T_JMP 281
+#define T_LEA 282
+#define T_LODS 283
+#define T_LOOP 284
+#define T_LOOPNZ 285
+#define T_LOOPZ 286
+#define T_MOV 287
+#define T_MOVS 288
+#define T_MUL 289
+#define T_NEG 290
+#define T_NOT 291
+#define T_OUT 292
+#define T_OUTS 293
+#define T_POP 294
+#define T_PUSH 295
+#define T_RCL 296
+#define T_RCR 297
+#define T_REPNZ 298
+#define T_REPZ 299
+#define T_RET 300
+#define T_ROL 301
+#define T_ROR 302
+#define T_SAR 303
+#define T_SCAS 304
+#define T_SHL 305
+#define T_SHR 306
+#define T_STOS 307
+#define T_TEST 308
+#define T_XCHG 309
+#define T_CS 310
+#define T_DS 311
+#define T_ES 312
+#define T_FS 313
+#define T_GS 314
+#define T_AL 315
+#define T_CL 316
+#define T_DL 317
+#define T_BL 318
+#define T_AH 319
+#define T_CH 320
+#define T_DH 321
+#define T_BH 322
+#define T_AX 323
+#define T_CX 324
+#define T_DX 325
+#define T_BX 326
+#define T_SP 327
+#define T_BP 328
+#define T_SI 329
+#define T_DI 330
+#define T_EAX 331
+#define T_ECX 332
+#define T_EDX 333
+#define T_EBX 334
+#define T_ESP 335
+#define T_EBP 336
+#define T_ESI 337
+#define T_EDI 338
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -414,7 +322,7 @@ union YYSTYPE
   AsmMemoryLoc *mem;
   Object *obj;
 
-#line 418 "../../src/intel-parse.cc"
+#line 326 "../../src/intel-parse.cc"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -443,146 +351,102 @@ enum yysymbol_kind_t
   YYSYMBOL_T_DWORD = 8,                    /* "dword"  */
   YYSYMBOL_T_NEAR = 9,                     /* "near"  */
   YYSYMBOL_T_FAR = 10,                     /* "far"  */
-  YYSYMBOL_T_ADC = 11,                     /* "adc"  */
-  YYSYMBOL_T_ADD = 12,                     /* "add"  */
-  YYSYMBOL_T_AND = 13,                     /* "and"  */
-  YYSYMBOL_T_CMP = 14,                     /* "cmp"  */
-  YYSYMBOL_T_OR = 15,                      /* "or"  */
-  YYSYMBOL_T_SBB = 16,                     /* "sbb"  */
-  YYSYMBOL_T_SUB = 17,                     /* "sub"  */
-  YYSYMBOL_T_XOR = 18,                     /* "xor"  */
-  YYSYMBOL_T_JO = 19,                      /* "jo"  */
-  YYSYMBOL_T_JNO = 20,                     /* "jno"  */
-  YYSYMBOL_T_JC = 21,                      /* "jc"  */
-  YYSYMBOL_T_JNC = 22,                     /* "jnc"  */
-  YYSYMBOL_T_JZ = 23,                      /* "jz"  */
-  YYSYMBOL_T_JNZ = 24,                     /* "jnz"  */
-  YYSYMBOL_T_JNA = 25,                     /* "jna"  */
-  YYSYMBOL_T_JA = 26,                      /* "ja"  */
-  YYSYMBOL_T_JS = 27,                      /* "js"  */
-  YYSYMBOL_T_JNS = 28,                     /* "jns"  */
-  YYSYMBOL_T_JP = 29,                      /* "jp"  */
-  YYSYMBOL_T_JNP = 30,                     /* "jnp"  */
-  YYSYMBOL_T_JL = 31,                      /* "jl"  */
-  YYSYMBOL_T_JNL = 32,                     /* "jnl"  */
-  YYSYMBOL_T_JNG = 33,                     /* "jng"  */
-  YYSYMBOL_T_JG = 34,                      /* "jg"  */
-  YYSYMBOL_T_AAA = 35,                     /* "aaa"  */
-  YYSYMBOL_T_AAD = 36,                     /* "aad"  */
-  YYSYMBOL_T_AAM = 37,                     /* "aam"  */
-  YYSYMBOL_T_AAS = 38,                     /* "aas"  */
-  YYSYMBOL_T_CALL = 39,                    /* "call"  */
-  YYSYMBOL_T_CBW = 40,                     /* "cbw"  */
-  YYSYMBOL_T_CDQ = 41,                     /* "cdq"  */
-  YYSYMBOL_T_CLC = 42,                     /* "clc"  */
-  YYSYMBOL_T_CLD = 43,                     /* "cld"  */
-  YYSYMBOL_T_CLI = 44,                     /* "cli"  */
-  YYSYMBOL_T_CMPS = 45,                    /* "cmps"  */
-  YYSYMBOL_T_CWD = 46,                     /* "cwd"  */
-  YYSYMBOL_T_CWDE = 47,                    /* "cwde"  */
-  YYSYMBOL_T_DEC = 48,                     /* "dec"  */
-  YYSYMBOL_T_DIV = 49,                     /* "div"  */
-  YYSYMBOL_T_ENTER = 50,                   /* "enter"  */
-  YYSYMBOL_T_HLT = 51,                     /* "hlt"  */
-  YYSYMBOL_T_IDIV = 52,                    /* "idiv"  */
-  YYSYMBOL_T_IMUL = 53,                    /* "imul"  */
-  YYSYMBOL_T_IN = 54,                      /* "in"  */
-  YYSYMBOL_T_INC = 55,                     /* "inc"  */
-  YYSYMBOL_T_INS = 56,                     /* "ins"  */
-  YYSYMBOL_T_INT = 57,                     /* "int"  */
-  YYSYMBOL_T_INT3 = 58,                    /* "int3"  */
-  YYSYMBOL_T_INTO = 59,                    /* "into"  */
-  YYSYMBOL_T_IRET = 60,                    /* "iret"  */
-  YYSYMBOL_T_JMP = 61,                     /* "jmp"  */
-  YYSYMBOL_T_LAHF = 62,                    /* "lahf"  */
-  YYSYMBOL_T_LEA = 63,                     /* "lea"  */
-  YYSYMBOL_T_LEAVE = 64,                   /* "leave"  */
-  YYSYMBOL_T_LODS = 65,                    /* "lods"  */
-  YYSYMBOL_T_LOOP = 66,                    /* "loop"  */
-  YYSYMBOL_T_LOOPNZ = 67,                  /* "loopnz"  */
-  YYSYMBOL_T_LOOPZ = 68,                   /* "loopz"  */
-  YYSYMBOL_T_MOV = 69,                     /* "mov"  */
-  YYSYMBOL_T_MOVS = 70,                    /* "movs"  */
-  YYSYMBOL_T_MUL = 71,                     /* "mul"  */
-  YYSYMBOL_T_NEG = 72,                     /* "neg"  */
-  YYSYMBOL_T_NOT = 73,                     /* "not"  */
-  YYSYMBOL_T_OUT = 74,                     /* "out"  */
-  YYSYMBOL_T_OUTS = 75,                    /* "outs"  */
-  YYSYMBOL_T_POP = 76,                     /* "pop"  */
-  YYSYMBOL_T_POPA = 77,                    /* "popa"  */
-  YYSYMBOL_T_POPF = 78,                    /* "popf"  */
-  YYSYMBOL_T_PUSH = 79,                    /* "push"  */
-  YYSYMBOL_T_PUSHA = 80,                   /* "pusha"  */
-  YYSYMBOL_T_PUSHF = 81,                   /* "pushf"  */
-  YYSYMBOL_T_RCL = 82,                     /* "rcl"  */
-  YYSYMBOL_T_RCR = 83,                     /* "rcr"  */
-  YYSYMBOL_T_REPNZ = 84,                   /* "repnz"  */
-  YYSYMBOL_T_REPZ = 85,                    /* "repz"  */
-  YYSYMBOL_T_RET = 86,                     /* "ret"  */
-  YYSYMBOL_T_ROL = 87,                     /* "rol"  */
-  YYSYMBOL_T_ROR = 88,                     /* "ror"  */
-  YYSYMBOL_T_SAHF = 89,                    /* "sahf"  */
-  YYSYMBOL_T_SAR = 90,                     /* "sar"  */
-  YYSYMBOL_T_SCAS = 91,                    /* "scas"  */
-  YYSYMBOL_T_SHL = 92,                     /* "shl"  */
-  YYSYMBOL_T_SHR = 93,                     /* "shr"  */
-  YYSYMBOL_T_STC = 94,                     /* "stc"  */
-  YYSYMBOL_T_STD = 95,                     /* "std"  */
-  YYSYMBOL_T_STOS = 96,                    /* "stos"  */
-  YYSYMBOL_T_STI = 97,                     /* "sti"  */
-  YYSYMBOL_T_TEST = 98,                    /* "test"  */
-  YYSYMBOL_T_XCHG = 99,                    /* "xchg"  */
-  YYSYMBOL_T_XLAT = 100,                   /* "xlat"  */
-  YYSYMBOL_T_CS = 101,                     /* "cs"  */
-  YYSYMBOL_T_DS = 102,                     /* "ds"  */
-  YYSYMBOL_T_ES = 103,                     /* "es"  */
-  YYSYMBOL_T_FS = 104,                     /* "fs"  */
-  YYSYMBOL_T_GS = 105,                     /* "gs"  */
-  YYSYMBOL_T_AL = 106,                     /* "al"  */
-  YYSYMBOL_T_CL = 107,                     /* "cl"  */
-  YYSYMBOL_T_DL = 108,                     /* "dl"  */
-  YYSYMBOL_T_BL = 109,                     /* "bl"  */
-  YYSYMBOL_T_AH = 110,                     /* "ah"  */
-  YYSYMBOL_T_CH = 111,                     /* "ch"  */
-  YYSYMBOL_T_DH = 112,                     /* "dh"  */
-  YYSYMBOL_T_BH = 113,                     /* "bh"  */
-  YYSYMBOL_T_AX = 114,                     /* "ax"  */
-  YYSYMBOL_T_CX = 115,                     /* "cx"  */
-  YYSYMBOL_T_DX = 116,                     /* "dx"  */
-  YYSYMBOL_T_BX = 117,                     /* "bx"  */
-  YYSYMBOL_T_SP = 118,                     /* "sp"  */
-  YYSYMBOL_T_BP = 119,                     /* "bp"  */
-  YYSYMBOL_T_SI = 120,                     /* "si"  */
-  YYSYMBOL_T_DI = 121,                     /* "di"  */
-  YYSYMBOL_T_EAX = 122,                    /* "eax"  */
-  YYSYMBOL_T_ECX = 123,                    /* "ecx"  */
-  YYSYMBOL_T_EDX = 124,                    /* "edx"  */
-  YYSYMBOL_T_EBX = 125,                    /* "ebx"  */
-  YYSYMBOL_T_ESP = 126,                    /* "esp"  */
-  YYSYMBOL_T_EBP = 127,                    /* "ebp"  */
-  YYSYMBOL_T_ESI = 128,                    /* "esi"  */
-  YYSYMBOL_T_EDI = 129,                    /* "edi"  */
-  YYSYMBOL_130_ = 130,                     /* ','  */
-  YYSYMBOL_131_ = 131,                     /* '['  */
-  YYSYMBOL_132_ = 132,                     /* ']'  */
-  YYSYMBOL_133_ = 133,                     /* ';'  */
-  YYSYMBOL_134_n_ = 134,                   /* '\n'  */
-  YYSYMBOL_135_ = 135,                     /* ':'  */
-  YYSYMBOL_YYACCEPT = 136,                 /* $accept  */
-  YYSYMBOL_program = 137,                  /* program  */
-  YYSYMBOL_object = 138,                   /* object  */
-  YYSYMBOL_lines = 139,                    /* lines  */
-  YYSYMBOL_instruction = 140,              /* instruction  */
-  YYSYMBOL_arith_instruction = 141,        /* arith_instruction  */
-  YYSYMBOL_expression = 142,               /* expression  */
-  YYSYMBOL_immediate = 143,                /* immediate  */
-  YYSYMBOL_storage = 144,                  /* storage  */
-  YYSYMBOL_memloc = 145,                   /* memloc  */
-  YYSYMBOL_reg = 146,                      /* reg  */
-  YYSYMBOL_size_specifier = 147,           /* size_specifier  */
-  YYSYMBOL_terminator = 148,               /* terminator  */
-  YYSYMBOL_arith_operator = 149,           /* arith_operator  */
-  YYSYMBOL_label = 150                     /* label  */
+  YYSYMBOL_T_ARTH = 11,                    /* "instruction mnemonic"  */
+  YYSYMBOL_T_JF = 12,                      /* T_JF  */
+  YYSYMBOL_T_ZO = 13,                      /* T_ZO  */
+  YYSYMBOL_T_AAD = 14,                     /* T_AAD  */
+  YYSYMBOL_T_AAM = 15,                     /* T_AAM  */
+  YYSYMBOL_T_CALL = 16,                    /* T_CALL  */
+  YYSYMBOL_T_CMPS = 17,                    /* T_CMPS  */
+  YYSYMBOL_T_DEC = 18,                     /* T_DEC  */
+  YYSYMBOL_T_DIV = 19,                     /* T_DIV  */
+  YYSYMBOL_T_IDIV = 20,                    /* T_IDIV  */
+  YYSYMBOL_T_IMUL = 21,                    /* T_IMUL  */
+  YYSYMBOL_T_IN = 22,                      /* T_IN  */
+  YYSYMBOL_T_INC = 23,                     /* T_INC  */
+  YYSYMBOL_T_INS = 24,                     /* T_INS  */
+  YYSYMBOL_T_INT = 25,                     /* T_INT  */
+  YYSYMBOL_T_JMP = 26,                     /* T_JMP  */
+  YYSYMBOL_T_LEA = 27,                     /* T_LEA  */
+  YYSYMBOL_T_LODS = 28,                    /* T_LODS  */
+  YYSYMBOL_T_LOOP = 29,                    /* T_LOOP  */
+  YYSYMBOL_T_LOOPNZ = 30,                  /* T_LOOPNZ  */
+  YYSYMBOL_T_LOOPZ = 31,                   /* T_LOOPZ  */
+  YYSYMBOL_T_MOV = 32,                     /* T_MOV  */
+  YYSYMBOL_T_MOVS = 33,                    /* T_MOVS  */
+  YYSYMBOL_T_MUL = 34,                     /* T_MUL  */
+  YYSYMBOL_T_NEG = 35,                     /* T_NEG  */
+  YYSYMBOL_T_NOT = 36,                     /* T_NOT  */
+  YYSYMBOL_T_OUT = 37,                     /* T_OUT  */
+  YYSYMBOL_T_OUTS = 38,                    /* T_OUTS  */
+  YYSYMBOL_T_POP = 39,                     /* T_POP  */
+  YYSYMBOL_T_PUSH = 40,                    /* T_PUSH  */
+  YYSYMBOL_T_RCL = 41,                     /* T_RCL  */
+  YYSYMBOL_T_RCR = 42,                     /* T_RCR  */
+  YYSYMBOL_T_REPNZ = 43,                   /* T_REPNZ  */
+  YYSYMBOL_T_REPZ = 44,                    /* T_REPZ  */
+  YYSYMBOL_T_RET = 45,                     /* T_RET  */
+  YYSYMBOL_T_ROL = 46,                     /* T_ROL  */
+  YYSYMBOL_T_ROR = 47,                     /* T_ROR  */
+  YYSYMBOL_T_SAR = 48,                     /* T_SAR  */
+  YYSYMBOL_T_SCAS = 49,                    /* T_SCAS  */
+  YYSYMBOL_T_SHL = 50,                     /* T_SHL  */
+  YYSYMBOL_T_SHR = 51,                     /* T_SHR  */
+  YYSYMBOL_T_STOS = 52,                    /* T_STOS  */
+  YYSYMBOL_T_TEST = 53,                    /* T_TEST  */
+  YYSYMBOL_T_XCHG = 54,                    /* T_XCHG  */
+  YYSYMBOL_T_CS = 55,                      /* "register"  */
+  YYSYMBOL_T_DS = 56,                      /* T_DS  */
+  YYSYMBOL_T_ES = 57,                      /* T_ES  */
+  YYSYMBOL_T_FS = 58,                      /* T_FS  */
+  YYSYMBOL_T_GS = 59,                      /* T_GS  */
+  YYSYMBOL_T_AL = 60,                      /* T_AL  */
+  YYSYMBOL_T_CL = 61,                      /* T_CL  */
+  YYSYMBOL_T_DL = 62,                      /* T_DL  */
+  YYSYMBOL_T_BL = 63,                      /* T_BL  */
+  YYSYMBOL_T_AH = 64,                      /* T_AH  */
+  YYSYMBOL_T_CH = 65,                      /* T_CH  */
+  YYSYMBOL_T_DH = 66,                      /* T_DH  */
+  YYSYMBOL_T_BH = 67,                      /* T_BH  */
+  YYSYMBOL_T_AX = 68,                      /* T_AX  */
+  YYSYMBOL_T_CX = 69,                      /* T_CX  */
+  YYSYMBOL_T_DX = 70,                      /* T_DX  */
+  YYSYMBOL_T_BX = 71,                      /* T_BX  */
+  YYSYMBOL_T_SP = 72,                      /* T_SP  */
+  YYSYMBOL_T_BP = 73,                      /* T_BP  */
+  YYSYMBOL_T_SI = 74,                      /* T_SI  */
+  YYSYMBOL_T_DI = 75,                      /* T_DI  */
+  YYSYMBOL_T_EAX = 76,                     /* T_EAX  */
+  YYSYMBOL_T_ECX = 77,                     /* T_ECX  */
+  YYSYMBOL_T_EDX = 78,                     /* T_EDX  */
+  YYSYMBOL_T_EBX = 79,                     /* T_EBX  */
+  YYSYMBOL_T_ESP = 80,                     /* T_ESP  */
+  YYSYMBOL_T_EBP = 81,                     /* T_EBP  */
+  YYSYMBOL_T_ESI = 82,                     /* T_ESI  */
+  YYSYMBOL_T_EDI = 83,                     /* T_EDI  */
+  YYSYMBOL_84_ = 84,                       /* ','  */
+  YYSYMBOL_85_ = 85,                       /* '['  */
+  YYSYMBOL_86_ = 86,                       /* ']'  */
+  YYSYMBOL_87_ = 87,                       /* ';'  */
+  YYSYMBOL_88_n_ = 88,                     /* '\n'  */
+  YYSYMBOL_89_ = 89,                       /* ':'  */
+  YYSYMBOL_YYACCEPT = 90,                  /* $accept  */
+  YYSYMBOL_program = 91,                   /* program  */
+  YYSYMBOL_object = 92,                    /* object  */
+  YYSYMBOL_lines = 93,                     /* lines  */
+  YYSYMBOL_instruction = 94,               /* instruction  */
+  YYSYMBOL_arith_inst = 95,                /* arith_inst  */
+  YYSYMBOL_jf_inst = 96,                   /* jf_inst  */
+  YYSYMBOL_zo_inst = 97,                   /* zo_inst  */
+  YYSYMBOL_expression = 98,                /* expression  */
+  YYSYMBOL_immediate = 99,                 /* immediate  */
+  YYSYMBOL_storage = 100,                  /* storage  */
+  YYSYMBOL_memloc = 101,                   /* memloc  */
+  YYSYMBOL_reg = 102,                      /* reg  */
+  YYSYMBOL_size_specifier = 103,           /* size_specifier  */
+  YYSYMBOL_terminator = 104,               /* terminator  */
+  YYSYMBOL_label = 105,                    /* label  */
+  YYSYMBOL_addr = 106                      /* addr  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -902,21 +766,21 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  18
+#define YYFINAL  52
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   154
+#define YYLAST   108
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  136
+#define YYNTOKENS  90
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  15
+#define YYNNTS  17
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  59
+#define YYNRULES  56
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  68
+#define YYNSTATES  66
 
 /* YYMAXUTOK -- Last valid token kind.  */
-#define YYMAXUTOK   384
+#define YYMAXUTOK   338
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -928,18 +792,18 @@ union yyalloc
 
 /* YYTRANSLATE[TOKEN-NUM] -- Symbol number corresponding to TOKEN-NUM
    as returned by yylex.  */
-static const yytype_uint8 yytranslate[] =
+static const yytype_int8 yytranslate[] =
 {
        0,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-     134,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+      88,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,   130,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,   135,   133,
+       2,     2,     2,     2,    84,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,    89,    87,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,   131,     2,   132,     2,     2,     2,     2,     2,     2,
+       2,    85,     2,    86,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
@@ -963,24 +827,19 @@ static const yytype_uint8 yytranslate[] =
       45,    46,    47,    48,    49,    50,    51,    52,    53,    54,
       55,    56,    57,    58,    59,    60,    61,    62,    63,    64,
       65,    66,    67,    68,    69,    70,    71,    72,    73,    74,
-      75,    76,    77,    78,    79,    80,    81,    82,    83,    84,
-      85,    86,    87,    88,    89,    90,    91,    92,    93,    94,
-      95,    96,    97,    98,    99,   100,   101,   102,   103,   104,
-     105,   106,   107,   108,   109,   110,   111,   112,   113,   114,
-     115,   116,   117,   118,   119,   120,   121,   122,   123,   124,
-     125,   126,   127,   128,   129
+      75,    76,    77,    78,    79,    80,    81,    82,    83
 };
 
 #if YYDEBUG
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   206,   206,   209,   217,   222,   227,   228,   229,   232,
-     236,   242,   243,   246,   249,   250,   253,   260,   261,   262,
-     263,   264,   265,   266,   267,   268,   269,   270,   271,   272,
-     273,   274,   275,   276,   277,   278,   279,   280,   281,   282,
-     283,   284,   285,   286,   287,   288,   291,   292,   293,   296,
-     297,   300,   301,   302,   303,   304,   305,   306,   307,   310
+       0,   158,   158,   161,   169,   174,   179,   180,   181,   184,
+     185,   186,   189,   195,   198,   201,   202,   205,   208,   209,
+     212,   219,   220,   221,   222,   223,   224,   225,   226,   227,
+     228,   229,   230,   231,   232,   233,   234,   235,   236,   237,
+     238,   239,   240,   241,   242,   243,   244,   245,   246,   247,
+     250,   251,   252,   255,   256,   259,   262
 };
 #endif
 
@@ -998,22 +857,20 @@ yysymbol_name (yysymbol_kind_t yysymbol)
   static const char *const yy_sname[] =
   {
   "end of file", "error", "invalid token", "identifier", "number",
-  "character literal", "byte", "word", "dword", "near", "far", "adc",
-  "add", "and", "cmp", "or", "sbb", "sub", "xor", "jo", "jno", "jc", "jnc",
-  "jz", "jnz", "jna", "ja", "js", "jns", "jp", "jnp", "jl", "jnl", "jng",
-  "jg", "aaa", "aad", "aam", "aas", "call", "cbw", "cdq", "clc", "cld",
-  "cli", "cmps", "cwd", "cwde", "dec", "div", "enter", "hlt", "idiv",
-  "imul", "in", "inc", "ins", "int", "int3", "into", "iret", "jmp", "lahf",
-  "lea", "leave", "lods", "loop", "loopnz", "loopz", "mov", "movs", "mul",
-  "neg", "not", "out", "outs", "pop", "popa", "popf", "push", "pusha",
-  "pushf", "rcl", "rcr", "repnz", "repz", "ret", "rol", "ror", "sahf",
-  "sar", "scas", "shl", "shr", "stc", "std", "stos", "sti", "test", "xchg",
-  "xlat", "cs", "ds", "es", "fs", "gs", "al", "cl", "dl", "bl", "ah", "ch",
-  "dh", "bh", "ax", "cx", "dx", "bx", "sp", "bp", "si", "di", "eax", "ecx",
-  "edx", "ebx", "esp", "ebp", "esi", "edi", "','", "'['", "']'", "';'",
+  "character literal", "byte", "word", "dword", "near", "far",
+  "instruction mnemonic", "T_JF", "T_ZO", "T_AAD", "T_AAM", "T_CALL",
+  "T_CMPS", "T_DEC", "T_DIV", "T_IDIV", "T_IMUL", "T_IN", "T_INC", "T_INS",
+  "T_INT", "T_JMP", "T_LEA", "T_LODS", "T_LOOP", "T_LOOPNZ", "T_LOOPZ",
+  "T_MOV", "T_MOVS", "T_MUL", "T_NEG", "T_NOT", "T_OUT", "T_OUTS", "T_POP",
+  "T_PUSH", "T_RCL", "T_RCR", "T_REPNZ", "T_REPZ", "T_RET", "T_ROL",
+  "T_ROR", "T_SAR", "T_SCAS", "T_SHL", "T_SHR", "T_STOS", "T_TEST",
+  "T_XCHG", "register", "T_DS", "T_ES", "T_FS", "T_GS", "T_AL", "T_CL",
+  "T_DL", "T_BL", "T_AH", "T_CH", "T_DH", "T_BH", "T_AX", "T_CX", "T_DX",
+  "T_BX", "T_SP", "T_BP", "T_SI", "T_DI", "T_EAX", "T_ECX", "T_EDX",
+  "T_EBX", "T_ESP", "T_EBP", "T_ESI", "T_EDI", "','", "'['", "']'", "';'",
   "'\\n'", "':'", "$accept", "program", "object", "lines", "instruction",
-  "arith_instruction", "expression", "immediate", "storage", "memloc",
-  "reg", "size_specifier", "terminator", "arith_operator", "label", YY_NULLPTR
+  "arith_inst", "jf_inst", "zo_inst", "expression", "immediate", "storage",
+  "memloc", "reg", "size_specifier", "terminator", "label", "addr", YY_NULLPTR
   };
   return yy_sname[yysymbol];
 }
@@ -1032,16 +889,11 @@ static const yytype_int16 yytoknum[] =
      305,   306,   307,   308,   309,   310,   311,   312,   313,   314,
      315,   316,   317,   318,   319,   320,   321,   322,   323,   324,
      325,   326,   327,   328,   329,   330,   331,   332,   333,   334,
-     335,   336,   337,   338,   339,   340,   341,   342,   343,   344,
-     345,   346,   347,   348,   349,   350,   351,   352,   353,   354,
-     355,   356,   357,   358,   359,   360,   361,   362,   363,   364,
-     365,   366,   367,   368,   369,   370,   371,   372,   373,   374,
-     375,   376,   377,   378,   379,   380,   381,   382,   383,   384,
-      44,    91,    93,    59,    10,    58
+     335,   336,   337,   338,    44,    91,    93,    59,    10,    58
 };
 #endif
 
-#define YYPACT_NINF (-129)
+#define YYPACT_NINF (-83)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -1053,15 +905,15 @@ static const yytype_int16 yytoknum[] =
 
   /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
      STATE-NUM.  */
-static const yytype_int16 yypact[] =
+static const yytype_int8 yypact[] =
 {
-      -2,  -127,  -129,  -129,  -129,  -129,  -129,  -129,  -129,  -129,
-       7,  -129,  -128,  -129,  -129,    25,  -129,  -129,  -129,  -129,
-    -129,    -2,  -129,  -129,  -129,  -129,  -129,  -129,  -129,  -129,
-    -129,  -129,  -129,  -129,  -129,  -129,  -129,  -129,  -129,  -129,
-    -129,  -129,  -129,  -129,  -129,  -129,  -129,  -129,  -129,  -129,
-    -129,  -129,  -129,  -129,  -113,  -129,  -129,  -112,  -129,  -129,
-      -4,    14,  -129,  -129,  -129,  -129,  -111,  -129
+      -2,   -81,    25,     3,   -83,    12,   -83,   -82,   -83,   -83,
+     -83,   -83,   -83,   -83,   -83,   -83,   -83,   -83,   -83,   -83,
+     -83,   -83,   -83,   -83,   -83,   -83,   -83,   -83,   -83,   -83,
+     -83,   -83,   -83,   -83,   -83,   -83,   -83,   -83,   -83,   -83,
+     -83,   -83,   -83,   -83,   -83,   -83,   -71,   -83,   -83,   -70,
+     -83,   -83,   -83,   -83,   -83,    -2,    -4,    10,   -83,   -83,
+     -83,   -83,   -83,   -83,   -69,   -83
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -1069,27 +921,27 @@ static const yytype_int16 yypact[] =
      means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       0,     0,    51,    52,    53,    54,    55,    56,    57,    58,
-       0,     2,     3,     4,     9,     0,     5,    59,     1,    49,
-      50,     8,    46,    47,    48,    17,    18,    19,    20,    21,
-      22,    23,    24,    25,    26,    27,    28,    29,    30,    31,
-      32,    33,    34,    35,    36,    37,    38,    39,    40,    41,
-      42,    43,    44,    45,     0,    15,    14,     0,     6,     7,
-       0,     0,    13,    10,    11,    12,     0,    16
+       0,     0,     0,     0,    14,     0,     2,     3,     4,     9,
+      10,    11,     5,    55,    50,    51,    52,    21,    22,    23,
+      24,    25,    26,    27,    28,    29,    30,    31,    32,    33,
+      34,    35,    36,    37,    38,    39,    40,    41,    42,    43,
+      44,    45,    46,    47,    48,    49,     0,    19,    18,     0,
+      56,    13,     1,    53,    54,     8,     0,     0,     6,     7,
+      17,    12,    15,    16,     0,    20
 };
 
   /* YYPGOTO[NTERM-NUM].  */
-static const yytype_int16 yypgoto[] =
+static const yytype_int8 yypgoto[] =
 {
-    -129,  -129,  -129,  -129,    -1,  -129,  -129,  -129,   -38,  -129,
-    -129,  -129,  -129,  -129,     2
+     -83,   -83,   -83,   -83,   -39,   -83,   -83,   -83,   -83,   -83,
+     -38,   -83,   -83,   -83,   -83,   -36,   -83
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-       0,    10,    11,    12,    13,    14,    63,    64,    54,    55,
-      56,    57,    21,    15,    16
+       0,     5,     6,     7,     8,     9,    10,    11,    61,    62,
+      46,    47,    48,    49,    55,    12,    51
 };
 
   /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -1097,77 +949,67 @@ static const yytype_int8 yydefgoto[] =
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-      62,     1,    22,    23,    24,    19,    20,    18,    17,     2,
-       3,     4,     5,     6,     7,     8,     9,    60,    66,    61,
-      58,    67,    65,    59,     0,     0,     0,     0,     0,     0,
-       0,    22,    23,    24,     0,     0,     0,     0,     0,     0,
+      60,     1,    14,    15,    16,    53,    54,    50,    13,     2,
+       3,     4,    52,    56,    64,    57,    58,    65,    63,    59,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,    14,    15,    16,     0,     0,     0,     0,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,    25,    26,    27,
-      28,    29,    30,    31,    32,    33,    34,    35,    36,    37,
-      38,    39,    40,    41,    42,    43,    44,    45,    46,    47,
-      48,    49,    50,    51,    52,    53,    25,    26,    27,    28,
-      29,    30,    31,    32,    33,    34,    35,    36,    37,    38,
-      39,    40,    41,    42,    43,    44,    45,    46,    47,    48,
-      49,    50,    51,    52,    53
+       0,    17,    18,    19,    20,    21,    22,    23,    24,    25,
+      26,    27,    28,    29,    30,    31,    32,    33,    34,    35,
+      36,    37,    38,    39,    40,    41,    42,    43,    44,    45,
+      17,    18,    19,    20,    21,    22,    23,    24,    25,    26,
+      27,    28,    29,    30,    31,    32,    33,    34,    35,    36,
+      37,    38,    39,    40,    41,    42,    43,    44,    45
 };
 
-static const yytype_int16 yycheck[] =
+static const yytype_int8 yycheck[] =
 {
-       4,     3,     6,     7,     8,   133,   134,     0,   135,    11,
-      12,    13,    14,    15,    16,    17,    18,   130,     4,   131,
-      21,   132,    60,    21,    -1,    -1,    -1,    -1,    -1,    -1,
+       4,     3,     6,     7,     8,    87,    88,     4,    89,    11,
+      12,    13,     0,    84,     4,    85,    55,    86,    56,    55,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
       -1,     6,     7,     8,    -1,    -1,    -1,    -1,    -1,    -1,
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,   101,   102,   103,
-     104,   105,   106,   107,   108,   109,   110,   111,   112,   113,
-     114,   115,   116,   117,   118,   119,   120,   121,   122,   123,
-     124,   125,   126,   127,   128,   129,   101,   102,   103,   104,
-     105,   106,   107,   108,   109,   110,   111,   112,   113,   114,
-     115,   116,   117,   118,   119,   120,   121,   122,   123,   124,
-     125,   126,   127,   128,   129
+      -1,    55,    56,    57,    58,    59,    60,    61,    62,    63,
+      64,    65,    66,    67,    68,    69,    70,    71,    72,    73,
+      74,    75,    76,    77,    78,    79,    80,    81,    82,    83,
+      55,    56,    57,    58,    59,    60,    61,    62,    63,    64,
+      65,    66,    67,    68,    69,    70,    71,    72,    73,    74,
+      75,    76,    77,    78,    79,    80,    81,    82,    83
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
      symbol of state STATE-NUM.  */
-static const yytype_uint8 yystos[] =
+static const yytype_int8 yystos[] =
 {
-       0,     3,    11,    12,    13,    14,    15,    16,    17,    18,
-     137,   138,   139,   140,   141,   149,   150,   135,     0,   133,
-     134,   148,     6,     7,     8,   101,   102,   103,   104,   105,
-     106,   107,   108,   109,   110,   111,   112,   113,   114,   115,
-     116,   117,   118,   119,   120,   121,   122,   123,   124,   125,
-     126,   127,   128,   129,   144,   145,   146,   147,   140,   150,
-     130,   131,     4,   142,   143,   144,     4,   132
+       0,     3,    11,    12,    13,    91,    92,    93,    94,    95,
+      96,    97,   105,    89,     6,     7,     8,    55,    56,    57,
+      58,    59,    60,    61,    62,    63,    64,    65,    66,    67,
+      68,    69,    70,    71,    72,    73,    74,    75,    76,    77,
+      78,    79,    80,    81,    82,    83,   100,   101,   102,   103,
+       4,   106,     0,    87,    88,   104,    84,    85,    94,   105,
+       4,    98,    99,   100,     4,    86
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
-static const yytype_uint8 yyr1[] =
+static const yytype_int8 yyr1[] =
 {
-       0,   136,   137,   138,   139,   139,   139,   139,   139,   140,
-     141,   142,   142,   143,   144,   144,   145,   146,   146,   146,
-     146,   146,   146,   146,   146,   146,   146,   146,   146,   146,
-     146,   146,   146,   146,   146,   146,   146,   146,   146,   146,
-     146,   146,   146,   146,   146,   146,   147,   147,   147,   148,
-     148,   149,   149,   149,   149,   149,   149,   149,   149,   150
+       0,    90,    91,    92,    93,    93,    93,    93,    93,    94,
+      94,    94,    95,    96,    97,    98,    98,    99,   100,   100,
+     101,   102,   102,   102,   102,   102,   102,   102,   102,   102,
+     102,   102,   102,   102,   102,   102,   102,   102,   102,   102,
+     102,   102,   102,   102,   102,   102,   102,   102,   102,   102,
+     103,   103,   103,   104,   104,   105,   106
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
 static const yytype_int8 yyr2[] =
 {
        0,     2,     1,     1,     1,     1,     3,     3,     2,     1,
-       4,     1,     1,     1,     1,     1,     4,     1,     1,     1,
+       1,     1,     4,     2,     1,     1,     1,     1,     1,     1,
+       4,     1,     1,     1,     1,     1,     1,     1,     1,     1,
        1,     1,     1,     1,     1,     1,     1,     1,     1,     1,
        1,     1,     1,     1,     1,     1,     1,     1,     1,     1,
-       1,     1,     1,     1,     1,     1,     1,     1,     1,     1,
-       1,     1,     1,     1,     1,     1,     1,     1,     1,     2
+       1,     1,     1,     1,     1,     2,     1
 };
 
 
@@ -1856,298 +1698,310 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* program: object  */
-#line 206 "../../src/intel-parse.yy"
+#line 158 "../../src/intel-parse.yy"
                        { result = (yyvsp[0].obj); }
-#line 1862 "../../src/intel-parse.cc"
+#line 1704 "../../src/intel-parse.cc"
     break;
 
   case 3: /* object: lines  */
-#line 210 "../../src/intel-parse.yy"
+#line 162 "../../src/intel-parse.yy"
                 {
 		  (yyval.obj) = new Object (format, filename);
 		  (yyval.obj)->lines = *(yyvsp[0].lines);
 		  delete (yyvsp[0].lines);
 		}
-#line 1872 "../../src/intel-parse.cc"
+#line 1714 "../../src/intel-parse.cc"
     break;
 
   case 4: /* lines: instruction  */
-#line 218 "../../src/intel-parse.yy"
+#line 170 "../../src/intel-parse.yy"
                 {
 		  (yyval.lines) = new std::vector <AsmLine *> ();
 		  (yyval.lines)->push_back ((yyvsp[0].inst));
 		}
-#line 1881 "../../src/intel-parse.cc"
+#line 1723 "../../src/intel-parse.cc"
     break;
 
   case 5: /* lines: label  */
-#line 223 "../../src/intel-parse.yy"
+#line 175 "../../src/intel-parse.yy"
                 {
 		  (yyval.lines) = new std::vector <AsmLine *> ();
 		  (yyval.lines)->push_back ((yyvsp[0].label));
 		}
-#line 1890 "../../src/intel-parse.cc"
+#line 1732 "../../src/intel-parse.cc"
     break;
 
   case 6: /* lines: lines terminator instruction  */
-#line 227 "../../src/intel-parse.yy"
+#line 179 "../../src/intel-parse.yy"
                                              { (yyvsp[-2].lines)->push_back ((yyvsp[0].inst)); }
-#line 1896 "../../src/intel-parse.cc"
+#line 1738 "../../src/intel-parse.cc"
     break;
 
   case 7: /* lines: lines terminator label  */
-#line 228 "../../src/intel-parse.yy"
+#line 180 "../../src/intel-parse.yy"
                                        { (yyvsp[-2].lines)->push_back ((yyvsp[0].label)); }
-#line 1902 "../../src/intel-parse.cc"
+#line 1744 "../../src/intel-parse.cc"
     break;
 
-  case 10: /* arith_instruction: arith_operator storage ',' expression  */
-#line 237 "../../src/intel-parse.yy"
+  case 12: /* arith_inst: "instruction mnemonic" storage ',' expression  */
+#line 190 "../../src/intel-parse.yy"
                 {
 		  (yyval.inst) = new AsmInstARITH ((yyvsp[-3].arith), (yyvsp[-2].storage), (yyvsp[0].expr));
 		}
-#line 1910 "../../src/intel-parse.cc"
+#line 1752 "../../src/intel-parse.cc"
     break;
 
-  case 11: /* expression: immediate  */
-#line 242 "../../src/intel-parse.yy"
+  case 13: /* jf_inst: T_JF addr  */
+#line 195 "../../src/intel-parse.yy"
+                          { (yyval.inst) = new AsmInstJF ((yyvsp[-1].jf), (yyvsp[0].number), 4); }
+#line 1758 "../../src/intel-parse.cc"
+    break;
+
+  case 14: /* zo_inst: T_ZO  */
+#line 198 "../../src/intel-parse.yy"
+                     { (yyval.inst) = new AsmInstZO ((yyvsp[0].zo)); }
+#line 1764 "../../src/intel-parse.cc"
+    break;
+
+  case 15: /* expression: immediate  */
+#line 201 "../../src/intel-parse.yy"
                           { (yyval.expr) = (yyvsp[0].imm); }
-#line 1916 "../../src/intel-parse.cc"
+#line 1770 "../../src/intel-parse.cc"
     break;
 
-  case 12: /* expression: storage  */
-#line 243 "../../src/intel-parse.yy"
+  case 16: /* expression: storage  */
+#line 202 "../../src/intel-parse.yy"
                         { (yyval.expr) = (yyvsp[0].storage); }
-#line 1922 "../../src/intel-parse.cc"
+#line 1776 "../../src/intel-parse.cc"
     break;
 
-  case 13: /* immediate: "number"  */
-#line 246 "../../src/intel-parse.yy"
+  case 17: /* immediate: "number"  */
+#line 205 "../../src/intel-parse.yy"
                          { (yyval.imm) = new AsmImmediate ((yyvsp[0].number)); }
-#line 1928 "../../src/intel-parse.cc"
+#line 1782 "../../src/intel-parse.cc"
     break;
 
-  case 14: /* storage: reg  */
-#line 249 "../../src/intel-parse.yy"
+  case 18: /* storage: reg  */
+#line 208 "../../src/intel-parse.yy"
                     { (yyval.storage) = (yyvsp[0].reg); }
-#line 1934 "../../src/intel-parse.cc"
+#line 1788 "../../src/intel-parse.cc"
     break;
 
-  case 15: /* storage: memloc  */
-#line 250 "../../src/intel-parse.yy"
+  case 19: /* storage: memloc  */
+#line 209 "../../src/intel-parse.yy"
                        { (yyval.storage) = (yyvsp[0].mem); }
-#line 1940 "../../src/intel-parse.cc"
+#line 1794 "../../src/intel-parse.cc"
     break;
 
-  case 16: /* memloc: size_specifier '[' "number" ']'  */
-#line 254 "../../src/intel-parse.yy"
+  case 20: /* memloc: size_specifier '[' "number" ']'  */
+#line 213 "../../src/intel-parse.yy"
                 {
 		  (yyval.mem) = new AsmMemoryLoc (nullptr, nullptr, 0, (yyvsp[-1].number),
 					 AsmRegister::DS, (yyvsp[-3].number));
 		}
-#line 1949 "../../src/intel-parse.cc"
+#line 1803 "../../src/intel-parse.cc"
     break;
 
-  case 17: /* reg: "cs"  */
-#line 260 "../../src/intel-parse.yy"
+  case 21: /* reg: "register"  */
+#line 219 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::CS; }
-#line 1955 "../../src/intel-parse.cc"
+#line 1809 "../../src/intel-parse.cc"
     break;
 
-  case 18: /* reg: "ds"  */
-#line 261 "../../src/intel-parse.yy"
+  case 22: /* reg: T_DS  */
+#line 220 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::DS; }
-#line 1961 "../../src/intel-parse.cc"
+#line 1815 "../../src/intel-parse.cc"
     break;
 
-  case 19: /* reg: "es"  */
-#line 262 "../../src/intel-parse.yy"
+  case 23: /* reg: T_ES  */
+#line 221 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::ES; }
-#line 1967 "../../src/intel-parse.cc"
+#line 1821 "../../src/intel-parse.cc"
     break;
 
-  case 20: /* reg: "fs"  */
-#line 263 "../../src/intel-parse.yy"
+  case 24: /* reg: T_FS  */
+#line 222 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::FS; }
-#line 1973 "../../src/intel-parse.cc"
+#line 1827 "../../src/intel-parse.cc"
     break;
 
-  case 21: /* reg: "gs"  */
-#line 264 "../../src/intel-parse.yy"
+  case 25: /* reg: T_GS  */
+#line 223 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::GS; }
-#line 1979 "../../src/intel-parse.cc"
+#line 1833 "../../src/intel-parse.cc"
     break;
 
-  case 22: /* reg: "al"  */
-#line 265 "../../src/intel-parse.yy"
+  case 26: /* reg: T_AL  */
+#line 224 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::AL; }
-#line 1985 "../../src/intel-parse.cc"
+#line 1839 "../../src/intel-parse.cc"
     break;
 
-  case 23: /* reg: "cl"  */
-#line 266 "../../src/intel-parse.yy"
+  case 27: /* reg: T_CL  */
+#line 225 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::CL; }
-#line 1991 "../../src/intel-parse.cc"
+#line 1845 "../../src/intel-parse.cc"
     break;
 
-  case 24: /* reg: "dl"  */
-#line 267 "../../src/intel-parse.yy"
+  case 28: /* reg: T_DL  */
+#line 226 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::DL; }
-#line 1997 "../../src/intel-parse.cc"
+#line 1851 "../../src/intel-parse.cc"
     break;
 
-  case 25: /* reg: "bl"  */
-#line 268 "../../src/intel-parse.yy"
+  case 29: /* reg: T_BL  */
+#line 227 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::BL; }
-#line 2003 "../../src/intel-parse.cc"
+#line 1857 "../../src/intel-parse.cc"
     break;
 
-  case 26: /* reg: "ah"  */
-#line 269 "../../src/intel-parse.yy"
+  case 30: /* reg: T_AH  */
+#line 228 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::AH; }
-#line 2009 "../../src/intel-parse.cc"
+#line 1863 "../../src/intel-parse.cc"
     break;
 
-  case 27: /* reg: "ch"  */
-#line 270 "../../src/intel-parse.yy"
+  case 31: /* reg: T_CH  */
+#line 229 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::CH; }
-#line 2015 "../../src/intel-parse.cc"
+#line 1869 "../../src/intel-parse.cc"
     break;
 
-  case 28: /* reg: "dh"  */
-#line 271 "../../src/intel-parse.yy"
+  case 32: /* reg: T_DH  */
+#line 230 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::DH; }
-#line 2021 "../../src/intel-parse.cc"
+#line 1875 "../../src/intel-parse.cc"
     break;
 
-  case 29: /* reg: "bh"  */
-#line 272 "../../src/intel-parse.yy"
+  case 33: /* reg: T_BH  */
+#line 231 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::BH; }
-#line 2027 "../../src/intel-parse.cc"
+#line 1881 "../../src/intel-parse.cc"
     break;
 
-  case 30: /* reg: "ax"  */
-#line 273 "../../src/intel-parse.yy"
+  case 34: /* reg: T_AX  */
+#line 232 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::AX; }
-#line 2033 "../../src/intel-parse.cc"
+#line 1887 "../../src/intel-parse.cc"
     break;
 
-  case 31: /* reg: "cx"  */
-#line 274 "../../src/intel-parse.yy"
+  case 35: /* reg: T_CX  */
+#line 233 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::CX; }
-#line 2039 "../../src/intel-parse.cc"
+#line 1893 "../../src/intel-parse.cc"
     break;
 
-  case 32: /* reg: "dx"  */
-#line 275 "../../src/intel-parse.yy"
+  case 36: /* reg: T_DX  */
+#line 234 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::DX; }
-#line 2045 "../../src/intel-parse.cc"
+#line 1899 "../../src/intel-parse.cc"
     break;
 
-  case 33: /* reg: "bx"  */
-#line 276 "../../src/intel-parse.yy"
+  case 37: /* reg: T_BX  */
+#line 235 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::BX; }
-#line 2051 "../../src/intel-parse.cc"
+#line 1905 "../../src/intel-parse.cc"
     break;
 
-  case 34: /* reg: "sp"  */
-#line 277 "../../src/intel-parse.yy"
+  case 38: /* reg: T_SP  */
+#line 236 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::SP; }
-#line 2057 "../../src/intel-parse.cc"
+#line 1911 "../../src/intel-parse.cc"
     break;
 
-  case 35: /* reg: "bp"  */
-#line 278 "../../src/intel-parse.yy"
+  case 39: /* reg: T_BP  */
+#line 237 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::BP; }
-#line 2063 "../../src/intel-parse.cc"
+#line 1917 "../../src/intel-parse.cc"
     break;
 
-  case 36: /* reg: "si"  */
-#line 279 "../../src/intel-parse.yy"
+  case 40: /* reg: T_SI  */
+#line 238 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::SI; }
-#line 2069 "../../src/intel-parse.cc"
+#line 1923 "../../src/intel-parse.cc"
     break;
 
-  case 37: /* reg: "di"  */
-#line 280 "../../src/intel-parse.yy"
+  case 41: /* reg: T_DI  */
+#line 239 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::DI; }
-#line 2075 "../../src/intel-parse.cc"
+#line 1929 "../../src/intel-parse.cc"
     break;
 
-  case 38: /* reg: "eax"  */
-#line 281 "../../src/intel-parse.yy"
+  case 42: /* reg: T_EAX  */
+#line 240 "../../src/intel-parse.yy"
                       { (yyval.reg) = AsmRegister::EAX; }
-#line 2081 "../../src/intel-parse.cc"
+#line 1935 "../../src/intel-parse.cc"
     break;
 
-  case 39: /* reg: "ecx"  */
-#line 282 "../../src/intel-parse.yy"
+  case 43: /* reg: T_ECX  */
+#line 241 "../../src/intel-parse.yy"
                       { (yyval.reg) = AsmRegister::ECX; }
-#line 2087 "../../src/intel-parse.cc"
+#line 1941 "../../src/intel-parse.cc"
     break;
 
-  case 40: /* reg: "edx"  */
-#line 283 "../../src/intel-parse.yy"
+  case 44: /* reg: T_EDX  */
+#line 242 "../../src/intel-parse.yy"
                       { (yyval.reg) = AsmRegister::EDX; }
-#line 2093 "../../src/intel-parse.cc"
+#line 1947 "../../src/intel-parse.cc"
     break;
 
-  case 41: /* reg: "ebx"  */
-#line 284 "../../src/intel-parse.yy"
+  case 45: /* reg: T_EBX  */
+#line 243 "../../src/intel-parse.yy"
                       { (yyval.reg) = AsmRegister::EBX; }
-#line 2099 "../../src/intel-parse.cc"
+#line 1953 "../../src/intel-parse.cc"
     break;
 
-  case 42: /* reg: "esp"  */
-#line 285 "../../src/intel-parse.yy"
+  case 46: /* reg: T_ESP  */
+#line 244 "../../src/intel-parse.yy"
                       { (yyval.reg) = AsmRegister::ESP; }
-#line 2105 "../../src/intel-parse.cc"
+#line 1959 "../../src/intel-parse.cc"
     break;
 
-  case 43: /* reg: "ebp"  */
-#line 286 "../../src/intel-parse.yy"
+  case 47: /* reg: T_EBP  */
+#line 245 "../../src/intel-parse.yy"
                       { (yyval.reg) = AsmRegister::EBP; }
-#line 2111 "../../src/intel-parse.cc"
+#line 1965 "../../src/intel-parse.cc"
     break;
 
-  case 44: /* reg: "esi"  */
-#line 287 "../../src/intel-parse.yy"
+  case 48: /* reg: T_ESI  */
+#line 246 "../../src/intel-parse.yy"
                       { (yyval.reg) = AsmRegister::ESI; }
-#line 2117 "../../src/intel-parse.cc"
+#line 1971 "../../src/intel-parse.cc"
     break;
 
-  case 45: /* reg: "edi"  */
-#line 288 "../../src/intel-parse.yy"
+  case 49: /* reg: T_EDI  */
+#line 247 "../../src/intel-parse.yy"
                       { (yyval.reg) = AsmRegister::EDI; }
-#line 2123 "../../src/intel-parse.cc"
+#line 1977 "../../src/intel-parse.cc"
     break;
 
-  case 46: /* size_specifier: "byte"  */
-#line 291 "../../src/intel-parse.yy"
+  case 50: /* size_specifier: "byte"  */
+#line 250 "../../src/intel-parse.yy"
                        { (yyval.number) = 1; }
-#line 2129 "../../src/intel-parse.cc"
+#line 1983 "../../src/intel-parse.cc"
     break;
 
-  case 47: /* size_specifier: "word"  */
-#line 292 "../../src/intel-parse.yy"
+  case 51: /* size_specifier: "word"  */
+#line 251 "../../src/intel-parse.yy"
                        { (yyval.number) = 2; }
-#line 2135 "../../src/intel-parse.cc"
+#line 1989 "../../src/intel-parse.cc"
     break;
 
-  case 48: /* size_specifier: "dword"  */
-#line 293 "../../src/intel-parse.yy"
+  case 52: /* size_specifier: "dword"  */
+#line 252 "../../src/intel-parse.yy"
                         { (yyval.number) = 4; }
-#line 2141 "../../src/intel-parse.cc"
+#line 1995 "../../src/intel-parse.cc"
     break;
 
-  case 59: /* label: "identifier" ':'  */
-#line 310 "../../src/intel-parse.yy"
+  case 55: /* label: "identifier" ':'  */
+#line 259 "../../src/intel-parse.yy"
                             { (yyval.label) = new AsmIdentifier (*(yyvsp[-1].string)); delete (yyvsp[-1].string); }
-#line 2147 "../../src/intel-parse.cc"
+#line 2001 "../../src/intel-parse.cc"
     break;
 
 
-#line 2151 "../../src/intel-parse.cc"
+#line 2005 "../../src/intel-parse.cc"
 
       default: break;
     }

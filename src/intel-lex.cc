@@ -946,7 +946,7 @@ return T_FAR;
 case 11:
 YY_RULE_SETUP
 #line 47 "../../src/intel-lex.ll"
-return T_AAA;
+yylval.zo = AsmInstZOType::AAA; return T_ZO;
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
@@ -961,22 +961,22 @@ return T_AAM;
 case 14:
 YY_RULE_SETUP
 #line 50 "../../src/intel-lex.ll"
-return T_AAS;
+yylval.zo = AsmInstZOType::AAS; return T_ZO;
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
 #line 51 "../../src/intel-lex.ll"
-yylval.arith = AsmInstARITHType::ADC; return T_ADC;
+yylval.arith = AsmInstARITHType::ADC; return T_ARTH;
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
 #line 52 "../../src/intel-lex.ll"
-yylval.arith = AsmInstARITHType::ADD; return T_ADD;
+yylval.arith = AsmInstARITHType::ADD; return T_ARTH;
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
 #line 53 "../../src/intel-lex.ll"
-yylval.arith = AsmInstARITHType::AND; return T_AND;
+yylval.arith = AsmInstARITHType::AND; return T_ARTH;
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
@@ -986,32 +986,32 @@ return T_CALL;
 case 19:
 YY_RULE_SETUP
 #line 55 "../../src/intel-lex.ll"
-return T_CBW;
+yylval.zo = AsmInstZOType::CBW; return T_ZO;
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
 #line 56 "../../src/intel-lex.ll"
-return T_CDQ;
+yylval.zo = AsmInstZOType::CDQ; return T_ZO;
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
 #line 57 "../../src/intel-lex.ll"
-return T_CLC;
+yylval.zo = AsmInstZOType::CLC; return T_ZO;
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
 #line 58 "../../src/intel-lex.ll"
-return T_CLD;
+yylval.zo = AsmInstZOType::CLD; return T_ZO;
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
 #line 59 "../../src/intel-lex.ll"
-return T_CLI;
+yylval.zo = AsmInstZOType::CLI; return T_ZO;;
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
 #line 60 "../../src/intel-lex.ll"
-yylval.arith = AsmInstARITHType::CMP; return T_CMP;
+yylval.arith = AsmInstARITHType::CMP; return T_ARTH;
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
@@ -1021,12 +1021,12 @@ return T_CMPS;
 case 26:
 YY_RULE_SETUP
 #line 62 "../../src/intel-lex.ll"
-return T_CWD;
+yylval.zo = AsmInstZOType::CWD; return T_ZO;
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
 #line 63 "../../src/intel-lex.ll"
-return T_CWDE;
+yylval.zo = AsmInstZOType::CWDE; return T_ZO;
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
@@ -1041,12 +1041,12 @@ return T_DIV;
 case 30:
 YY_RULE_SETUP
 #line 66 "../../src/intel-lex.ll"
-return T_ENTER;
+yylval.zo = AsmInstZOType::ENTER; return T_ZO;
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
 #line 67 "../../src/intel-lex.ll"
-return T_HLT;
+yylval.zo = AsmInstZOType::HLT; return T_ZO;
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
@@ -1081,97 +1081,97 @@ return T_INT;
 case 38:
 YY_RULE_SETUP
 #line 74 "../../src/intel-lex.ll"
-return T_INT3;
+yylval.zo = AsmInstZOType::INT3; return T_ZO;
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
 #line 75 "../../src/intel-lex.ll"
-return T_INTO;
+yylval.zo = AsmInstZOType::INTO; return T_ZO;
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
 #line 76 "../../src/intel-lex.ll"
-return T_IRET;
+yylval.zo = AsmInstZOType::IRET; return T_ZO;
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
 #line 77 "../../src/intel-lex.ll"
-yylval.jf = AsmInstJFType::JO; return T_JO;
+yylval.jf = AsmInstJFType::JO; return T_JF;
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
 #line 78 "../../src/intel-lex.ll"
-yylval.jf = AsmInstJFType::JNO; return T_JNO;
+yylval.jf = AsmInstJFType::JNO; return T_JF;
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
 #line 79 "../../src/intel-lex.ll"
-yylval.jf = AsmInstJFType::JC; return T_JC;
+yylval.jf = AsmInstJFType::JC; return T_JF;
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
 #line 80 "../../src/intel-lex.ll"
-yylval.jf = AsmInstJFType::JNC; return T_JNC;
+yylval.jf = AsmInstJFType::JNC; return T_JF;
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
 #line 81 "../../src/intel-lex.ll"
-yylval.jf = AsmInstJFType::JZ; return T_JZ;
+yylval.jf = AsmInstJFType::JZ; return T_JF;
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
 #line 82 "../../src/intel-lex.ll"
-yylval.jf = AsmInstJFType::JNZ; return T_JNZ;
+yylval.jf = AsmInstJFType::JNZ; return T_JF;
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
 #line 83 "../../src/intel-lex.ll"
-yylval.jf = AsmInstJFType::JNA; return T_JNA;
+yylval.jf = AsmInstJFType::JNA; return T_JF;
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
 #line 84 "../../src/intel-lex.ll"
-yylval.jf = AsmInstJFType::JA; return T_JA;
+yylval.jf = AsmInstJFType::JA; return T_JF;
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
 #line 85 "../../src/intel-lex.ll"
-yylval.jf = AsmInstJFType::JS; return T_JS;
+yylval.jf = AsmInstJFType::JS; return T_JF;
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
 #line 86 "../../src/intel-lex.ll"
-yylval.jf = AsmInstJFType::JNS; return T_JNS;
+yylval.jf = AsmInstJFType::JNS; return T_JF;
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
 #line 87 "../../src/intel-lex.ll"
-yylval.jf = AsmInstJFType::JP; return T_JP;
+yylval.jf = AsmInstJFType::JP; return T_JF;
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
 #line 88 "../../src/intel-lex.ll"
-yylval.jf = AsmInstJFType::JNP; return T_JNP;
+yylval.jf = AsmInstJFType::JNP; return T_JF;
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
 #line 89 "../../src/intel-lex.ll"
-yylval.jf = AsmInstJFType::JL; return T_JL;
+yylval.jf = AsmInstJFType::JL; return T_JF;
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
 #line 90 "../../src/intel-lex.ll"
-yylval.jf = AsmInstJFType::JNL; return T_JNL;
+yylval.jf = AsmInstJFType::JNL; return T_JF;
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
 #line 91 "../../src/intel-lex.ll"
-yylval.jf = AsmInstJFType::JNG; return T_JNG;
+yylval.jf = AsmInstJFType::JNG; return T_JF;
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
 #line 92 "../../src/intel-lex.ll"
-yylval.jf = AsmInstJFType::JG; return T_JG;
+yylval.jf = AsmInstJFType::JG; return T_JF;
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
@@ -1181,7 +1181,7 @@ return T_JMP;
 case 58:
 YY_RULE_SETUP
 #line 94 "../../src/intel-lex.ll"
-return T_LAHF;
+yylval.zo = AsmInstZOType::LAHF; return T_ZO;
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
@@ -1191,7 +1191,7 @@ return T_LEA;
 case 60:
 YY_RULE_SETUP
 #line 96 "../../src/intel-lex.ll"
-return T_LEAVE;
+yylval.zo = AsmInstZOType::LEAVE; return T_ZO;
 	YY_BREAK
 case 61:
 YY_RULE_SETUP
@@ -1241,7 +1241,7 @@ return T_NOT;
 case 70:
 YY_RULE_SETUP
 #line 106 "../../src/intel-lex.ll"
-yylval.arith = AsmInstARITHType::OR; return T_OR;
+yylval.arith = AsmInstARITHType::OR; return T_ARTH;
 	YY_BREAK
 case 71:
 YY_RULE_SETUP
@@ -1261,12 +1261,12 @@ return T_POP;
 case 74:
 YY_RULE_SETUP
 #line 110 "../../src/intel-lex.ll"
-return T_POPA;
+yylval.zo = AsmInstZOType::POPA; return T_ZO;
 	YY_BREAK
 case 75:
 YY_RULE_SETUP
 #line 111 "../../src/intel-lex.ll"
-return T_POPF;
+yylval.zo = AsmInstZOType::POPF; return T_ZO;
 	YY_BREAK
 case 76:
 YY_RULE_SETUP
@@ -1276,12 +1276,12 @@ return T_PUSH;
 case 77:
 YY_RULE_SETUP
 #line 113 "../../src/intel-lex.ll"
-return T_PUSHA;
+yylval.zo = AsmInstZOType::PUSHA; return T_ZO;
 	YY_BREAK
 case 78:
 YY_RULE_SETUP
 #line 114 "../../src/intel-lex.ll"
-return T_PUSHF;
+yylval.zo = AsmInstZOType::PUSHF; return T_ZO;
 	YY_BREAK
 case 79:
 YY_RULE_SETUP
@@ -1321,7 +1321,7 @@ return T_ROR;
 case 86:
 YY_RULE_SETUP
 #line 122 "../../src/intel-lex.ll"
-return T_SAHF;
+yylval.zo = AsmInstZOType::SAHF; return T_ZO;
 	YY_BREAK
 case 87:
 YY_RULE_SETUP
@@ -1331,7 +1331,7 @@ return T_SAR;
 case 88:
 YY_RULE_SETUP
 #line 124 "../../src/intel-lex.ll"
-yylval.arith = AsmInstARITHType::SBB; return T_SBB;
+yylval.arith = AsmInstARITHType::SBB; return T_ARTH;
 	YY_BREAK
 case 89:
 YY_RULE_SETUP
@@ -1351,12 +1351,12 @@ return T_SHR;
 case 92:
 YY_RULE_SETUP
 #line 128 "../../src/intel-lex.ll"
-return T_STC;
+yylval.zo = AsmInstZOType::STC; return T_ZO;
 	YY_BREAK
 case 93:
 YY_RULE_SETUP
 #line 129 "../../src/intel-lex.ll"
-return T_STD;
+yylval.zo = AsmInstZOType::STD; return T_ZO;
 	YY_BREAK
 case 94:
 YY_RULE_SETUP
@@ -1366,12 +1366,12 @@ return T_STOS;
 case 95:
 YY_RULE_SETUP
 #line 131 "../../src/intel-lex.ll"
-return T_STI;
+yylval.zo = AsmInstZOType::STI; return T_ZO;
 	YY_BREAK
 case 96:
 YY_RULE_SETUP
 #line 132 "../../src/intel-lex.ll"
-yylval.arith = AsmInstARITHType::SUB; return T_SUB;
+yylval.arith = AsmInstARITHType::SUB; return T_ARTH;
 	YY_BREAK
 case 97:
 YY_RULE_SETUP
@@ -1386,12 +1386,12 @@ return T_XCHG;
 case 99:
 YY_RULE_SETUP
 #line 135 "../../src/intel-lex.ll"
-return T_XLAT;
+yylval.zo = AsmInstZOType::XLAT; return T_ZO;
 	YY_BREAK
 case 100:
 YY_RULE_SETUP
 #line 136 "../../src/intel-lex.ll"
-yylval.arith = AsmInstARITHType::XOR; return T_XOR;
+yylval.arith = AsmInstARITHType::XOR; return T_ARTH;
 	YY_BREAK
 case 101:
 YY_RULE_SETUP

@@ -64,140 +64,92 @@ extern Object *result;
 %token T_NEAR "near"
 %token T_FAR "far"
 
-%token	<arith>		T_ADC "adc"
-%token	<arith>		T_ADD "add"
-%token	<arith>		T_AND "and"
-%token	<arith>		T_CMP "cmp"
-%token	<arith>		T_OR "or"
-%token	<arith>		T_SBB "sbb"
-%token	<arith>		T_SUB "sub"
-%token	<arith>		T_XOR "xor"
+%token	<arith>		T_ARTH "instruction mnemonic"
+%token	<jf>		T_JF "instruction mnemonic"
+%token	<zo>		T_ZO "instruction mnemonic"
 
-%token	<jf>		T_JO "jo"
-%token	<jf>		T_JNO "jno"
-%token	<jf>		T_JC "jc"
-%token	<jf>		T_JNC "jnc"
-%token	<jf>		T_JZ "jz"
-%token	<jf>		T_JNZ "jnz"
-%token	<jf>		T_JNA "jna"
-%token	<jf>		T_JA "ja"
-%token	<jf>		T_JS "js"
-%token	<jf>		T_JNS "jns"
-%token	<jf>		T_JP "jp"
-%token	<jf>		T_JNP "jnp"
-%token	<jf>		T_JL "jl"
-%token	<jf>		T_JNL "jnl"
-%token	<jf>		T_JNG "jng"
-%token	<jf>		T_JG "jg"
+%token T_AAD "instruction mnemonic"
+%token T_AAM "instruction mnemonic"
+%token T_CALL "instruction mnemonic"
+%token T_CMPS "instruction mnemonic"
+%token T_DEC "instruction mnemonic"
+%token T_DIV "instruction mnemonic"
+%token T_IDIV "instruction mnemonic"
+%token T_IMUL "instruction mnemonic"
+%token T_IN "instruction mnemonic"
+%token T_INC "instruction mnemonic"
+%token T_INS "instruction mnemonic"
+%token T_INT "instruction mnemonic"
+%token T_JMP "instruction mnemonic"
+%token T_LEA "instruction mnemonic"
+%token T_LODS "instruction mnemonic"
+%token T_LOOP "instruction mnemonic"
+%token T_LOOPNZ "instruction mnemonic"
+%token T_LOOPZ "instruction mnemonic"
+%token T_MOV "instruction mnemonic"
+%token T_MOVS "instruction mnemonic"
+%token T_MUL "instruction mnemonic"
+%token T_NEG "instruction mnemonic"
+%token T_NOT "instruction mnemonic"
+%token T_OUT "instruction mnemonic"
+%token T_OUTS "instruction mnemonic"
+%token T_POP "instruction mnemonic"
+%token T_PUSH "instruction mnemonic"
+%token T_RCL "instruction mnemonic"
+%token T_RCR "instruction mnemonic"
+%token T_REPNZ "instruction mnemonic"
+%token T_REPZ "instruction mnemonic"
+%token T_RET "instruction mnemonic"
+%token T_ROL "instruction mnemonic"
+%token T_ROR "instruction mnemonic"
+%token T_SAR "instruction mnemonic"
+%token T_SCAS "instruction mnemonic"
+%token T_SHL "instruction mnemonic"
+%token T_SHR "instruction mnemonic"
+%token T_STOS "instruction mnemonic"
+%token T_TEST "instruction mnemonic"
+%token T_XCHG "instruction mnemonic"
 
-%token T_AAA "aaa"
-%token T_AAD "aad"
-%token T_AAM "aam"
-%token T_AAS "aas"
-%token T_CALL "call"
-%token T_CBW "cbw"
-%token T_CDQ "cdq"
-%token T_CLC "clc"
-%token T_CLD "cld"
-%token T_CLI "cli"
-%token T_CMPS "cmps"
-%token T_CWD "cwd"
-%token T_CWDE "cwde"
-%token T_DEC "dec"
-%token T_DIV "div"
-%token T_ENTER "enter"
-%token T_HLT "hlt"
-%token T_IDIV "idiv"
-%token T_IMUL "imul"
-%token T_IN "in"
-%token T_INC "inc"
-%token T_INS "ins"
-%token T_INT "int"
-%token T_INT3 "int3"
-%token T_INTO "into"
-%token T_IRET "iret"
-%token T_JMP "jmp"
-%token T_LAHF "lahf"
-%token T_LEA "lea"
-%token T_LEAVE "leave"
-%token T_LODS "lods"
-%token T_LOOP "loop"
-%token T_LOOPNZ "loopnz"
-%token T_LOOPZ "loopz"
-%token T_MOV "mov"
-%token T_MOVS "movs"
-%token T_MUL "mul"
-%token T_NEG "neg"
-%token T_NOT "not"
-%token T_OUT "out"
-%token T_OUTS "outs"
-%token T_POP "pop"
-%token T_POPA "popa"
-%token T_POPF "popf"
-%token T_PUSH "push"
-%token T_PUSHA "pusha"
-%token T_PUSHF "pushf"
-%token T_RCL "rcl"
-%token T_RCR "rcr"
-%token T_REPNZ "repnz"
-%token T_REPZ "repz"
-%token T_RET "ret"
-%token T_ROL "rol"
-%token T_ROR "ror"
-%token T_SAHF "sahf"
-%token T_SAR "sar"
-%token T_SCAS "scas"
-%token T_SHL "shl"
-%token T_SHR "shr"
-%token T_STC "stc"
-%token T_STD "std"
-%token T_STOS "stos"
-%token T_STI "sti"
-%token T_TEST "test"
-%token T_XCHG "xchg"
-%token T_XLAT "xlat"
+%token T_CS "register"
+%token T_DS "register"
+%token T_ES "register"
+%token T_FS "register"
+%token T_GS "register"
+%token T_AL "register"
+%token T_CL "register"
+%token T_DL "register"
+%token T_BL "register"
+%token T_AH "register"
+%token T_CH "register"
+%token T_DH "register"
+%token T_BH "register"
+%token T_AX "register"
+%token T_CX "register"
+%token T_DX "register"
+%token T_BX "register"
+%token T_SP "register"
+%token T_BP "register"
+%token T_SI "register"
+%token T_DI "register"
+%token T_EAX "register"
+%token T_ECX "register"
+%token T_EDX "register"
+%token T_EBX "register"
+%token T_ESP "register"
+%token T_EBP "register"
+%token T_ESI "register"
+%token T_EDI "register"
 
-%token T_CS "cs"
-%token T_DS "ds"
-%token T_ES "es"
-%token T_FS "fs"
-%token T_GS "gs"
-%token T_AL "al"
-%token T_CL "cl"
-%token T_DL "dl"
-%token T_BL "bl"
-%token T_AH "ah"
-%token T_CH "ch"
-%token T_DH "dh"
-%token T_BH "bh"
-%token T_AX "ax"
-%token T_CX "cx"
-%token T_DX "dx"
-%token T_BX "bx"
-%token T_SP "sp"
-%token T_BP "bp"
-%token T_SI "si"
-%token T_DI "di"
-%token T_EAX "eax"
-%token T_ECX "ecx"
-%token T_EDX "edx"
-%token T_EBX "ebx"
-%token T_ESP "esp"
-%token T_EBP "ebp"
-%token T_ESI "esi"
-%token T_EDI "edi"
-
-%type	<arith>		arith_operator
 %type	<label>		label
 %type	<lines>		lines
 %type	<expr>		expression
 %type	<imm>		immediate
-%type	<inst>		instruction arith_instruction
+%type	<inst>		instruction arith_inst jf_inst zo_inst
 %type	<obj>		object
 %type	<reg>		reg
 %type	<mem>		memloc
 %type	<storage>	storage
-%type	<number>	size_specifier
+%type	<number>	size_specifier addr
 
 %start program
 
@@ -229,14 +181,21 @@ lines:		instruction
 	|	lines terminator
 	;
 
-instruction:	arith_instruction
+instruction:	arith_inst
+	|	jf_inst
+	|	zo_inst
 	;
 
-arith_instruction:
-		arith_operator storage ',' expression
+arith_inst:	T_ARTH storage ',' expression
 		{
 		  $$ = new AsmInstARITH ($1, $2, $4);
 		}
+	;
+
+jf_inst:	T_JF addr { $$ = new AsmInstJF ($1, $2, 4); }
+	;
+
+zo_inst:	T_ZO { $$ = new AsmInstZO ($1); }
 	;
 
 expression:	immediate { $$ = $1; }
@@ -297,15 +256,8 @@ terminator:	';'
 	|	'\n'
 	;
 
-arith_operator:	T_ADC
-	|	T_ADD
-	|	T_AND
-	|	T_CMP
-	|	T_OR
-	|	T_SBB
-	|	T_SUB
-	|	T_XOR
+label:		T_IDENT ':' { $$ = new AsmIdentifier (*$1); delete $1; }
 	;
 
-label:		T_IDENT ':' { $$ = new AsmIdentifier (*$1); delete $1; }
+addr:		T_NUMBER /* TODO Allow labels as addresses */
 	;
