@@ -158,8 +158,7 @@ extern Object *result;
 %type	<lines>		lines
 %type	<expr>		expression
 %type	<imm>		immediate
-%type	<inst>		instruction directive arith_inst jf_inst zo_inst
-%type	<inst>		zos_inst ascii_inst mov_inst
+%type	<inst>		instruction directive ascii_inst call_inst
 %type	<obj>		object
 %type	<reg>		reg
 %type	<mem>		memloc
@@ -197,37 +196,40 @@ lines:		instruction
 	|	lines terminator
 	;
 
-instruction:	arith_inst
-	|	jf_inst
-	|	zo_inst
-	|	zos_inst
-	|	ascii_inst
-	|	mov_inst
-	|	directive
-	;
-
-arith_inst:	T_ARTH storage ',' expression
+instruction:	T_ARTH storage ',' expression
 		{
 		  $$ = new AsmInstARITH ($1, $2, $4);
 		}
-	;
-
-jf_inst:	T_JF addr { $$ = new AsmInstJF ($1, $2, 4); }
-	;
-
-zo_inst:	T_ZO { $$ = new AsmInstZO ($1); }
-	;
-
-zos_inst:	T_ZOS size_specifier { $$ = new AsmInstZOS ($1, $2); }
-	;
-
-mov_inst:	T_MOV storage ',' expression { $$ = new AsmInstMOV ($2, $4); }
+	|	T_JF addr { $$ = new AsmInstJF ($1, $2, 4); }
+	|	T_ZO { $$ = new AsmInstZO ($1); }
+	|	T_ZOS size_specifier { $$ = new AsmInstZOS ($1, $2); }
+	|	ascii_inst
+	|	call_inst
+	|	T_DEC storage { $$ = new AsmInstDEC ($2); }
+	|	T_DIV storage { $$ = new AsmInstDIV ($2); }
+	|	T_IDIV storage { $$ = new AsmInstIDIV ($2); }
+	|	T_IMUL storage { $$ = new AsmInstIMUL ($2); }
+	|	T_INC storage { $$ = new AsmInstINC ($2); }
+	|	T_MOV storage ',' expression { $$ = new AsmInstMOV ($2, $4); }
+	|	directive
 	;
 
 ascii_inst:	T_AAD T_NUMBER { $$ = new AsmInstAAD ($2); }
 	|	T_AAD { $$ = new AsmInstAAD (); }
 	|	T_AAM T_NUMBER { $$ = new AsmInstAAM ($2); }
 	|	T_AAM { $$ = new AsmInstAAM (); }
+	;
+
+call_inst:	T_CALL addr { $$ = new AsmInstCALL ($2, 4); }
+	|	T_CALL T_NEAR addr { $$ = new AsmInstCALL ($3, 4); }
+	|	T_CALL T_NUMBER ':' T_NUMBER { $$ = new AsmInstCALLF ($2, $4); }
+	|	T_CALL T_FAR T_NUMBER ':' T_NUMBER
+		{
+		  $$ = new AsmInstCALLF ($3, $5);
+		}
+	|	T_CALL storage { $$ = new AsmInstCALL ($2); }
+	|	T_CALL T_NEAR storage { $$ = new AsmInstCALL ($3); }
+	|	T_CALL T_FAR memloc { $$ = new AsmInstCALLF ($3); }
 	;
 
 directive:	T_GLOBAL T_IDENT { global_syms.insert (*$2); delete $2; }
