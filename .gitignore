@@ -1,0 +1,5 @@
+.DS_Store
+*~
+._*
+autom4te.cache
+build
