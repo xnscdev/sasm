@@ -16,6 +16,8 @@ sasm_SOURCES =		\
 	error.hh	\
 	expr.hh		\
 	inst.hh		\
+	inst-call.cc	\
+	inst-callf.cc	\
 	inst-dec.cc	\
 	inst-div.cc	\
 	inst-idiv.cc	\
@@ -23,16 +25,22 @@ sasm_SOURCES =		\
 	inst-in.cc	\
 	inst-inc.cc	\
 	inst-int.cc	\
+	inst-jmp.cc	\
+	inst-jmpf.cc	\
 	inst-mul.cc	\
 	inst-neg.cc	\
 	inst-not.cc	\
+	inst-pop.cc	\
+	inst-push.cc	\
 	inst-repnz.cc	\
 	inst-repz.cc	\
 	inst-ret.cc	\
 	inst-out.cc	\
 	insts-arith.cc	\
 	insts-ascii.cc	\
+	insts-jf.cc	\
 	insts-loop.cc	\
+	insts-rotshf.cc	\
 	insts-str.cc	\
 	insts-zo.cc	\
 	intel-lex.ll	\
