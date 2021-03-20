@@ -73,6 +73,23 @@ extern Object *result;
 %token	<arith>		T_SUB "sub"
 %token	<arith>		T_XOR "xor"
 
+%token	<jf>		T_JO "jo"
+%token	<jf>		T_JNO "jno"
+%token	<jf>		T_JC "jc"
+%token	<jf>		T_JNC "jnc"
+%token	<jf>		T_JZ "jz"
+%token	<jf>		T_JNZ "jnz"
+%token	<jf>		T_JNA "jna"
+%token	<jf>		T_JA "ja"
+%token	<jf>		T_JS "js"
+%token	<jf>		T_JNS "jns"
+%token	<jf>		T_JP "jp"
+%token	<jf>		T_JNP "jnp"
+%token	<jf>		T_JL "jl"
+%token	<jf>		T_JNL "jnl"
+%token	<jf>		T_JNG "jng"
+%token	<jf>		T_JG "jg"
+
 %token T_AAA "aaa"
 %token T_AAD "aad"
 %token T_AAM "aam"
@@ -99,22 +116,6 @@ extern Object *result;
 %token T_INT3 "int3"
 %token T_INTO "into"
 %token T_IRET "iret"
-%token T_JO "jo"
-%token T_JNO "jno"
-%token T_JC "jc"
-%token T_JNC "jnc"
-%token T_JZ "jz"
-%token T_JNZ "jnz"
-%token T_JNA "jna"
-%token T_JA "ja"
-%token T_JS "js"
-%token T_JNS "jns"
-%token T_JP "jp"
-%token T_JNP "jnp"
-%token T_JL "jl"
-%token T_JNL "jnl"
-%token T_JNG "jng"
-%token T_JG "jg"
 %token T_JMP "jmp"
 %token T_LAHF "lahf"
 %token T_LEA "lea"
@@ -205,7 +206,12 @@ extern Object *result;
 program:        object { result = $1; }
 	;
 
-object:		lines { $$ = new Object (format, filename); $$->lines = $1; }
+object:		lines
+		{
+		  $$ = new Object (format, filename);
+		  $$->lines = *$1;
+		  delete $1;
+		}
 	;
 
 lines:		instruction

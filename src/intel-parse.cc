@@ -144,48 +144,48 @@ extern int yydebug;
     T_SBB = 271,                   /* "sbb"  */
     T_SUB = 272,                   /* "sub"  */
     T_XOR = 273,                   /* "xor"  */
-    T_AAA = 274,                   /* "aaa"  */
-    T_AAD = 275,                   /* "aad"  */
-    T_AAM = 276,                   /* "aam"  */
-    T_AAS = 277,                   /* "aas"  */
-    T_CALL = 278,                  /* "call"  */
-    T_CBW = 279,                   /* "cbw"  */
-    T_CDQ = 280,                   /* "cdq"  */
-    T_CLC = 281,                   /* "clc"  */
-    T_CLD = 282,                   /* "cld"  */
-    T_CLI = 283,                   /* "cli"  */
-    T_CMPS = 284,                  /* "cmps"  */
-    T_CWD = 285,                   /* "cwd"  */
-    T_CWDE = 286,                  /* "cwde"  */
-    T_DEC = 287,                   /* "dec"  */
-    T_DIV = 288,                   /* "div"  */
-    T_ENTER = 289,                 /* "enter"  */
-    T_HLT = 290,                   /* "hlt"  */
-    T_IDIV = 291,                  /* "idiv"  */
-    T_IMUL = 292,                  /* "imul"  */
-    T_IN = 293,                    /* "in"  */
-    T_INC = 294,                   /* "inc"  */
-    T_INS = 295,                   /* "ins"  */
-    T_INT = 296,                   /* "int"  */
-    T_INT3 = 297,                  /* "int3"  */
-    T_INTO = 298,                  /* "into"  */
-    T_IRET = 299,                  /* "iret"  */
-    T_JO = 300,                    /* "jo"  */
-    T_JNO = 301,                   /* "jno"  */
-    T_JC = 302,                    /* "jc"  */
-    T_JNC = 303,                   /* "jnc"  */
-    T_JZ = 304,                    /* "jz"  */
-    T_JNZ = 305,                   /* "jnz"  */
-    T_JNA = 306,                   /* "jna"  */
-    T_JA = 307,                    /* "ja"  */
-    T_JS = 308,                    /* "js"  */
-    T_JNS = 309,                   /* "jns"  */
-    T_JP = 310,                    /* "jp"  */
-    T_JNP = 311,                   /* "jnp"  */
-    T_JL = 312,                    /* "jl"  */
-    T_JNL = 313,                   /* "jnl"  */
-    T_JNG = 314,                   /* "jng"  */
-    T_JG = 315,                    /* "jg"  */
+    T_JO = 274,                    /* "jo"  */
+    T_JNO = 275,                   /* "jno"  */
+    T_JC = 276,                    /* "jc"  */
+    T_JNC = 277,                   /* "jnc"  */
+    T_JZ = 278,                    /* "jz"  */
+    T_JNZ = 279,                   /* "jnz"  */
+    T_JNA = 280,                   /* "jna"  */
+    T_JA = 281,                    /* "ja"  */
+    T_JS = 282,                    /* "js"  */
+    T_JNS = 283,                   /* "jns"  */
+    T_JP = 284,                    /* "jp"  */
+    T_JNP = 285,                   /* "jnp"  */
+    T_JL = 286,                    /* "jl"  */
+    T_JNL = 287,                   /* "jnl"  */
+    T_JNG = 288,                   /* "jng"  */
+    T_JG = 289,                    /* "jg"  */
+    T_AAA = 290,                   /* "aaa"  */
+    T_AAD = 291,                   /* "aad"  */
+    T_AAM = 292,                   /* "aam"  */
+    T_AAS = 293,                   /* "aas"  */
+    T_CALL = 294,                  /* "call"  */
+    T_CBW = 295,                   /* "cbw"  */
+    T_CDQ = 296,                   /* "cdq"  */
+    T_CLC = 297,                   /* "clc"  */
+    T_CLD = 298,                   /* "cld"  */
+    T_CLI = 299,                   /* "cli"  */
+    T_CMPS = 300,                  /* "cmps"  */
+    T_CWD = 301,                   /* "cwd"  */
+    T_CWDE = 302,                  /* "cwde"  */
+    T_DEC = 303,                   /* "dec"  */
+    T_DIV = 304,                   /* "div"  */
+    T_ENTER = 305,                 /* "enter"  */
+    T_HLT = 306,                   /* "hlt"  */
+    T_IDIV = 307,                  /* "idiv"  */
+    T_IMUL = 308,                  /* "imul"  */
+    T_IN = 309,                    /* "in"  */
+    T_INC = 310,                   /* "inc"  */
+    T_INS = 311,                   /* "ins"  */
+    T_INT = 312,                   /* "int"  */
+    T_INT3 = 313,                  /* "int3"  */
+    T_INTO = 314,                  /* "into"  */
+    T_IRET = 315,                  /* "iret"  */
     T_JMP = 316,                   /* "jmp"  */
     T_LAHF = 317,                  /* "lahf"  */
     T_LEA = 318,                   /* "lea"  */
@@ -279,48 +279,48 @@ extern int yydebug;
 #define T_SBB 271
 #define T_SUB 272
 #define T_XOR 273
-#define T_AAA 274
-#define T_AAD 275
-#define T_AAM 276
-#define T_AAS 277
-#define T_CALL 278
-#define T_CBW 279
-#define T_CDQ 280
-#define T_CLC 281
-#define T_CLD 282
-#define T_CLI 283
-#define T_CMPS 284
-#define T_CWD 285
-#define T_CWDE 286
-#define T_DEC 287
-#define T_DIV 288
-#define T_ENTER 289
-#define T_HLT 290
-#define T_IDIV 291
-#define T_IMUL 292
-#define T_IN 293
-#define T_INC 294
-#define T_INS 295
-#define T_INT 296
-#define T_INT3 297
-#define T_INTO 298
-#define T_IRET 299
-#define T_JO 300
-#define T_JNO 301
-#define T_JC 302
-#define T_JNC 303
-#define T_JZ 304
-#define T_JNZ 305
-#define T_JNA 306
-#define T_JA 307
-#define T_JS 308
-#define T_JNS 309
-#define T_JP 310
-#define T_JNP 311
-#define T_JL 312
-#define T_JNL 313
-#define T_JNG 314
-#define T_JG 315
+#define T_JO 274
+#define T_JNO 275
+#define T_JC 276
+#define T_JNC 277
+#define T_JZ 278
+#define T_JNZ 279
+#define T_JNA 280
+#define T_JA 281
+#define T_JS 282
+#define T_JNS 283
+#define T_JP 284
+#define T_JNP 285
+#define T_JL 286
+#define T_JNL 287
+#define T_JNG 288
+#define T_JG 289
+#define T_AAA 290
+#define T_AAD 291
+#define T_AAM 292
+#define T_AAS 293
+#define T_CALL 294
+#define T_CBW 295
+#define T_CDQ 296
+#define T_CLC 297
+#define T_CLD 298
+#define T_CLI 299
+#define T_CMPS 300
+#define T_CWD 301
+#define T_CWDE 302
+#define T_DEC 303
+#define T_DIV 304
+#define T_ENTER 305
+#define T_HLT 306
+#define T_IDIV 307
+#define T_IMUL 308
+#define T_IN 309
+#define T_INC 310
+#define T_INS 311
+#define T_INT 312
+#define T_INT3 313
+#define T_INTO 314
+#define T_IRET 315
 #define T_JMP 316
 #define T_LAHF 317
 #define T_LEA 318
@@ -451,48 +451,48 @@ enum yysymbol_kind_t
   YYSYMBOL_T_SBB = 16,                     /* "sbb"  */
   YYSYMBOL_T_SUB = 17,                     /* "sub"  */
   YYSYMBOL_T_XOR = 18,                     /* "xor"  */
-  YYSYMBOL_T_AAA = 19,                     /* "aaa"  */
-  YYSYMBOL_T_AAD = 20,                     /* "aad"  */
-  YYSYMBOL_T_AAM = 21,                     /* "aam"  */
-  YYSYMBOL_T_AAS = 22,                     /* "aas"  */
-  YYSYMBOL_T_CALL = 23,                    /* "call"  */
-  YYSYMBOL_T_CBW = 24,                     /* "cbw"  */
-  YYSYMBOL_T_CDQ = 25,                     /* "cdq"  */
-  YYSYMBOL_T_CLC = 26,                     /* "clc"  */
-  YYSYMBOL_T_CLD = 27,                     /* "cld"  */
-  YYSYMBOL_T_CLI = 28,                     /* "cli"  */
-  YYSYMBOL_T_CMPS = 29,                    /* "cmps"  */
-  YYSYMBOL_T_CWD = 30,                     /* "cwd"  */
-  YYSYMBOL_T_CWDE = 31,                    /* "cwde"  */
-  YYSYMBOL_T_DEC = 32,                     /* "dec"  */
-  YYSYMBOL_T_DIV = 33,                     /* "div"  */
-  YYSYMBOL_T_ENTER = 34,                   /* "enter"  */
-  YYSYMBOL_T_HLT = 35,                     /* "hlt"  */
-  YYSYMBOL_T_IDIV = 36,                    /* "idiv"  */
-  YYSYMBOL_T_IMUL = 37,                    /* "imul"  */
-  YYSYMBOL_T_IN = 38,                      /* "in"  */
-  YYSYMBOL_T_INC = 39,                     /* "inc"  */
-  YYSYMBOL_T_INS = 40,                     /* "ins"  */
-  YYSYMBOL_T_INT = 41,                     /* "int"  */
-  YYSYMBOL_T_INT3 = 42,                    /* "int3"  */
-  YYSYMBOL_T_INTO = 43,                    /* "into"  */
-  YYSYMBOL_T_IRET = 44,                    /* "iret"  */
-  YYSYMBOL_T_JO = 45,                      /* "jo"  */
-  YYSYMBOL_T_JNO = 46,                     /* "jno"  */
-  YYSYMBOL_T_JC = 47,                      /* "jc"  */
-  YYSYMBOL_T_JNC = 48,                     /* "jnc"  */
-  YYSYMBOL_T_JZ = 49,                      /* "jz"  */
-  YYSYMBOL_T_JNZ = 50,                     /* "jnz"  */
-  YYSYMBOL_T_JNA = 51,                     /* "jna"  */
-  YYSYMBOL_T_JA = 52,                      /* "ja"  */
-  YYSYMBOL_T_JS = 53,                      /* "js"  */
-  YYSYMBOL_T_JNS = 54,                     /* "jns"  */
-  YYSYMBOL_T_JP = 55,                      /* "jp"  */
-  YYSYMBOL_T_JNP = 56,                     /* "jnp"  */
-  YYSYMBOL_T_JL = 57,                      /* "jl"  */
-  YYSYMBOL_T_JNL = 58,                     /* "jnl"  */
-  YYSYMBOL_T_JNG = 59,                     /* "jng"  */
-  YYSYMBOL_T_JG = 60,                      /* "jg"  */
+  YYSYMBOL_T_JO = 19,                      /* "jo"  */
+  YYSYMBOL_T_JNO = 20,                     /* "jno"  */
+  YYSYMBOL_T_JC = 21,                      /* "jc"  */
+  YYSYMBOL_T_JNC = 22,                     /* "jnc"  */
+  YYSYMBOL_T_JZ = 23,                      /* "jz"  */
+  YYSYMBOL_T_JNZ = 24,                     /* "jnz"  */
+  YYSYMBOL_T_JNA = 25,                     /* "jna"  */
+  YYSYMBOL_T_JA = 26,                      /* "ja"  */
+  YYSYMBOL_T_JS = 27,                      /* "js"  */
+  YYSYMBOL_T_JNS = 28,                     /* "jns"  */
+  YYSYMBOL_T_JP = 29,                      /* "jp"  */
+  YYSYMBOL_T_JNP = 30,                     /* "jnp"  */
+  YYSYMBOL_T_JL = 31,                      /* "jl"  */
+  YYSYMBOL_T_JNL = 32,                     /* "jnl"  */
+  YYSYMBOL_T_JNG = 33,                     /* "jng"  */
+  YYSYMBOL_T_JG = 34,                      /* "jg"  */
+  YYSYMBOL_T_AAA = 35,                     /* "aaa"  */
+  YYSYMBOL_T_AAD = 36,                     /* "aad"  */
+  YYSYMBOL_T_AAM = 37,                     /* "aam"  */
+  YYSYMBOL_T_AAS = 38,                     /* "aas"  */
+  YYSYMBOL_T_CALL = 39,                    /* "call"  */
+  YYSYMBOL_T_CBW = 40,                     /* "cbw"  */
+  YYSYMBOL_T_CDQ = 41,                     /* "cdq"  */
+  YYSYMBOL_T_CLC = 42,                     /* "clc"  */
+  YYSYMBOL_T_CLD = 43,                     /* "cld"  */
+  YYSYMBOL_T_CLI = 44,                     /* "cli"  */
+  YYSYMBOL_T_CMPS = 45,                    /* "cmps"  */
+  YYSYMBOL_T_CWD = 46,                     /* "cwd"  */
+  YYSYMBOL_T_CWDE = 47,                    /* "cwde"  */
+  YYSYMBOL_T_DEC = 48,                     /* "dec"  */
+  YYSYMBOL_T_DIV = 49,                     /* "div"  */
+  YYSYMBOL_T_ENTER = 50,                   /* "enter"  */
+  YYSYMBOL_T_HLT = 51,                     /* "hlt"  */
+  YYSYMBOL_T_IDIV = 52,                    /* "idiv"  */
+  YYSYMBOL_T_IMUL = 53,                    /* "imul"  */
+  YYSYMBOL_T_IN = 54,                      /* "in"  */
+  YYSYMBOL_T_INC = 55,                     /* "inc"  */
+  YYSYMBOL_T_INS = 56,                     /* "ins"  */
+  YYSYMBOL_T_INT = 57,                     /* "int"  */
+  YYSYMBOL_T_INT3 = 58,                    /* "int3"  */
+  YYSYMBOL_T_INTO = 59,                    /* "into"  */
+  YYSYMBOL_T_IRET = 60,                    /* "iret"  */
   YYSYMBOL_T_JMP = 61,                     /* "jmp"  */
   YYSYMBOL_T_LAHF = 62,                    /* "lahf"  */
   YYSYMBOL_T_LEA = 63,                     /* "lea"  */
@@ -975,12 +975,12 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   205,   205,   208,   211,   216,   221,   222,   223,   226,
-     230,   236,   237,   240,   243,   244,   247,   254,   255,   256,
-     257,   258,   259,   260,   261,   262,   263,   264,   265,   266,
-     267,   268,   269,   270,   271,   272,   273,   274,   275,   276,
-     277,   278,   279,   280,   281,   282,   285,   286,   287,   290,
-     291,   294,   295,   296,   297,   298,   299,   300,   301,   304
+       0,   206,   206,   209,   217,   222,   227,   228,   229,   232,
+     236,   242,   243,   246,   249,   250,   253,   260,   261,   262,
+     263,   264,   265,   266,   267,   268,   269,   270,   271,   272,
+     273,   274,   275,   276,   277,   278,   279,   280,   281,   282,
+     283,   284,   285,   286,   287,   288,   291,   292,   293,   296,
+     297,   300,   301,   302,   303,   304,   305,   306,   307,   310
 };
 #endif
 
@@ -999,11 +999,11 @@ yysymbol_name (yysymbol_kind_t yysymbol)
   {
   "end of file", "error", "invalid token", "identifier", "number",
   "character literal", "byte", "word", "dword", "near", "far", "adc",
-  "add", "and", "cmp", "or", "sbb", "sub", "xor", "aaa", "aad", "aam",
-  "aas", "call", "cbw", "cdq", "clc", "cld", "cli", "cmps", "cwd", "cwde",
-  "dec", "div", "enter", "hlt", "idiv", "imul", "in", "inc", "ins", "int",
-  "int3", "into", "iret", "jo", "jno", "jc", "jnc", "jz", "jnz", "jna",
-  "ja", "js", "jns", "jp", "jnp", "jl", "jnl", "jng", "jg", "jmp", "lahf",
+  "add", "and", "cmp", "or", "sbb", "sub", "xor", "jo", "jno", "jc", "jnc",
+  "jz", "jnz", "jna", "ja", "js", "jns", "jp", "jnp", "jl", "jnl", "jng",
+  "jg", "aaa", "aad", "aam", "aas", "call", "cbw", "cdq", "clc", "cld",
+  "cli", "cmps", "cwd", "cwde", "dec", "div", "enter", "hlt", "idiv",
+  "imul", "in", "inc", "ins", "int", "int3", "into", "iret", "jmp", "lahf",
   "lea", "leave", "lods", "loop", "loopnz", "loopz", "mov", "movs", "mul",
   "neg", "not", "out", "outs", "pop", "popa", "popf", "push", "pusha",
   "pushf", "rcl", "rcr", "repnz", "repz", "ret", "rol", "ror", "sahf",
@@ -1856,294 +1856,298 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* program: object  */
-#line 205 "../../src/intel-parse.yy"
+#line 206 "../../src/intel-parse.yy"
                        { result = (yyvsp[0].obj); }
 #line 1862 "../../src/intel-parse.cc"
     break;
 
   case 3: /* object: lines  */
-#line 208 "../../src/intel-parse.yy"
-                      { (yyval.obj) = new Object (format, filename); (yyval.obj)->lines = (yyvsp[0].lines); }
-#line 1868 "../../src/intel-parse.cc"
+#line 210 "../../src/intel-parse.yy"
+                {
+		  (yyval.obj) = new Object (format, filename);
+		  (yyval.obj)->lines = *(yyvsp[0].lines);
+		  delete (yyvsp[0].lines);
+		}
+#line 1872 "../../src/intel-parse.cc"
     break;
 
   case 4: /* lines: instruction  */
-#line 212 "../../src/intel-parse.yy"
+#line 218 "../../src/intel-parse.yy"
                 {
 		  (yyval.lines) = new std::vector <AsmLine *> ();
 		  (yyval.lines)->push_back ((yyvsp[0].inst));
 		}
-#line 1877 "../../src/intel-parse.cc"
+#line 1881 "../../src/intel-parse.cc"
     break;
 
   case 5: /* lines: label  */
-#line 217 "../../src/intel-parse.yy"
+#line 223 "../../src/intel-parse.yy"
                 {
 		  (yyval.lines) = new std::vector <AsmLine *> ();
 		  (yyval.lines)->push_back ((yyvsp[0].label));
 		}
-#line 1886 "../../src/intel-parse.cc"
+#line 1890 "../../src/intel-parse.cc"
     break;
 
   case 6: /* lines: lines terminator instruction  */
-#line 221 "../../src/intel-parse.yy"
+#line 227 "../../src/intel-parse.yy"
                                              { (yyvsp[-2].lines)->push_back ((yyvsp[0].inst)); }
-#line 1892 "../../src/intel-parse.cc"
+#line 1896 "../../src/intel-parse.cc"
     break;
 
   case 7: /* lines: lines terminator label  */
-#line 222 "../../src/intel-parse.yy"
+#line 228 "../../src/intel-parse.yy"
                                        { (yyvsp[-2].lines)->push_back ((yyvsp[0].label)); }
-#line 1898 "../../src/intel-parse.cc"
+#line 1902 "../../src/intel-parse.cc"
     break;
 
   case 10: /* arith_instruction: arith_operator storage ',' expression  */
-#line 231 "../../src/intel-parse.yy"
+#line 237 "../../src/intel-parse.yy"
                 {
 		  (yyval.inst) = new AsmInstARITH ((yyvsp[-3].arith), (yyvsp[-2].storage), (yyvsp[0].expr));
 		}
-#line 1906 "../../src/intel-parse.cc"
+#line 1910 "../../src/intel-parse.cc"
     break;
 
   case 11: /* expression: immediate  */
-#line 236 "../../src/intel-parse.yy"
+#line 242 "../../src/intel-parse.yy"
                           { (yyval.expr) = (yyvsp[0].imm); }
-#line 1912 "../../src/intel-parse.cc"
+#line 1916 "../../src/intel-parse.cc"
     break;
 
   case 12: /* expression: storage  */
-#line 237 "../../src/intel-parse.yy"
+#line 243 "../../src/intel-parse.yy"
                         { (yyval.expr) = (yyvsp[0].storage); }
-#line 1918 "../../src/intel-parse.cc"
+#line 1922 "../../src/intel-parse.cc"
     break;
 
   case 13: /* immediate: "number"  */
-#line 240 "../../src/intel-parse.yy"
+#line 246 "../../src/intel-parse.yy"
                          { (yyval.imm) = new AsmImmediate ((yyvsp[0].number)); }
-#line 1924 "../../src/intel-parse.cc"
+#line 1928 "../../src/intel-parse.cc"
     break;
 
   case 14: /* storage: reg  */
-#line 243 "../../src/intel-parse.yy"
+#line 249 "../../src/intel-parse.yy"
                     { (yyval.storage) = (yyvsp[0].reg); }
-#line 1930 "../../src/intel-parse.cc"
+#line 1934 "../../src/intel-parse.cc"
     break;
 
   case 15: /* storage: memloc  */
-#line 244 "../../src/intel-parse.yy"
+#line 250 "../../src/intel-parse.yy"
                        { (yyval.storage) = (yyvsp[0].mem); }
-#line 1936 "../../src/intel-parse.cc"
+#line 1940 "../../src/intel-parse.cc"
     break;
 
   case 16: /* memloc: size_specifier '[' "number" ']'  */
-#line 248 "../../src/intel-parse.yy"
+#line 254 "../../src/intel-parse.yy"
                 {
 		  (yyval.mem) = new AsmMemoryLoc (nullptr, nullptr, 0, (yyvsp[-1].number),
 					 AsmRegister::DS, (yyvsp[-3].number));
 		}
-#line 1945 "../../src/intel-parse.cc"
+#line 1949 "../../src/intel-parse.cc"
     break;
 
   case 17: /* reg: "cs"  */
-#line 254 "../../src/intel-parse.yy"
+#line 260 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::CS; }
-#line 1951 "../../src/intel-parse.cc"
+#line 1955 "../../src/intel-parse.cc"
     break;
 
   case 18: /* reg: "ds"  */
-#line 255 "../../src/intel-parse.yy"
+#line 261 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::DS; }
-#line 1957 "../../src/intel-parse.cc"
+#line 1961 "../../src/intel-parse.cc"
     break;
 
   case 19: /* reg: "es"  */
-#line 256 "../../src/intel-parse.yy"
+#line 262 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::ES; }
-#line 1963 "../../src/intel-parse.cc"
+#line 1967 "../../src/intel-parse.cc"
     break;
 
   case 20: /* reg: "fs"  */
-#line 257 "../../src/intel-parse.yy"
+#line 263 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::FS; }
-#line 1969 "../../src/intel-parse.cc"
+#line 1973 "../../src/intel-parse.cc"
     break;
 
   case 21: /* reg: "gs"  */
-#line 258 "../../src/intel-parse.yy"
+#line 264 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::GS; }
-#line 1975 "../../src/intel-parse.cc"
+#line 1979 "../../src/intel-parse.cc"
     break;
 
   case 22: /* reg: "al"  */
-#line 259 "../../src/intel-parse.yy"
+#line 265 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::AL; }
-#line 1981 "../../src/intel-parse.cc"
+#line 1985 "../../src/intel-parse.cc"
     break;
 
   case 23: /* reg: "cl"  */
-#line 260 "../../src/intel-parse.yy"
+#line 266 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::CL; }
-#line 1987 "../../src/intel-parse.cc"
+#line 1991 "../../src/intel-parse.cc"
     break;
 
   case 24: /* reg: "dl"  */
-#line 261 "../../src/intel-parse.yy"
+#line 267 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::DL; }
-#line 1993 "../../src/intel-parse.cc"
+#line 1997 "../../src/intel-parse.cc"
     break;
 
   case 25: /* reg: "bl"  */
-#line 262 "../../src/intel-parse.yy"
+#line 268 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::BL; }
-#line 1999 "../../src/intel-parse.cc"
+#line 2003 "../../src/intel-parse.cc"
     break;
 
   case 26: /* reg: "ah"  */
-#line 263 "../../src/intel-parse.yy"
+#line 269 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::AH; }
-#line 2005 "../../src/intel-parse.cc"
+#line 2009 "../../src/intel-parse.cc"
     break;
 
   case 27: /* reg: "ch"  */
-#line 264 "../../src/intel-parse.yy"
+#line 270 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::CH; }
-#line 2011 "../../src/intel-parse.cc"
+#line 2015 "../../src/intel-parse.cc"
     break;
 
   case 28: /* reg: "dh"  */
-#line 265 "../../src/intel-parse.yy"
+#line 271 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::DH; }
-#line 2017 "../../src/intel-parse.cc"
+#line 2021 "../../src/intel-parse.cc"
     break;
 
   case 29: /* reg: "bh"  */
-#line 266 "../../src/intel-parse.yy"
+#line 272 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::BH; }
-#line 2023 "../../src/intel-parse.cc"
+#line 2027 "../../src/intel-parse.cc"
     break;
 
   case 30: /* reg: "ax"  */
-#line 267 "../../src/intel-parse.yy"
+#line 273 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::AX; }
-#line 2029 "../../src/intel-parse.cc"
+#line 2033 "../../src/intel-parse.cc"
     break;
 
   case 31: /* reg: "cx"  */
-#line 268 "../../src/intel-parse.yy"
+#line 274 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::CX; }
-#line 2035 "../../src/intel-parse.cc"
+#line 2039 "../../src/intel-parse.cc"
     break;
 
   case 32: /* reg: "dx"  */
-#line 269 "../../src/intel-parse.yy"
+#line 275 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::DX; }
-#line 2041 "../../src/intel-parse.cc"
+#line 2045 "../../src/intel-parse.cc"
     break;
 
   case 33: /* reg: "bx"  */
-#line 270 "../../src/intel-parse.yy"
+#line 276 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::BX; }
-#line 2047 "../../src/intel-parse.cc"
+#line 2051 "../../src/intel-parse.cc"
     break;
 
   case 34: /* reg: "sp"  */
-#line 271 "../../src/intel-parse.yy"
+#line 277 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::SP; }
-#line 2053 "../../src/intel-parse.cc"
+#line 2057 "../../src/intel-parse.cc"
     break;
 
   case 35: /* reg: "bp"  */
-#line 272 "../../src/intel-parse.yy"
+#line 278 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::BP; }
-#line 2059 "../../src/intel-parse.cc"
+#line 2063 "../../src/intel-parse.cc"
     break;
 
   case 36: /* reg: "si"  */
-#line 273 "../../src/intel-parse.yy"
+#line 279 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::SI; }
-#line 2065 "../../src/intel-parse.cc"
+#line 2069 "../../src/intel-parse.cc"
     break;
 
   case 37: /* reg: "di"  */
-#line 274 "../../src/intel-parse.yy"
+#line 280 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::DI; }
-#line 2071 "../../src/intel-parse.cc"
+#line 2075 "../../src/intel-parse.cc"
     break;
 
   case 38: /* reg: "eax"  */
-#line 275 "../../src/intel-parse.yy"
+#line 281 "../../src/intel-parse.yy"
                       { (yyval.reg) = AsmRegister::EAX; }
-#line 2077 "../../src/intel-parse.cc"
+#line 2081 "../../src/intel-parse.cc"
     break;
 
   case 39: /* reg: "ecx"  */
-#line 276 "../../src/intel-parse.yy"
+#line 282 "../../src/intel-parse.yy"
                       { (yyval.reg) = AsmRegister::ECX; }
-#line 2083 "../../src/intel-parse.cc"
+#line 2087 "../../src/intel-parse.cc"
     break;
 
   case 40: /* reg: "edx"  */
-#line 277 "../../src/intel-parse.yy"
+#line 283 "../../src/intel-parse.yy"
                       { (yyval.reg) = AsmRegister::EDX; }
-#line 2089 "../../src/intel-parse.cc"
+#line 2093 "../../src/intel-parse.cc"
     break;
 
   case 41: /* reg: "ebx"  */
-#line 278 "../../src/intel-parse.yy"
+#line 284 "../../src/intel-parse.yy"
                       { (yyval.reg) = AsmRegister::EBX; }
-#line 2095 "../../src/intel-parse.cc"
+#line 2099 "../../src/intel-parse.cc"
     break;
 
   case 42: /* reg: "esp"  */
-#line 279 "../../src/intel-parse.yy"
+#line 285 "../../src/intel-parse.yy"
                       { (yyval.reg) = AsmRegister::ESP; }
-#line 2101 "../../src/intel-parse.cc"
+#line 2105 "../../src/intel-parse.cc"
     break;
 
   case 43: /* reg: "ebp"  */
-#line 280 "../../src/intel-parse.yy"
+#line 286 "../../src/intel-parse.yy"
                       { (yyval.reg) = AsmRegister::EBP; }
-#line 2107 "../../src/intel-parse.cc"
+#line 2111 "../../src/intel-parse.cc"
     break;
 
   case 44: /* reg: "esi"  */
-#line 281 "../../src/intel-parse.yy"
+#line 287 "../../src/intel-parse.yy"
                       { (yyval.reg) = AsmRegister::ESI; }
-#line 2113 "../../src/intel-parse.cc"
+#line 2117 "../../src/intel-parse.cc"
     break;
 
   case 45: /* reg: "edi"  */
-#line 282 "../../src/intel-parse.yy"
+#line 288 "../../src/intel-parse.yy"
                       { (yyval.reg) = AsmRegister::EDI; }
-#line 2119 "../../src/intel-parse.cc"
+#line 2123 "../../src/intel-parse.cc"
     break;
 
   case 46: /* size_specifier: "byte"  */
-#line 285 "../../src/intel-parse.yy"
+#line 291 "../../src/intel-parse.yy"
                        { (yyval.number) = 1; }
-#line 2125 "../../src/intel-parse.cc"
+#line 2129 "../../src/intel-parse.cc"
     break;
 
   case 47: /* size_specifier: "word"  */
-#line 286 "../../src/intel-parse.yy"
+#line 292 "../../src/intel-parse.yy"
                        { (yyval.number) = 2; }
-#line 2131 "../../src/intel-parse.cc"
+#line 2135 "../../src/intel-parse.cc"
     break;
 
   case 48: /* size_specifier: "dword"  */
-#line 287 "../../src/intel-parse.yy"
+#line 293 "../../src/intel-parse.yy"
                         { (yyval.number) = 4; }
-#line 2137 "../../src/intel-parse.cc"
+#line 2141 "../../src/intel-parse.cc"
     break;
 
   case 59: /* label: "identifier" ':'  */
-#line 304 "../../src/intel-parse.yy"
+#line 310 "../../src/intel-parse.yy"
                             { (yyval.label) = new AsmIdentifier (*(yyvsp[-1].string)); delete (yyvsp[-1].string); }
-#line 2143 "../../src/intel-parse.cc"
+#line 2147 "../../src/intel-parse.cc"
     break;
 
 
-#line 2147 "../../src/intel-parse.cc"
+#line 2151 "../../src/intel-parse.cc"
 
       default: break;
     }

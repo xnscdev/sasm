@@ -70,48 +70,48 @@ extern int yydebug;
     T_SBB = 271,                   /* "sbb"  */
     T_SUB = 272,                   /* "sub"  */
     T_XOR = 273,                   /* "xor"  */
-    T_AAA = 274,                   /* "aaa"  */
-    T_AAD = 275,                   /* "aad"  */
-    T_AAM = 276,                   /* "aam"  */
-    T_AAS = 277,                   /* "aas"  */
-    T_CALL = 278,                  /* "call"  */
-    T_CBW = 279,                   /* "cbw"  */
-    T_CDQ = 280,                   /* "cdq"  */
-    T_CLC = 281,                   /* "clc"  */
-    T_CLD = 282,                   /* "cld"  */
-    T_CLI = 283,                   /* "cli"  */
-    T_CMPS = 284,                  /* "cmps"  */
-    T_CWD = 285,                   /* "cwd"  */
-    T_CWDE = 286,                  /* "cwde"  */
-    T_DEC = 287,                   /* "dec"  */
-    T_DIV = 288,                   /* "div"  */
-    T_ENTER = 289,                 /* "enter"  */
-    T_HLT = 290,                   /* "hlt"  */
-    T_IDIV = 291,                  /* "idiv"  */
-    T_IMUL = 292,                  /* "imul"  */
-    T_IN = 293,                    /* "in"  */
-    T_INC = 294,                   /* "inc"  */
-    T_INS = 295,                   /* "ins"  */
-    T_INT = 296,                   /* "int"  */
-    T_INT3 = 297,                  /* "int3"  */
-    T_INTO = 298,                  /* "into"  */
-    T_IRET = 299,                  /* "iret"  */
-    T_JO = 300,                    /* "jo"  */
-    T_JNO = 301,                   /* "jno"  */
-    T_JC = 302,                    /* "jc"  */
-    T_JNC = 303,                   /* "jnc"  */
-    T_JZ = 304,                    /* "jz"  */
-    T_JNZ = 305,                   /* "jnz"  */
-    T_JNA = 306,                   /* "jna"  */
-    T_JA = 307,                    /* "ja"  */
-    T_JS = 308,                    /* "js"  */
-    T_JNS = 309,                   /* "jns"  */
-    T_JP = 310,                    /* "jp"  */
-    T_JNP = 311,                   /* "jnp"  */
-    T_JL = 312,                    /* "jl"  */
-    T_JNL = 313,                   /* "jnl"  */
-    T_JNG = 314,                   /* "jng"  */
-    T_JG = 315,                    /* "jg"  */
+    T_JO = 274,                    /* "jo"  */
+    T_JNO = 275,                   /* "jno"  */
+    T_JC = 276,                    /* "jc"  */
+    T_JNC = 277,                   /* "jnc"  */
+    T_JZ = 278,                    /* "jz"  */
+    T_JNZ = 279,                   /* "jnz"  */
+    T_JNA = 280,                   /* "jna"  */
+    T_JA = 281,                    /* "ja"  */
+    T_JS = 282,                    /* "js"  */
+    T_JNS = 283,                   /* "jns"  */
+    T_JP = 284,                    /* "jp"  */
+    T_JNP = 285,                   /* "jnp"  */
+    T_JL = 286,                    /* "jl"  */
+    T_JNL = 287,                   /* "jnl"  */
+    T_JNG = 288,                   /* "jng"  */
+    T_JG = 289,                    /* "jg"  */
+    T_AAA = 290,                   /* "aaa"  */
+    T_AAD = 291,                   /* "aad"  */
+    T_AAM = 292,                   /* "aam"  */
+    T_AAS = 293,                   /* "aas"  */
+    T_CALL = 294,                  /* "call"  */
+    T_CBW = 295,                   /* "cbw"  */
+    T_CDQ = 296,                   /* "cdq"  */
+    T_CLC = 297,                   /* "clc"  */
+    T_CLD = 298,                   /* "cld"  */
+    T_CLI = 299,                   /* "cli"  */
+    T_CMPS = 300,                  /* "cmps"  */
+    T_CWD = 301,                   /* "cwd"  */
+    T_CWDE = 302,                  /* "cwde"  */
+    T_DEC = 303,                   /* "dec"  */
+    T_DIV = 304,                   /* "div"  */
+    T_ENTER = 305,                 /* "enter"  */
+    T_HLT = 306,                   /* "hlt"  */
+    T_IDIV = 307,                  /* "idiv"  */
+    T_IMUL = 308,                  /* "imul"  */
+    T_IN = 309,                    /* "in"  */
+    T_INC = 310,                   /* "inc"  */
+    T_INS = 311,                   /* "ins"  */
+    T_INT = 312,                   /* "int"  */
+    T_INT3 = 313,                  /* "int3"  */
+    T_INTO = 314,                  /* "into"  */
+    T_IRET = 315,                  /* "iret"  */
     T_JMP = 316,                   /* "jmp"  */
     T_LAHF = 317,                  /* "lahf"  */
     T_LEA = 318,                   /* "lea"  */
@@ -205,48 +205,48 @@ extern int yydebug;
 #define T_SBB 271
 #define T_SUB 272
 #define T_XOR 273
-#define T_AAA 274
-#define T_AAD 275
-#define T_AAM 276
-#define T_AAS 277
-#define T_CALL 278
-#define T_CBW 279
-#define T_CDQ 280
-#define T_CLC 281
-#define T_CLD 282
-#define T_CLI 283
-#define T_CMPS 284
-#define T_CWD 285
-#define T_CWDE 286
-#define T_DEC 287
-#define T_DIV 288
-#define T_ENTER 289
-#define T_HLT 290
-#define T_IDIV 291
-#define T_IMUL 292
-#define T_IN 293
-#define T_INC 294
-#define T_INS 295
-#define T_INT 296
-#define T_INT3 297
-#define T_INTO 298
-#define T_IRET 299
-#define T_JO 300
-#define T_JNO 301
-#define T_JC 302
-#define T_JNC 303
-#define T_JZ 304
-#define T_JNZ 305
-#define T_JNA 306
-#define T_JA 307
-#define T_JS 308
-#define T_JNS 309
-#define T_JP 310
-#define T_JNP 311
-#define T_JL 312
-#define T_JNL 313
-#define T_JNG 314
-#define T_JG 315
+#define T_JO 274
+#define T_JNO 275
+#define T_JC 276
+#define T_JNC 277
+#define T_JZ 278
+#define T_JNZ 279
+#define T_JNA 280
+#define T_JA 281
+#define T_JS 282
+#define T_JNS 283
+#define T_JP 284
+#define T_JNP 285
+#define T_JL 286
+#define T_JNL 287
+#define T_JNG 288
+#define T_JG 289
+#define T_AAA 290
+#define T_AAD 291
+#define T_AAM 292
+#define T_AAS 293
+#define T_CALL 294
+#define T_CBW 295
+#define T_CDQ 296
+#define T_CLC 297
+#define T_CLD 298
+#define T_CLI 299
+#define T_CMPS 300
+#define T_CWD 301
+#define T_CWDE 302
+#define T_DEC 303
+#define T_DIV 304
+#define T_ENTER 305
+#define T_HLT 306
+#define T_IDIV 307
+#define T_IMUL 308
+#define T_IN 309
+#define T_INC 310
+#define T_INS 311
+#define T_INT 312
+#define T_INT3 313
+#define T_INTO 314
+#define T_IRET 315
 #define T_JMP 316
 #define T_LAHF 317
 #define T_LEA 318

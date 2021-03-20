@@ -26,7 +26,8 @@
 
 enum class ObjectFileFormat
 {
-  BINARY32 = 1, /* 32-bit raw machine code */
+  NONE = 0, /* Invalid value */
+  BINARY32, /* 32-bit raw machine code */
   ELF32, /* 32-bit ELF relocatable */
   COFF32 /* 32-bit COFF relocatable */
 };
@@ -39,19 +40,20 @@ class Object
   std::vector <unsigned char> binary;
   ELF32Object elf;
   COFF32Object coff;
-  std::string section;
 
   bool elf_assemble (AsmInst *inst);
   bool coff_assemble (AsmInst *inst);
 
 public:
   ObjectFileFormat type;
-  std::vector <AsmLine *> *lines;
+  std::vector <AsmLine *> lines;
+  std::string section;
 
   Object (ObjectFileFormat type, std::string filename) :
     elf (filename), coff (filename), type (type) {}
   void switch_section (std::string new_sect);
   bool assemble_inst (AsmInst *inst);
+  void add_label (AsmLabel *sym);
   bool write (FILE *stream);
 };
 

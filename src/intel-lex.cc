@@ -1096,82 +1096,82 @@ return T_IRET;
 case 41:
 YY_RULE_SETUP
 #line 77 "../../src/intel-lex.ll"
-return T_JO;
+yylval.jf = AsmInstJFType::JO; return T_JO;
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
 #line 78 "../../src/intel-lex.ll"
-return T_JNO;
+yylval.jf = AsmInstJFType::JNO; return T_JNO;
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
 #line 79 "../../src/intel-lex.ll"
-return T_JC;
+yylval.jf = AsmInstJFType::JC; return T_JC;
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
 #line 80 "../../src/intel-lex.ll"
-return T_JNC;
+yylval.jf = AsmInstJFType::JNC; return T_JNC;
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
 #line 81 "../../src/intel-lex.ll"
-return T_JZ;
+yylval.jf = AsmInstJFType::JZ; return T_JZ;
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
 #line 82 "../../src/intel-lex.ll"
-return T_JNZ;
+yylval.jf = AsmInstJFType::JNZ; return T_JNZ;
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
 #line 83 "../../src/intel-lex.ll"
-return T_JNA;
+yylval.jf = AsmInstJFType::JNA; return T_JNA;
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
 #line 84 "../../src/intel-lex.ll"
-return T_JA;
+yylval.jf = AsmInstJFType::JA; return T_JA;
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
 #line 85 "../../src/intel-lex.ll"
-return T_JS;
+yylval.jf = AsmInstJFType::JS; return T_JS;
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
 #line 86 "../../src/intel-lex.ll"
-return T_JNS;
+yylval.jf = AsmInstJFType::JNS; return T_JNS;
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
 #line 87 "../../src/intel-lex.ll"
-return T_JP;
+yylval.jf = AsmInstJFType::JP; return T_JP;
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
 #line 88 "../../src/intel-lex.ll"
-return T_JNP;
+yylval.jf = AsmInstJFType::JNP; return T_JNP;
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
 #line 89 "../../src/intel-lex.ll"
-return T_JL;
+yylval.jf = AsmInstJFType::JL; return T_JL;
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
 #line 90 "../../src/intel-lex.ll"
-return T_JNL;
+yylval.jf = AsmInstJFType::JNL; return T_JNL;
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
 #line 91 "../../src/intel-lex.ll"
-return T_JNG;
+yylval.jf = AsmInstJFType::JNG; return T_JNG;
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
 #line 92 "../../src/intel-lex.ll"
-return T_JG;
+yylval.jf = AsmInstJFType::JG; return T_JG;
 	YY_BREAK
 case 57:
 YY_RULE_SETUP

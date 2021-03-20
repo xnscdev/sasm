@@ -169,6 +169,22 @@ Object::assemble_inst (AsmInst *inst)
     }
 }
 
+void
+Object::add_label (AsmLabel *sym)
+{
+  switch (type)
+    {
+    case ObjectFileFormat::ELF32:
+      elf.add_symbol (sym);
+      break;
+    case ObjectFileFormat::COFF32:
+      coff.add_symbol (sym);
+      break;
+    default:
+      break; /* -Wswitch */
+    }
+}
+
 bool
 Object::write (FILE *stream)
 {
