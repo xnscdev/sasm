@@ -18,15 +18,18 @@
 
 %{
 
+#define _COFF_DISABLE_DEFINES /* Prevent name clashes with Yacc defines */
+
 #include <string>
-#include "expr.hh"
+#include "gen-obj.hh"
 #include "intel-parse.hh"
 
 int yylex (void);
 void yyerror (const char *s);
 
 extern std::string filename;
-extern AsmTranslationUnit *result;
+extern ObjectFileFormat format;
+extern Object *result;
 
 %}
 
@@ -35,9 +38,14 @@ extern AsmTranslationUnit *result;
   long long number;
   std::string *string;
 
+  std::vector <AsmInst *> *instlist;
   AsmLabel *label;
+  AsmInst *inst;
   AsmExpr *expr;
-  AsmTranslationUnit *transunit;
+  AsmStorage *storage;
+  AsmRegister *reg;
+  AsmMemoryLoc *mem;
+  Object *obj;
 }
 
 %define parse.error detailed
@@ -170,29 +178,101 @@ extern AsmTranslationUnit *result;
 %token T_ESP "esp"
 %token T_EBP "ebp"
 %token T_ESI "esi"
-%token T_EDI "edi"			
+%token T_EDI "edi"
 
 %type	<label>		label
-%type	<expr>		lines expression immediate
-%type	<transunit>	translation_unit
+%type	<instlist>	lines
+%type	<expr>		expression immediate
+%type	<inst>		instruction add_instruction
+%type	<obj>		object
+%type	<reg>		reg
+%type	<mem>		memloc
+%type	<storage>	storage
+%type	<number>	size_specifier
 
 %start program
 
 %%
 
-program:        translation_unit { result = $1; }
+program:        object { result = $1; }
 	;
 
-translation_unit:
-	|	lines { $$ = new AsmTranslationUnit (filename); }
+object:		lines { $$ = new Object (format, filename); }
 	;
 
-lines:		expression '\n'
-	|	lines expression '\n'
+lines:		instruction
+		{
+		  $$ = new std::vector <AsmInst *> ();
+		  $$->push_back ($1);
+		}
+	|	lines terminator instruction { $1->push_back ($3); }
+	|	lines terminator
+	;
+
+instruction:	add_instruction
+	;
+
+add_instruction:
+		T_ADD storage ',' expression
+		{
+		  $$ = new AsmInstARITH (AsmInstARITHType::ADD, $2, $4);
+		}
 	;
 
 expression:	immediate
+	|	storage
 	;
 
-immediate:	T_NUMBER { $$ = new AsmImmediate ($1); printf ("%lld\n", $1); }
+immediate:	T_NUMBER { $$ = new AsmImmediate ($1); }
+	;
+
+storage:	reg { $$ = $1; }
+	|	memloc { $$ = $1; }
+	;
+
+memloc:		size_specifier '[' T_NUMBER ']'
+		{
+		  $$ = new AsmMemoryLoc (nullptr, nullptr, 0, $3,
+					 AsmRegister::DS, $1);
+		}
+	;
+
+reg:		T_CS { $$ = AsmRegister::CS; }
+	|       T_DS { $$ = AsmRegister::DS; }
+	|       T_ES { $$ = AsmRegister::ES; }
+	|       T_FS { $$ = AsmRegister::FS; }
+	|       T_GS { $$ = AsmRegister::GS; }
+	|       T_AL { $$ = AsmRegister::AL; }
+	|       T_CL { $$ = AsmRegister::CL; }
+	|       T_DL { $$ = AsmRegister::DL; }
+	|       T_BL { $$ = AsmRegister::BL; }
+	|       T_AH { $$ = AsmRegister::AH; }
+	|       T_CH { $$ = AsmRegister::CH; }
+	|       T_DH { $$ = AsmRegister::DH; }
+	|       T_BH { $$ = AsmRegister::BH; }
+	|       T_AX { $$ = AsmRegister::AX; }
+	|       T_CX { $$ = AsmRegister::CX; }
+	|       T_DX { $$ = AsmRegister::DX; }
+	|       T_BX { $$ = AsmRegister::BX; }
+	|       T_SP { $$ = AsmRegister::SP; }
+	|       T_BP { $$ = AsmRegister::BP; }
+	|       T_SI { $$ = AsmRegister::SI; }
+	|       T_DI { $$ = AsmRegister::DI; }
+	|       T_EAX { $$ = AsmRegister::EAX; }
+	|       T_ECX { $$ = AsmRegister::ECX; }
+	|       T_EDX { $$ = AsmRegister::EDX; }
+	|       T_EBX { $$ = AsmRegister::EBX; }
+	|       T_ESP { $$ = AsmRegister::ESP; }
+	|       T_EBP { $$ = AsmRegister::EBP; }
+	|       T_ESI { $$ = AsmRegister::ESI; }
+	|       T_EDI { $$ = AsmRegister::EDI; }
+	;
+
+size_specifier:	T_BYTE { $$ = 1; }
+	|	T_WORD { $$ = 2; }
+	|	T_DWORD { $$ = 4; }
+	;
+
+terminator:	';'
+	|	'\n'
 	;

@@ -67,21 +67,24 @@
 
 
 /* First part of user prologue.  */
-#line 19 "intel-parse.yy"
+#line 19 "../../src/intel-parse.yy"
 
+
+#define _COFF_DISABLE_DEFINES /* Prevent name clashes with Yacc defines */
 
 #include <string>
-#include "expr.hh"
+#include "gen-obj.hh"
 #include "intel-parse.hh"
 
 int yylex (void);
 void yyerror (const char *s);
 
 extern std::string filename;
-extern AsmTranslationUnit *result;
+extern ObjectFileFormat format;
+extern Object *result;
 
 
-#line 85 "intel-parse.cc"
+#line 88 "../../src/intel-parse.cc"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -106,8 +109,8 @@ extern AsmTranslationUnit *result;
 
 /* Use api.header.include to #include this header
    instead of duplicating it here.  */
-#ifndef YY_YY_INTEL_PARSE_HH_INCLUDED
-# define YY_YY_INTEL_PARSE_HH_INCLUDED
+#ifndef YY_YY__SRC_INTEL_PARSE_HH_INCLUDED
+# define YY_YY__SRC_INTEL_PARSE_HH_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -392,16 +395,21 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 34 "intel-parse.yy"
+#line 37 "../../src/intel-parse.yy"
 
   long long number;
   std::string *string;
 
+  std::vector <AsmInst *> *instlist;
   AsmLabel *label;
+  AsmInst *inst;
   AsmExpr *expr;
-  AsmTranslationUnit *transunit;
+  AsmStorage *storage;
+  AsmRegister *reg;
+  AsmMemoryLoc *mem;
+  Object *obj;
 
-#line 405 "intel-parse.cc"
+#line 413 "../../src/intel-parse.cc"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -414,7 +422,7 @@ extern YYSTYPE yylval;
 
 int yyparse (void);
 
-#endif /* !YY_YY_INTEL_PARSE_HH_INCLUDED  */
+#endif /* !YY_YY__SRC_INTEL_PARSE_HH_INCLUDED  */
 /* Symbol kind.  */
 enum yysymbol_kind_t
 {
@@ -549,13 +557,24 @@ enum yysymbol_kind_t
   YYSYMBOL_T_EBP = 127,                    /* "ebp"  */
   YYSYMBOL_T_ESI = 128,                    /* "esi"  */
   YYSYMBOL_T_EDI = 129,                    /* "edi"  */
-  YYSYMBOL_130_n_ = 130,                   /* '\n'  */
-  YYSYMBOL_YYACCEPT = 131,                 /* $accept  */
-  YYSYMBOL_program = 132,                  /* program  */
-  YYSYMBOL_translation_unit = 133,         /* translation_unit  */
-  YYSYMBOL_lines = 134,                    /* lines  */
-  YYSYMBOL_expression = 135,               /* expression  */
-  YYSYMBOL_immediate = 136                 /* immediate  */
+  YYSYMBOL_130_ = 130,                     /* ','  */
+  YYSYMBOL_131_ = 131,                     /* '['  */
+  YYSYMBOL_132_ = 132,                     /* ']'  */
+  YYSYMBOL_133_ = 133,                     /* ';'  */
+  YYSYMBOL_134_n_ = 134,                   /* '\n'  */
+  YYSYMBOL_YYACCEPT = 135,                 /* $accept  */
+  YYSYMBOL_program = 136,                  /* program  */
+  YYSYMBOL_object = 137,                   /* object  */
+  YYSYMBOL_lines = 138,                    /* lines  */
+  YYSYMBOL_instruction = 139,              /* instruction  */
+  YYSYMBOL_add_instruction = 140,          /* add_instruction  */
+  YYSYMBOL_expression = 141,               /* expression  */
+  YYSYMBOL_immediate = 142,                /* immediate  */
+  YYSYMBOL_storage = 143,                  /* storage  */
+  YYSYMBOL_memloc = 144,                   /* memloc  */
+  YYSYMBOL_reg = 145,                      /* reg  */
+  YYSYMBOL_size_specifier = 146,           /* size_specifier  */
+  YYSYMBOL_terminator = 147                /* terminator  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -875,18 +894,18 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  7
+#define YYFINAL  43
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   4
+#define YYLAST   154
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  131
+#define YYNTOKENS  135
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  6
+#define YYNNTS  13
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  8
+#define YYNRULES  48
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  11
+#define YYNSTATES  56
 
 /* YYMAXUTOK -- Last valid token kind.  */
 #define YYMAXUTOK   384
@@ -904,15 +923,15 @@ union yyalloc
 static const yytype_uint8 yytranslate[] =
 {
        0,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-     130,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+     134,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,   130,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,   133,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,   131,     2,   132,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
@@ -946,9 +965,13 @@ static const yytype_uint8 yytranslate[] =
 
 #if YYDEBUG
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
-static const yytype_uint8 yyrline[] =
+static const yytype_int16 yyrline[] =
 {
-       0,   183,   183,   186,   187,   190,   191,   194,   197
+       0,   197,   197,   200,   203,   208,   209,   212,   216,   222,
+     223,   226,   229,   230,   233,   240,   241,   242,   243,   244,
+     245,   246,   247,   248,   249,   250,   251,   252,   253,   254,
+     255,   256,   257,   258,   259,   260,   261,   262,   263,   264,
+     265,   266,   267,   268,   271,   272,   273,   276,   277
 };
 #endif
 
@@ -978,8 +1001,10 @@ yysymbol_name (yysymbol_kind_t yysymbol)
   "shl", "shr", "stc", "std", "stos", "sti", "sub", "test", "xchg", "xlat",
   "xor", "cs", "ds", "es", "fs", "gs", "al", "cl", "dl", "bl", "ah", "ch",
   "dh", "bh", "ax", "cx", "dx", "bx", "sp", "bp", "si", "di", "eax", "ecx",
-  "edx", "ebx", "esp", "ebp", "esi", "edi", "'\\n'", "$accept", "program",
-  "translation_unit", "lines", "expression", "immediate", YY_NULLPTR
+  "edx", "ebx", "esp", "ebp", "esi", "edi", "','", "'['", "']'", "';'",
+  "'\\n'", "$accept", "program", "object", "lines", "instruction",
+  "add_instruction", "expression", "immediate", "storage", "memloc", "reg",
+  "size_specifier", "terminator", YY_NULLPTR
   };
   return yy_sname[yysymbol];
 }
@@ -1003,7 +1028,7 @@ static const yytype_int16 yytoknum[] =
      355,   356,   357,   358,   359,   360,   361,   362,   363,   364,
      365,   366,   367,   368,   369,   370,   371,   372,   373,   374,
      375,   376,   377,   378,   379,   380,   381,   382,   383,   384,
-      10
+      44,    91,    93,    59,    10
 };
 #endif
 
@@ -1021,8 +1046,12 @@ static const yytype_int16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int16 yypact[] =
 {
-      -4,  -129,     1,  -129,    -4,  -128,  -129,  -129,  -127,  -129,
-    -129
+     -15,    25,     7,  -129,  -128,  -129,  -129,  -129,  -129,  -129,
+    -129,  -129,  -129,  -129,  -129,  -129,  -129,  -129,  -129,  -129,
+    -129,  -129,  -129,  -129,  -129,  -129,  -129,  -129,  -129,  -129,
+    -129,  -129,  -129,  -129,  -129,  -129,  -129,  -129,  -129,  -122,
+    -129,  -129,  -121,  -129,  -129,  -129,   -15,    -4,     5,  -129,
+    -129,  -129,  -129,  -129,  -120,  -129
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -1030,20 +1059,26 @@ static const yytype_int16 yypact[] =
      means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       3,     8,     0,     2,     4,     0,     7,     1,     0,     5,
-       6
+       0,     0,     0,     2,     3,     4,     7,    44,    45,    46,
+      15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
+      25,    26,    27,    28,    29,    30,    31,    32,    33,    34,
+      35,    36,    37,    38,    39,    40,    41,    42,    43,     0,
+      13,    12,     0,     1,    47,    48,     6,     0,     0,     5,
+      11,     8,     9,    10,     0,    14
 };
 
   /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int16 yypgoto[] =
 {
-    -129,  -129,  -129,  -129,     0,  -129
+    -129,  -129,  -129,  -129,   -35,  -129,  -129,  -129,   -34,  -129,
+    -129,  -129,  -129
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-       0,     2,     3,     4,     5,     6
+       0,     2,     3,     4,     5,     6,    51,    52,    39,    40,
+      41,    42,    46
 };
 
   /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -1051,32 +1086,74 @@ static const yytype_int8 yydefgoto[] =
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-       1,     7,     9,    10,     8
+      50,     1,     7,     8,     9,    44,    45,    43,    47,    54,
+      48,    49,    55,    53,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     7,     8,     9,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,    10,    11,    12,
+      13,    14,    15,    16,    17,    18,    19,    20,    21,    22,
+      23,    24,    25,    26,    27,    28,    29,    30,    31,    32,
+      33,    34,    35,    36,    37,    38,    10,    11,    12,    13,
+      14,    15,    16,    17,    18,    19,    20,    21,    22,    23,
+      24,    25,    26,    27,    28,    29,    30,    31,    32,    33,
+      34,    35,    36,    37,    38
 };
 
-static const yytype_uint8 yycheck[] =
+static const yytype_int16 yycheck[] =
 {
-       4,     0,   130,   130,     4
+       4,    16,     6,     7,     8,   133,   134,     0,   130,     4,
+     131,    46,   132,    47,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,     6,     7,     8,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,   101,   102,   103,
+     104,   105,   106,   107,   108,   109,   110,   111,   112,   113,
+     114,   115,   116,   117,   118,   119,   120,   121,   122,   123,
+     124,   125,   126,   127,   128,   129,   101,   102,   103,   104,
+     105,   106,   107,   108,   109,   110,   111,   112,   113,   114,
+     115,   116,   117,   118,   119,   120,   121,   122,   123,   124,
+     125,   126,   127,   128,   129
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
      symbol of state STATE-NUM.  */
 static const yytype_uint8 yystos[] =
 {
-       0,     4,   132,   133,   134,   135,   136,     0,   135,   130,
-     130
+       0,    16,   136,   137,   138,   139,   140,     6,     7,     8,
+     101,   102,   103,   104,   105,   106,   107,   108,   109,   110,
+     111,   112,   113,   114,   115,   116,   117,   118,   119,   120,
+     121,   122,   123,   124,   125,   126,   127,   128,   129,   143,
+     144,   145,   146,     0,   133,   134,   147,   130,   131,   139,
+       4,   141,   142,   143,     4,   132
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_uint8 yyr1[] =
 {
-       0,   131,   132,   133,   133,   134,   134,   135,   136
+       0,   135,   136,   137,   138,   138,   138,   139,   140,   141,
+     141,   142,   143,   143,   144,   145,   145,   145,   145,   145,
+     145,   145,   145,   145,   145,   145,   145,   145,   145,   145,
+     145,   145,   145,   145,   145,   145,   145,   145,   145,   145,
+     145,   145,   145,   145,   146,   146,   146,   147,   147
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
 static const yytype_int8 yyr2[] =
 {
-       0,     2,     1,     0,     1,     2,     3,     1,     1
+       0,     2,     1,     1,     1,     3,     2,     1,     4,     1,
+       1,     1,     1,     1,     4,     1,     1,     1,     1,     1,
+       1,     1,     1,     1,     1,     1,     1,     1,     1,     1,
+       1,     1,     1,     1,     1,     1,     1,     1,     1,     1,
+       1,     1,     1,     1,     1,     1,     1,     1,     1
 };
 
 
@@ -1764,26 +1841,262 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-  case 2: /* program: translation_unit  */
-#line 183 "intel-parse.yy"
-                                 { result = (yyvsp[0].transunit); }
-#line 1771 "intel-parse.cc"
+  case 2: /* program: object  */
+#line 197 "../../src/intel-parse.yy"
+                       { result = (yyvsp[0].obj); }
+#line 1848 "../../src/intel-parse.cc"
     break;
 
-  case 4: /* translation_unit: lines  */
-#line 187 "intel-parse.yy"
-                      { (yyval.transunit) = new AsmTranslationUnit (filename); }
-#line 1777 "intel-parse.cc"
+  case 3: /* object: lines  */
+#line 200 "../../src/intel-parse.yy"
+                      { (yyval.obj) = new Object (format, filename); }
+#line 1854 "../../src/intel-parse.cc"
     break;
 
-  case 8: /* immediate: "number"  */
-#line 197 "intel-parse.yy"
-                         { (yyval.expr) = new AsmImmediate ((yyvsp[0].number)); printf ("%lld\n", (yyvsp[0].number)); }
-#line 1783 "intel-parse.cc"
+  case 4: /* lines: instruction  */
+#line 204 "../../src/intel-parse.yy"
+                {
+		  (yyval.instlist) = new std::vector <AsmInst *> ();
+		  (yyval.instlist)->push_back ((yyvsp[0].inst));
+		}
+#line 1863 "../../src/intel-parse.cc"
+    break;
+
+  case 5: /* lines: lines terminator instruction  */
+#line 208 "../../src/intel-parse.yy"
+                                             { (yyvsp[-2].instlist)->push_back ((yyvsp[0].inst)); }
+#line 1869 "../../src/intel-parse.cc"
+    break;
+
+  case 8: /* add_instruction: "add" storage ',' expression  */
+#line 217 "../../src/intel-parse.yy"
+                {
+		  (yyval.inst) = new AsmInstARITH (AsmInstARITHType::ADD, (yyvsp[-2].storage), (yyvsp[0].expr));
+		}
+#line 1877 "../../src/intel-parse.cc"
+    break;
+
+  case 11: /* immediate: "number"  */
+#line 226 "../../src/intel-parse.yy"
+                         { (yyval.expr) = new AsmImmediate ((yyvsp[0].number)); }
+#line 1883 "../../src/intel-parse.cc"
+    break;
+
+  case 12: /* storage: reg  */
+#line 229 "../../src/intel-parse.yy"
+                    { (yyval.storage) = (yyvsp[0].reg); }
+#line 1889 "../../src/intel-parse.cc"
+    break;
+
+  case 13: /* storage: memloc  */
+#line 230 "../../src/intel-parse.yy"
+                       { (yyval.storage) = (yyvsp[0].mem); }
+#line 1895 "../../src/intel-parse.cc"
+    break;
+
+  case 14: /* memloc: size_specifier '[' "number" ']'  */
+#line 234 "../../src/intel-parse.yy"
+                {
+		  (yyval.mem) = new AsmMemoryLoc (nullptr, nullptr, 0, (yyvsp[-1].number),
+					 AsmRegister::DS, (yyvsp[-3].number));
+		}
+#line 1904 "../../src/intel-parse.cc"
+    break;
+
+  case 15: /* reg: "cs"  */
+#line 240 "../../src/intel-parse.yy"
+                     { (yyval.reg) = AsmRegister::CS; }
+#line 1910 "../../src/intel-parse.cc"
+    break;
+
+  case 16: /* reg: "ds"  */
+#line 241 "../../src/intel-parse.yy"
+                     { (yyval.reg) = AsmRegister::DS; }
+#line 1916 "../../src/intel-parse.cc"
+    break;
+
+  case 17: /* reg: "es"  */
+#line 242 "../../src/intel-parse.yy"
+                     { (yyval.reg) = AsmRegister::ES; }
+#line 1922 "../../src/intel-parse.cc"
+    break;
+
+  case 18: /* reg: "fs"  */
+#line 243 "../../src/intel-parse.yy"
+                     { (yyval.reg) = AsmRegister::FS; }
+#line 1928 "../../src/intel-parse.cc"
+    break;
+
+  case 19: /* reg: "gs"  */
+#line 244 "../../src/intel-parse.yy"
+                     { (yyval.reg) = AsmRegister::GS; }
+#line 1934 "../../src/intel-parse.cc"
+    break;
+
+  case 20: /* reg: "al"  */
+#line 245 "../../src/intel-parse.yy"
+                     { (yyval.reg) = AsmRegister::AL; }
+#line 1940 "../../src/intel-parse.cc"
+    break;
+
+  case 21: /* reg: "cl"  */
+#line 246 "../../src/intel-parse.yy"
+                     { (yyval.reg) = AsmRegister::CL; }
+#line 1946 "../../src/intel-parse.cc"
+    break;
+
+  case 22: /* reg: "dl"  */
+#line 247 "../../src/intel-parse.yy"
+                     { (yyval.reg) = AsmRegister::DL; }
+#line 1952 "../../src/intel-parse.cc"
+    break;
+
+  case 23: /* reg: "bl"  */
+#line 248 "../../src/intel-parse.yy"
+                     { (yyval.reg) = AsmRegister::BL; }
+#line 1958 "../../src/intel-parse.cc"
+    break;
+
+  case 24: /* reg: "ah"  */
+#line 249 "../../src/intel-parse.yy"
+                     { (yyval.reg) = AsmRegister::AH; }
+#line 1964 "../../src/intel-parse.cc"
+    break;
+
+  case 25: /* reg: "ch"  */
+#line 250 "../../src/intel-parse.yy"
+                     { (yyval.reg) = AsmRegister::CH; }
+#line 1970 "../../src/intel-parse.cc"
+    break;
+
+  case 26: /* reg: "dh"  */
+#line 251 "../../src/intel-parse.yy"
+                     { (yyval.reg) = AsmRegister::DH; }
+#line 1976 "../../src/intel-parse.cc"
+    break;
+
+  case 27: /* reg: "bh"  */
+#line 252 "../../src/intel-parse.yy"
+                     { (yyval.reg) = AsmRegister::BH; }
+#line 1982 "../../src/intel-parse.cc"
+    break;
+
+  case 28: /* reg: "ax"  */
+#line 253 "../../src/intel-parse.yy"
+                     { (yyval.reg) = AsmRegister::AX; }
+#line 1988 "../../src/intel-parse.cc"
+    break;
+
+  case 29: /* reg: "cx"  */
+#line 254 "../../src/intel-parse.yy"
+                     { (yyval.reg) = AsmRegister::CX; }
+#line 1994 "../../src/intel-parse.cc"
+    break;
+
+  case 30: /* reg: "dx"  */
+#line 255 "../../src/intel-parse.yy"
+                     { (yyval.reg) = AsmRegister::DX; }
+#line 2000 "../../src/intel-parse.cc"
+    break;
+
+  case 31: /* reg: "bx"  */
+#line 256 "../../src/intel-parse.yy"
+                     { (yyval.reg) = AsmRegister::BX; }
+#line 2006 "../../src/intel-parse.cc"
+    break;
+
+  case 32: /* reg: "sp"  */
+#line 257 "../../src/intel-parse.yy"
+                     { (yyval.reg) = AsmRegister::SP; }
+#line 2012 "../../src/intel-parse.cc"
+    break;
+
+  case 33: /* reg: "bp"  */
+#line 258 "../../src/intel-parse.yy"
+                     { (yyval.reg) = AsmRegister::BP; }
+#line 2018 "../../src/intel-parse.cc"
+    break;
+
+  case 34: /* reg: "si"  */
+#line 259 "../../src/intel-parse.yy"
+                     { (yyval.reg) = AsmRegister::SI; }
+#line 2024 "../../src/intel-parse.cc"
+    break;
+
+  case 35: /* reg: "di"  */
+#line 260 "../../src/intel-parse.yy"
+                     { (yyval.reg) = AsmRegister::DI; }
+#line 2030 "../../src/intel-parse.cc"
+    break;
+
+  case 36: /* reg: "eax"  */
+#line 261 "../../src/intel-parse.yy"
+                      { (yyval.reg) = AsmRegister::EAX; }
+#line 2036 "../../src/intel-parse.cc"
+    break;
+
+  case 37: /* reg: "ecx"  */
+#line 262 "../../src/intel-parse.yy"
+                      { (yyval.reg) = AsmRegister::ECX; }
+#line 2042 "../../src/intel-parse.cc"
+    break;
+
+  case 38: /* reg: "edx"  */
+#line 263 "../../src/intel-parse.yy"
+                      { (yyval.reg) = AsmRegister::EDX; }
+#line 2048 "../../src/intel-parse.cc"
+    break;
+
+  case 39: /* reg: "ebx"  */
+#line 264 "../../src/intel-parse.yy"
+                      { (yyval.reg) = AsmRegister::EBX; }
+#line 2054 "../../src/intel-parse.cc"
+    break;
+
+  case 40: /* reg: "esp"  */
+#line 265 "../../src/intel-parse.yy"
+                      { (yyval.reg) = AsmRegister::ESP; }
+#line 2060 "../../src/intel-parse.cc"
+    break;
+
+  case 41: /* reg: "ebp"  */
+#line 266 "../../src/intel-parse.yy"
+                      { (yyval.reg) = AsmRegister::EBP; }
+#line 2066 "../../src/intel-parse.cc"
+    break;
+
+  case 42: /* reg: "esi"  */
+#line 267 "../../src/intel-parse.yy"
+                      { (yyval.reg) = AsmRegister::ESI; }
+#line 2072 "../../src/intel-parse.cc"
+    break;
+
+  case 43: /* reg: "edi"  */
+#line 268 "../../src/intel-parse.yy"
+                      { (yyval.reg) = AsmRegister::EDI; }
+#line 2078 "../../src/intel-parse.cc"
+    break;
+
+  case 44: /* size_specifier: "byte"  */
+#line 271 "../../src/intel-parse.yy"
+                       { (yyval.number) = 1; }
+#line 2084 "../../src/intel-parse.cc"
+    break;
+
+  case 45: /* size_specifier: "word"  */
+#line 272 "../../src/intel-parse.yy"
+                       { (yyval.number) = 2; }
+#line 2090 "../../src/intel-parse.cc"
+    break;
+
+  case 46: /* size_specifier: "dword"  */
+#line 273 "../../src/intel-parse.yy"
+                        { (yyval.number) = 4; }
+#line 2096 "../../src/intel-parse.cc"
     break;
 
 
-#line 1787 "intel-parse.cc"
+#line 2100 "../../src/intel-parse.cc"
 
       default: break;
     }

@@ -16,13 +16,15 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>. *
  *************************************************************************/
 
+#include <cstring>
 #include "error.hh"
-#include "expr.hh"
+#include "gen-obj.hh"
 
 extern FILE *yyin;
 
+ObjectFileFormat format;
 std::string filename;
-AsmTranslationUnit *result;
+Object *result;
 
 int yyparse (void);
 
@@ -30,7 +32,13 @@ int
 main (int argc, char **argv)
 {
   init_colors ();
+  format = ObjectFileFormat::BINARY32;
 
-  yyin = stdin;
+  if (argc < 2)
+    exit (1);
+  yyin = fopen (argv[1], "r");
+  if (yyin == nullptr)
+    fatal_error (std::string (argv[1]) + ": failed to open: " +
+		 strerror (errno));
   return yyparse ();
 }

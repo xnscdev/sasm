@@ -18,7 +18,10 @@
 
 %{
 
-#include "expr.hh"
+#define _COFF_DISABLE_DEFINES /* Prevent name clashes with Yacc defines */
+
+#include <string>
+#include "gen-obj.hh"
 #include "intel-parse.hh"
 
 #define SAVE_NUMBER (yylval.number = std::stoll (yytext, nullptr, 0))

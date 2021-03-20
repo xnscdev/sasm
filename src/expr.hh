@@ -171,12 +171,4 @@ namespace AsmOpcodeExt
   extern AsmRegister *OE7;
 }
 
-class AsmTranslationUnit
-{
-public:
-  std::string filename;
-
-  AsmTranslationUnit (std::string filename) : filename (std::move (filename)) {}
-};
-
 #endif

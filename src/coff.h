@@ -19,6 +19,8 @@
 #ifndef _COFF_H
 #define _COFF_H
 
+#ifndef _COFF_DISABLE_DEFINES
+
 #define COFF_MAGIC0 0x4c
 #define COFF_MAGIC1 0x01
 
@@ -134,6 +136,8 @@
 #define C_ALIAS   105
 #define C_HIDDEN  106
 #define C_EFCN    255
+
+#endif
 
 typedef union
 {

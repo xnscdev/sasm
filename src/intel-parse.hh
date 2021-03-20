@@ -35,8 +35,8 @@
    especially those whose name start with YY_ or yy_.  They are
    private implementation details that can be changed or removed.  */
 
-#ifndef YY_YY_INTEL_PARSE_HH_INCLUDED
-# define YY_YY_INTEL_PARSE_HH_INCLUDED
+#ifndef YY_YY__SRC_INTEL_PARSE_HH_INCLUDED
+# define YY_YY__SRC_INTEL_PARSE_HH_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -321,16 +321,21 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 34 "intel-parse.yy"
+#line 37 "../../src/intel-parse.yy"
 
   long long number;
   std::string *string;
 
+  std::vector <AsmInst *> *instlist;
   AsmLabel *label;
+  AsmInst *inst;
   AsmExpr *expr;
-  AsmTranslationUnit *transunit;
+  AsmStorage *storage;
+  AsmRegister *reg;
+  AsmMemoryLoc *mem;
+  Object *obj;
 
-#line 334 "intel-parse.hh"
+#line 339 "../../src/intel-parse.hh"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -343,4 +348,4 @@ extern YYSTYPE yylval;
 
 int yyparse (void);
 
-#endif /* !YY_YY_INTEL_PARSE_HH_INCLUDED  */
+#endif /* !YY_YY__SRC_INTEL_PARSE_HH_INCLUDED  */
