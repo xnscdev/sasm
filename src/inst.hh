@@ -106,10 +106,23 @@ enum class AsmInstZOSType
   SCAS
 };
 
-class AsmInst
+class AsmLine
 {
 public:
-  virtual ~AsmInst (void) = default;
+  virtual ~AsmLine (void) = default;
+};
+
+class AsmIdentifier : public AsmLine
+{
+public:
+  std::string name;
+
+  AsmIdentifier (std::string name) : name (std::move (name)) {}
+};
+
+class AsmInst : public AsmLine
+{
+public:
   virtual size_t width (const AsmContext &ctx) = 0;
   virtual bool assemble (std::vector <unsigned char> &result,
 			 const AsmContext &ctx) = 0;

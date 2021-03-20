@@ -17,6 +17,7 @@
  *************************************************************************/
 
 #include <cstring>
+#include <iostream>
 #include "error.hh"
 #include "gen-obj.hh"
 
@@ -35,10 +36,21 @@ main (int argc, char **argv)
   format = ObjectFileFormat::BINARY32;
 
   if (argc < 2)
-    exit (1);
+    fatal_error ("no input files");
   yyin = fopen (argv[1], "r");
   if (yyin == nullptr)
     fatal_error (std::string (argv[1]) + ": failed to open: " +
 		 strerror (errno));
-  return yyparse ();
+  if (yyparse () != 0)
+    exit (1);
+
+  for (AsmLine *line : *result->lines)
+    {
+      std::cerr << line << std::endl;
+      delete line;
+    }
+
+  delete result->lines;
+  delete result;
+  return 0;
 }

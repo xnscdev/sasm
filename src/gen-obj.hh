@@ -46,6 +46,7 @@ class Object
 
 public:
   ObjectFileFormat type;
+  std::vector <AsmLine *> *lines;
 
   Object (ObjectFileFormat type, std::string filename) :
     elf (filename), coff (filename), type (type) {}

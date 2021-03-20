@@ -330,8 +330,9 @@ union YYSTYPE
   long long number;
   std::string *string;
 
-  std::vector <AsmInst *> *instlist;
-  AsmLabel *label;
+  std::vector <AsmLine *> *lines;
+  AsmImmediate *imm;
+  AsmIdentifier *label;
   AsmInst *inst;
   AsmExpr *expr;
   AsmStorage *storage;
@@ -339,7 +340,7 @@ union YYSTYPE
   AsmMemoryLoc *mem;
   Object *obj;
 
-#line 343 "../../src/intel-parse.hh"
+#line 344 "../../src/intel-parse.hh"
 
 };
 typedef union YYSTYPE YYSTYPE;

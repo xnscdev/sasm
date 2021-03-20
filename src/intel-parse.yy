@@ -42,8 +42,9 @@ extern Object *result;
   long long number;
   std::string *string;
 
-  std::vector <AsmInst *> *instlist;
-  AsmLabel *label;
+  std::vector <AsmLine *> *lines;
+  AsmImmediate *imm;
+  AsmIdentifier *label;
   AsmInst *inst;
   AsmExpr *expr;
   AsmStorage *storage;
@@ -187,8 +188,9 @@ extern Object *result;
 
 %type	<arith>		arith_operator
 %type	<label>		label
-%type	<instlist>	lines
-%type	<expr>		expression immediate
+%type	<lines>		lines
+%type	<expr>		expression
+%type	<imm>		immediate
 %type	<inst>		instruction arith_instruction
 %type	<obj>		object
 %type	<reg>		reg
@@ -203,15 +205,21 @@ extern Object *result;
 program:        object { result = $1; }
 	;
 
-object:		lines { $$ = new Object (format, filename); }
+object:		lines { $$ = new Object (format, filename); $$->lines = $1; }
 	;
 
 lines:		instruction
 		{
-		  $$ = new std::vector <AsmInst *> ();
+		  $$ = new std::vector <AsmLine *> ();
+		  $$->push_back ($1);
+		}
+	|	label
+		{
+		  $$ = new std::vector <AsmLine *> ();
 		  $$->push_back ($1);
 		}
 	|	lines terminator instruction { $1->push_back ($3); }
+	|	lines terminator label { $1->push_back ($3); }
 	|	lines terminator
 	;
 
@@ -225,8 +233,8 @@ arith_instruction:
 		}
 	;
 
-expression:	immediate
-	|	storage
+expression:	immediate { $$ = $1; }
+	|	storage { $$ = $1; }
 	;
 
 immediate:	T_NUMBER { $$ = new AsmImmediate ($1); }
@@ -291,4 +299,7 @@ arith_operator:	T_ADC
 	|	T_SBB
 	|	T_SUB
 	|	T_XOR
+	;
+
+label:		T_IDENT ':' { $$ = new AsmIdentifier (*$1); delete $1; }
 	;
