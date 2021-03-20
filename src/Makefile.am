@@ -7,10 +7,17 @@ BUILT_SOURCES = intel-parse.hh
 bin_PROGRAMS = sasm
 
 sasm_SOURCES =		\
+	assemble.cc	\
+	assemble.hh	\
+	coff.h		\
 	driver.cc	\
+	elf.h		\
 	error.cc	\
 	error.hh	\
 	expr.hh		\
 	inst.hh		\
 	intel-lex.ll	\
-	intel-parse.yy
+	intel-parse.yy	\
+	memloc.cc	\
+	opcodes.h	\
+	registers.cc
