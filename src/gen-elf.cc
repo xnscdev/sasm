@@ -49,6 +49,7 @@ ELF32Section::write (Elf32_Off offset, Elf32_Off header, FILE *stream)
       shdr.sh_addralign = alignment;
     }
 
+  /* Fixed-size entry size */
   switch (type)
     {
     case SHT_SYMTAB:
@@ -103,6 +104,8 @@ ELF32Object::ELF32Object (std::string filename)
   local_symbols.push_back (symbol);
 }
 
+/* Finds the index of a string in the string table, or returns 0 if not found */
+
 Elf32_Word
 ELF32Object::shstrtab_match (Elf32_Word start, const char *str)
 {
@@ -127,7 +130,7 @@ ELF32Object::fix_relocation_link_info (void)
   for (ELF32Section &section : shtable)
     {
       if (section.type == SHT_REL || section.type == SHT_RELA)
-        section.link = shtable.size () - 2;
+        section.link = shtable.size () - 2; /* Point to symbol table */
     }
 }
 
@@ -144,6 +147,7 @@ ELF32Object::add_section (std::string name, Elf32_Word type, Elf32_Word flags,
       symbol.st_name = 0;
       symbol.st_value = 0;
       symbol.st_size = 0;
+      /* Section symbols are always local */
       symbol.st_info = ELF32_ST_INFO (STB_LOCAL, STT_SECTION);
       symbol.st_other = 0;
       symbol.st_shndx = shtable.size () - 1;
@@ -221,16 +225,23 @@ Elf32_Word
 ELF32Object::relocate_from (Elf32_Word target, std::string section,
                             Elf32_Addr offset, unsigned char type)
 {
+  /* Determine section symbol of target section */
   Elf32_Word targsym = section_symbol (target);
   if (targsym == 0)
     return 0;
+
+  /* Get section to relocate from */
   Elf32_Word from_sectid = search_section (section);
   if (from_sectid == 0)
     return 0;
+
+  /* Get or create relocation entry section */
   Elf32_Word rel_sectid = search_section (".rel" + section);
   if (rel_sectid == 0)
     rel_sectid = add_section (".rel" + section, SHT_REL, 0, 4);
   ELF32Section &rel_section = shtable[rel_sectid];
+
+  /* Add relocation table entry */
   Elf32_Rel rel;
   rel.r_offset = offset;
   rel.r_info = ELF32_R_INFO (targsym, type);
@@ -267,7 +278,9 @@ ELF32Object::write (FILE *stream)
   header.e_phentsize = 0;
   header.e_phnum = 0;
   header.e_shentsize = sizeof (Elf32_Shdr);
+  /* 3 special sections will be inserted */
   header.e_shnum = shtable.size () + 3;
+  /* Section string table will be inserted first */
   header.e_shstrndx = shtable.size ();
   if (fwrite (&header, sizeof (Elf32_Ehdr), 1, stream) != 1)
     return false;
@@ -300,7 +313,8 @@ ELF32Object::write (FILE *stream)
 
   fix_relocation_link_info ();
 
-  /* Write section data */
+  /* Write section data
+     0x40 is first 16-byte aligned address after file header */
   Elf32_Off offset = align (0x40 + shtable.size () * sizeof (Elf32_Shdr), 16);
   Elf32_Off hdroff = 0x40;
   for (ELF32Section &section : shtable)

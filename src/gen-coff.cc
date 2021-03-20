@@ -21,6 +21,8 @@
 #include "gen-coff.hh"
 #include "util.hh"
 
+/* COFF line numbers are deprecated by Microsoft, so not implemented here */
+
 bool
 COFF32AuxWeak::write (FILE *stream)
 {
@@ -68,6 +70,7 @@ COFF32Section::write (uint32_t offset, uint32_t header, COFF32Object *obj,
   ssize_t symbol = obj->section_symbol (sectid);
   if (symbol != -1)
     {
+      /* Fill section symbol */
       COFF32AuxSection *aux =
 	CAST (COFF32AuxSection *, obj->symtab[symbol].aux.back ());
       aux->size = data.size ();
@@ -117,6 +120,10 @@ COFF32Object::write_strtab (FILE *stream)
 void
 COFF32Object::fill_string (coff_str &result, std::string str)
 {
+  /* Fill COFF strings
+     If the string can fit in 8 bytes, it is directly copied in,
+     otherwise the e_zeroes field will be set to 0 and the last
+     4 bytes will point to an offset in the string table */
   if (str.size () > 8)
     {
       result.e_long.e_zeroes = 0;
@@ -151,6 +158,8 @@ COFF32Object::search_section (std::string name)
   return 0;
 }
 
+/* Symbol table index of a section symbol, excluding auxiliary data */
+
 ssize_t
 COFF32Object::section_symbol (uint32_t section)
 {
@@ -163,6 +172,8 @@ COFF32Object::section_symbol (uint32_t section)
     }
   return -1;
 }
+
+/* Symbol table index of a section symbol, counting auxiliary data */
 
 ssize_t
 COFF32Object::section_symbol_aux (uint32_t section)
@@ -182,6 +193,7 @@ COFF32Object::section_symbol_aux (uint32_t section)
 bool
 COFF32Object::assemble_inst (AsmInst *inst, uint32_t section)
 {
+  /* COFF sections are indexed starting at 1 */
   return assemble (inst, shtable[section - 1].data, ctx);
 }
 
@@ -203,7 +215,7 @@ COFF32Object::add_symbol (AsmLabel *sym)
     default:
       return -1;
     }
-  /* Avoid messing with COFF auxiliary data */
+  /* Avoid messing with COFF auxiliary data, so ignore type */
   symbol.type = T_NULL;
   symbol.auxcnt = 0;
   symbol.value = sym->addr;
@@ -218,10 +230,11 @@ COFF32Object::write (FILE *stream)
   header.f_magic[0] = COFF_MAGIC0;
   header.f_magic[1] = COFF_MAGIC1;
   header.f_nscns = shtable.size ();
-  header.f_timdat = time (nullptr);
-  header.f_opthdr = 0;
+  header.f_timdat = time (nullptr); /* Timestamp */
+  header.f_opthdr = 0; /* Optional header not present in relocatables */
   header.f_flags = 0;
 
+  /* 0x14 is immediately after the file header */
   uint32_t offset = align (0x14 + shtable.size () * sizeof (coff_scnhdr), 16);
   uint32_t hdroff = 0x14;
 
