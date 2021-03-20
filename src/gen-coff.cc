@@ -224,7 +224,7 @@ COFF32Object::add_symbol (AsmLabel *sym)
 }
 
 uint32_t
-COFF32Object::relocate_from (uint32_t symbol, std::string section,
+COFF32Object::relocate_from (uint32_t target, std::string section,
                              uint32_t offset, unsigned char type)
 {
   /* Get relocation section */
@@ -235,7 +235,7 @@ COFF32Object::relocate_from (uint32_t symbol, std::string section,
   /* Add relocation table entry */
   coff_reloc rel;
   rel.r_vaddr = offset;
-  rel.r_symndx = symbol;
+  rel.r_symndx = section_symbol_aux (target);
   rel.r_type = type;
   shtable[from_sectid - 1].relocs.push_back (rel);
   return from_sectid;

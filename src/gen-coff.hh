@@ -114,7 +114,7 @@ public:
   ssize_t section_symbol_aux (uint32_t section);
   bool assemble_inst (AsmInst *inst, uint32_t section);
   ssize_t add_symbol (AsmLabel *sym);
-  uint32_t relocate_from (uint32_t symbol, std::string section, uint32_t offset,
+  uint32_t relocate_from (uint32_t target, std::string section, uint32_t offset,
 			  unsigned char type);
   bool write (FILE *stream);
 };
