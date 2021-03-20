@@ -35,6 +35,10 @@ extern Object *result;
 
 %union
 {
+  AsmInstARITHType arith;
+  AsmInstJFType jf;
+  AsmInstZOType zo;
+  AsmInstZOSType zos;
   long long number;
   std::string *string;
 
@@ -59,20 +63,25 @@ extern Object *result;
 %token T_NEAR "near"
 %token T_FAR "far"
 
+%token	<arith>		T_ADC "adc"
+%token	<arith>		T_ADD "add"
+%token	<arith>		T_AND "and"
+%token	<arith>		T_CMP "cmp"
+%token	<arith>		T_OR "or"
+%token	<arith>		T_SBB "sbb"
+%token	<arith>		T_SUB "sub"
+%token	<arith>		T_XOR "xor"
+
 %token T_AAA "aaa"
 %token T_AAD "aad"
 %token T_AAM "aam"
 %token T_AAS "aas"
-%token T_ADC "adc"
-%token T_ADD "add"
-%token T_AND "and"
 %token T_CALL "call"
 %token T_CBW "cbw"
 %token T_CDQ "cdq"
 %token T_CLC "clc"
 %token T_CLD "cld"
 %token T_CLI "cli"
-%token T_CMP "cmp"
 %token T_CMPS "cmps"
 %token T_CWD "cwd"
 %token T_CWDE "cwde"
@@ -118,7 +127,6 @@ extern Object *result;
 %token T_MUL "mul"
 %token T_NEG "neg"
 %token T_NOT "not"
-%token T_OR "or"
 %token T_OUT "out"
 %token T_OUTS "outs"
 %token T_POP "pop"
@@ -136,7 +144,6 @@ extern Object *result;
 %token T_ROR "ror"
 %token T_SAHF "sahf"
 %token T_SAR "sar"
-%token T_SBB "sbb"
 %token T_SCAS "scas"
 %token T_SHL "shl"
 %token T_SHR "shr"
@@ -144,11 +151,9 @@ extern Object *result;
 %token T_STD "std"
 %token T_STOS "stos"
 %token T_STI "sti"
-%token T_SUB "sub"
 %token T_TEST "test"
 %token T_XCHG "xchg"
 %token T_XLAT "xlat"
-%token T_XOR "xor"
 
 %token T_CS "cs"
 %token T_DS "ds"
@@ -180,10 +185,11 @@ extern Object *result;
 %token T_ESI "esi"
 %token T_EDI "edi"
 
+%type	<arith>		arith_operator
 %type	<label>		label
 %type	<instlist>	lines
 %type	<expr>		expression immediate
-%type	<inst>		instruction add_instruction
+%type	<inst>		instruction arith_instruction
 %type	<obj>		object
 %type	<reg>		reg
 %type	<mem>		memloc
@@ -209,13 +215,13 @@ lines:		instruction
 	|	lines terminator
 	;
 
-instruction:	add_instruction
+instruction:	arith_instruction
 	;
 
-add_instruction:
-		T_ADD storage ',' expression
+arith_instruction:
+		arith_operator storage ',' expression
 		{
-		  $$ = new AsmInstARITH (AsmInstARITHType::ADD, $2, $4);
+		  $$ = new AsmInstARITH ($1, $2, $4);
 		}
 	;
 
@@ -275,4 +281,14 @@ size_specifier:	T_BYTE { $$ = 1; }
 
 terminator:	';'
 	|	'\n'
+	;
+
+arith_operator:	T_ADC
+	|	T_ADD
+	|	T_AND
+	|	T_CMP
+	|	T_OR
+	|	T_SBB
+	|	T_SUB
+	|	T_XOR
 	;

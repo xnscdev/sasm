@@ -966,17 +966,17 @@ return T_AAS;
 case 15:
 YY_RULE_SETUP
 #line 51 "../../src/intel-lex.ll"
-return T_ADC;
+yylval.arith = AsmInstARITHType::ADC; return T_ADC;
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
 #line 52 "../../src/intel-lex.ll"
-return T_ADD;
+yylval.arith = AsmInstARITHType::ADD; return T_ADD;
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
 #line 53 "../../src/intel-lex.ll"
-return T_AND;
+yylval.arith = AsmInstARITHType::AND; return T_AND;
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
@@ -1011,7 +1011,7 @@ return T_CLI;
 case 24:
 YY_RULE_SETUP
 #line 60 "../../src/intel-lex.ll"
-return T_CMP;
+yylval.arith = AsmInstARITHType::CMP; return T_CMP;
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
@@ -1241,7 +1241,7 @@ return T_NOT;
 case 70:
 YY_RULE_SETUP
 #line 106 "../../src/intel-lex.ll"
-return T_OR;
+yylval.arith = AsmInstARITHType::OR; return T_OR;
 	YY_BREAK
 case 71:
 YY_RULE_SETUP
@@ -1331,7 +1331,7 @@ return T_SAR;
 case 88:
 YY_RULE_SETUP
 #line 124 "../../src/intel-lex.ll"
-return T_SBB;
+yylval.arith = AsmInstARITHType::SBB; return T_SBB;
 	YY_BREAK
 case 89:
 YY_RULE_SETUP
@@ -1371,7 +1371,7 @@ return T_STI;
 case 96:
 YY_RULE_SETUP
 #line 132 "../../src/intel-lex.ll"
-return T_SUB;
+yylval.arith = AsmInstARITHType::SUB; return T_SUB;
 	YY_BREAK
 case 97:
 YY_RULE_SETUP
@@ -1391,7 +1391,7 @@ return T_XLAT;
 case 100:
 YY_RULE_SETUP
 #line 136 "../../src/intel-lex.ll"
-return T_XOR;
+yylval.arith = AsmInstARITHType::XOR; return T_XOR;
 	YY_BREAK
 case 101:
 YY_RULE_SETUP

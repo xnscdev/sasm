@@ -62,96 +62,96 @@ extern int yydebug;
     T_DWORD = 263,                 /* "dword"  */
     T_NEAR = 264,                  /* "near"  */
     T_FAR = 265,                   /* "far"  */
-    T_AAA = 266,                   /* "aaa"  */
-    T_AAD = 267,                   /* "aad"  */
-    T_AAM = 268,                   /* "aam"  */
-    T_AAS = 269,                   /* "aas"  */
-    T_ADC = 270,                   /* "adc"  */
-    T_ADD = 271,                   /* "add"  */
-    T_AND = 272,                   /* "and"  */
-    T_CALL = 273,                  /* "call"  */
-    T_CBW = 274,                   /* "cbw"  */
-    T_CDQ = 275,                   /* "cdq"  */
-    T_CLC = 276,                   /* "clc"  */
-    T_CLD = 277,                   /* "cld"  */
-    T_CLI = 278,                   /* "cli"  */
-    T_CMP = 279,                   /* "cmp"  */
-    T_CMPS = 280,                  /* "cmps"  */
-    T_CWD = 281,                   /* "cwd"  */
-    T_CWDE = 282,                  /* "cwde"  */
-    T_DEC = 283,                   /* "dec"  */
-    T_DIV = 284,                   /* "div"  */
-    T_ENTER = 285,                 /* "enter"  */
-    T_HLT = 286,                   /* "hlt"  */
-    T_IDIV = 287,                  /* "idiv"  */
-    T_IMUL = 288,                  /* "imul"  */
-    T_IN = 289,                    /* "in"  */
-    T_INC = 290,                   /* "inc"  */
-    T_INS = 291,                   /* "ins"  */
-    T_INT = 292,                   /* "int"  */
-    T_INT3 = 293,                  /* "int3"  */
-    T_INTO = 294,                  /* "into"  */
-    T_IRET = 295,                  /* "iret"  */
-    T_JO = 296,                    /* "jo"  */
-    T_JNO = 297,                   /* "jno"  */
-    T_JC = 298,                    /* "jc"  */
-    T_JNC = 299,                   /* "jnc"  */
-    T_JZ = 300,                    /* "jz"  */
-    T_JNZ = 301,                   /* "jnz"  */
-    T_JNA = 302,                   /* "jna"  */
-    T_JA = 303,                    /* "ja"  */
-    T_JS = 304,                    /* "js"  */
-    T_JNS = 305,                   /* "jns"  */
-    T_JP = 306,                    /* "jp"  */
-    T_JNP = 307,                   /* "jnp"  */
-    T_JL = 308,                    /* "jl"  */
-    T_JNL = 309,                   /* "jnl"  */
-    T_JNG = 310,                   /* "jng"  */
-    T_JG = 311,                    /* "jg"  */
-    T_JMP = 312,                   /* "jmp"  */
-    T_LAHF = 313,                  /* "lahf"  */
-    T_LEA = 314,                   /* "lea"  */
-    T_LEAVE = 315,                 /* "leave"  */
-    T_LODS = 316,                  /* "lods"  */
-    T_LOOP = 317,                  /* "loop"  */
-    T_LOOPNZ = 318,                /* "loopnz"  */
-    T_LOOPZ = 319,                 /* "loopz"  */
-    T_MOV = 320,                   /* "mov"  */
-    T_MOVS = 321,                  /* "movs"  */
-    T_MUL = 322,                   /* "mul"  */
-    T_NEG = 323,                   /* "neg"  */
-    T_NOT = 324,                   /* "not"  */
-    T_OR = 325,                    /* "or"  */
-    T_OUT = 326,                   /* "out"  */
-    T_OUTS = 327,                  /* "outs"  */
-    T_POP = 328,                   /* "pop"  */
-    T_POPA = 329,                  /* "popa"  */
-    T_POPF = 330,                  /* "popf"  */
-    T_PUSH = 331,                  /* "push"  */
-    T_PUSHA = 332,                 /* "pusha"  */
-    T_PUSHF = 333,                 /* "pushf"  */
-    T_RCL = 334,                   /* "rcl"  */
-    T_RCR = 335,                   /* "rcr"  */
-    T_REPNZ = 336,                 /* "repnz"  */
-    T_REPZ = 337,                  /* "repz"  */
-    T_RET = 338,                   /* "ret"  */
-    T_ROL = 339,                   /* "rol"  */
-    T_ROR = 340,                   /* "ror"  */
-    T_SAHF = 341,                  /* "sahf"  */
-    T_SAR = 342,                   /* "sar"  */
-    T_SBB = 343,                   /* "sbb"  */
-    T_SCAS = 344,                  /* "scas"  */
-    T_SHL = 345,                   /* "shl"  */
-    T_SHR = 346,                   /* "shr"  */
-    T_STC = 347,                   /* "stc"  */
-    T_STD = 348,                   /* "std"  */
-    T_STOS = 349,                  /* "stos"  */
-    T_STI = 350,                   /* "sti"  */
-    T_SUB = 351,                   /* "sub"  */
-    T_TEST = 352,                  /* "test"  */
-    T_XCHG = 353,                  /* "xchg"  */
-    T_XLAT = 354,                  /* "xlat"  */
-    T_XOR = 355,                   /* "xor"  */
+    T_ADC = 266,                   /* "adc"  */
+    T_ADD = 267,                   /* "add"  */
+    T_AND = 268,                   /* "and"  */
+    T_CMP = 269,                   /* "cmp"  */
+    T_OR = 270,                    /* "or"  */
+    T_SBB = 271,                   /* "sbb"  */
+    T_SUB = 272,                   /* "sub"  */
+    T_XOR = 273,                   /* "xor"  */
+    T_AAA = 274,                   /* "aaa"  */
+    T_AAD = 275,                   /* "aad"  */
+    T_AAM = 276,                   /* "aam"  */
+    T_AAS = 277,                   /* "aas"  */
+    T_CALL = 278,                  /* "call"  */
+    T_CBW = 279,                   /* "cbw"  */
+    T_CDQ = 280,                   /* "cdq"  */
+    T_CLC = 281,                   /* "clc"  */
+    T_CLD = 282,                   /* "cld"  */
+    T_CLI = 283,                   /* "cli"  */
+    T_CMPS = 284,                  /* "cmps"  */
+    T_CWD = 285,                   /* "cwd"  */
+    T_CWDE = 286,                  /* "cwde"  */
+    T_DEC = 287,                   /* "dec"  */
+    T_DIV = 288,                   /* "div"  */
+    T_ENTER = 289,                 /* "enter"  */
+    T_HLT = 290,                   /* "hlt"  */
+    T_IDIV = 291,                  /* "idiv"  */
+    T_IMUL = 292,                  /* "imul"  */
+    T_IN = 293,                    /* "in"  */
+    T_INC = 294,                   /* "inc"  */
+    T_INS = 295,                   /* "ins"  */
+    T_INT = 296,                   /* "int"  */
+    T_INT3 = 297,                  /* "int3"  */
+    T_INTO = 298,                  /* "into"  */
+    T_IRET = 299,                  /* "iret"  */
+    T_JO = 300,                    /* "jo"  */
+    T_JNO = 301,                   /* "jno"  */
+    T_JC = 302,                    /* "jc"  */
+    T_JNC = 303,                   /* "jnc"  */
+    T_JZ = 304,                    /* "jz"  */
+    T_JNZ = 305,                   /* "jnz"  */
+    T_JNA = 306,                   /* "jna"  */
+    T_JA = 307,                    /* "ja"  */
+    T_JS = 308,                    /* "js"  */
+    T_JNS = 309,                   /* "jns"  */
+    T_JP = 310,                    /* "jp"  */
+    T_JNP = 311,                   /* "jnp"  */
+    T_JL = 312,                    /* "jl"  */
+    T_JNL = 313,                   /* "jnl"  */
+    T_JNG = 314,                   /* "jng"  */
+    T_JG = 315,                    /* "jg"  */
+    T_JMP = 316,                   /* "jmp"  */
+    T_LAHF = 317,                  /* "lahf"  */
+    T_LEA = 318,                   /* "lea"  */
+    T_LEAVE = 319,                 /* "leave"  */
+    T_LODS = 320,                  /* "lods"  */
+    T_LOOP = 321,                  /* "loop"  */
+    T_LOOPNZ = 322,                /* "loopnz"  */
+    T_LOOPZ = 323,                 /* "loopz"  */
+    T_MOV = 324,                   /* "mov"  */
+    T_MOVS = 325,                  /* "movs"  */
+    T_MUL = 326,                   /* "mul"  */
+    T_NEG = 327,                   /* "neg"  */
+    T_NOT = 328,                   /* "not"  */
+    T_OUT = 329,                   /* "out"  */
+    T_OUTS = 330,                  /* "outs"  */
+    T_POP = 331,                   /* "pop"  */
+    T_POPA = 332,                  /* "popa"  */
+    T_POPF = 333,                  /* "popf"  */
+    T_PUSH = 334,                  /* "push"  */
+    T_PUSHA = 335,                 /* "pusha"  */
+    T_PUSHF = 336,                 /* "pushf"  */
+    T_RCL = 337,                   /* "rcl"  */
+    T_RCR = 338,                   /* "rcr"  */
+    T_REPNZ = 339,                 /* "repnz"  */
+    T_REPZ = 340,                  /* "repz"  */
+    T_RET = 341,                   /* "ret"  */
+    T_ROL = 342,                   /* "rol"  */
+    T_ROR = 343,                   /* "ror"  */
+    T_SAHF = 344,                  /* "sahf"  */
+    T_SAR = 345,                   /* "sar"  */
+    T_SCAS = 346,                  /* "scas"  */
+    T_SHL = 347,                   /* "shl"  */
+    T_SHR = 348,                   /* "shr"  */
+    T_STC = 349,                   /* "stc"  */
+    T_STD = 350,                   /* "std"  */
+    T_STOS = 351,                  /* "stos"  */
+    T_STI = 352,                   /* "sti"  */
+    T_TEST = 353,                  /* "test"  */
+    T_XCHG = 354,                  /* "xchg"  */
+    T_XLAT = 355,                  /* "xlat"  */
     T_CS = 356,                    /* "cs"  */
     T_DS = 357,                    /* "ds"  */
     T_ES = 358,                    /* "es"  */
@@ -197,96 +197,96 @@ extern int yydebug;
 #define T_DWORD 263
 #define T_NEAR 264
 #define T_FAR 265
-#define T_AAA 266
-#define T_AAD 267
-#define T_AAM 268
-#define T_AAS 269
-#define T_ADC 270
-#define T_ADD 271
-#define T_AND 272
-#define T_CALL 273
-#define T_CBW 274
-#define T_CDQ 275
-#define T_CLC 276
-#define T_CLD 277
-#define T_CLI 278
-#define T_CMP 279
-#define T_CMPS 280
-#define T_CWD 281
-#define T_CWDE 282
-#define T_DEC 283
-#define T_DIV 284
-#define T_ENTER 285
-#define T_HLT 286
-#define T_IDIV 287
-#define T_IMUL 288
-#define T_IN 289
-#define T_INC 290
-#define T_INS 291
-#define T_INT 292
-#define T_INT3 293
-#define T_INTO 294
-#define T_IRET 295
-#define T_JO 296
-#define T_JNO 297
-#define T_JC 298
-#define T_JNC 299
-#define T_JZ 300
-#define T_JNZ 301
-#define T_JNA 302
-#define T_JA 303
-#define T_JS 304
-#define T_JNS 305
-#define T_JP 306
-#define T_JNP 307
-#define T_JL 308
-#define T_JNL 309
-#define T_JNG 310
-#define T_JG 311
-#define T_JMP 312
-#define T_LAHF 313
-#define T_LEA 314
-#define T_LEAVE 315
-#define T_LODS 316
-#define T_LOOP 317
-#define T_LOOPNZ 318
-#define T_LOOPZ 319
-#define T_MOV 320
-#define T_MOVS 321
-#define T_MUL 322
-#define T_NEG 323
-#define T_NOT 324
-#define T_OR 325
-#define T_OUT 326
-#define T_OUTS 327
-#define T_POP 328
-#define T_POPA 329
-#define T_POPF 330
-#define T_PUSH 331
-#define T_PUSHA 332
-#define T_PUSHF 333
-#define T_RCL 334
-#define T_RCR 335
-#define T_REPNZ 336
-#define T_REPZ 337
-#define T_RET 338
-#define T_ROL 339
-#define T_ROR 340
-#define T_SAHF 341
-#define T_SAR 342
-#define T_SBB 343
-#define T_SCAS 344
-#define T_SHL 345
-#define T_SHR 346
-#define T_STC 347
-#define T_STD 348
-#define T_STOS 349
-#define T_STI 350
-#define T_SUB 351
-#define T_TEST 352
-#define T_XCHG 353
-#define T_XLAT 354
-#define T_XOR 355
+#define T_ADC 266
+#define T_ADD 267
+#define T_AND 268
+#define T_CMP 269
+#define T_OR 270
+#define T_SBB 271
+#define T_SUB 272
+#define T_XOR 273
+#define T_AAA 274
+#define T_AAD 275
+#define T_AAM 276
+#define T_AAS 277
+#define T_CALL 278
+#define T_CBW 279
+#define T_CDQ 280
+#define T_CLC 281
+#define T_CLD 282
+#define T_CLI 283
+#define T_CMPS 284
+#define T_CWD 285
+#define T_CWDE 286
+#define T_DEC 287
+#define T_DIV 288
+#define T_ENTER 289
+#define T_HLT 290
+#define T_IDIV 291
+#define T_IMUL 292
+#define T_IN 293
+#define T_INC 294
+#define T_INS 295
+#define T_INT 296
+#define T_INT3 297
+#define T_INTO 298
+#define T_IRET 299
+#define T_JO 300
+#define T_JNO 301
+#define T_JC 302
+#define T_JNC 303
+#define T_JZ 304
+#define T_JNZ 305
+#define T_JNA 306
+#define T_JA 307
+#define T_JS 308
+#define T_JNS 309
+#define T_JP 310
+#define T_JNP 311
+#define T_JL 312
+#define T_JNL 313
+#define T_JNG 314
+#define T_JG 315
+#define T_JMP 316
+#define T_LAHF 317
+#define T_LEA 318
+#define T_LEAVE 319
+#define T_LODS 320
+#define T_LOOP 321
+#define T_LOOPNZ 322
+#define T_LOOPZ 323
+#define T_MOV 324
+#define T_MOVS 325
+#define T_MUL 326
+#define T_NEG 327
+#define T_NOT 328
+#define T_OUT 329
+#define T_OUTS 330
+#define T_POP 331
+#define T_POPA 332
+#define T_POPF 333
+#define T_PUSH 334
+#define T_PUSHA 335
+#define T_PUSHF 336
+#define T_RCL 337
+#define T_RCR 338
+#define T_REPNZ 339
+#define T_REPZ 340
+#define T_RET 341
+#define T_ROL 342
+#define T_ROR 343
+#define T_SAHF 344
+#define T_SAR 345
+#define T_SCAS 346
+#define T_SHL 347
+#define T_SHR 348
+#define T_STC 349
+#define T_STD 350
+#define T_STOS 351
+#define T_STI 352
+#define T_TEST 353
+#define T_XCHG 354
+#define T_XLAT 355
 #define T_CS 356
 #define T_DS 357
 #define T_ES 358
@@ -323,6 +323,10 @@ union YYSTYPE
 {
 #line 37 "../../src/intel-parse.yy"
 
+  AsmInstARITHType arith;
+  AsmInstJFType jf;
+  AsmInstZOType zo;
+  AsmInstZOSType zos;
   long long number;
   std::string *string;
 
@@ -335,7 +339,7 @@ union YYSTYPE
   AsmMemoryLoc *mem;
   Object *obj;
 
-#line 339 "../../src/intel-parse.hh"
+#line 343 "../../src/intel-parse.hh"
 
 };
 typedef union YYSTYPE YYSTYPE;
