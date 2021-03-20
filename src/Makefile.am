@@ -6,17 +6,16 @@ BUILT_SOURCES = intel-parse.hh
 
 bin_PROGRAMS = sasm
 
-sasm_SOURCES =		\
+noinst_LIBRARIES = libsasm.a
+
+libsasm_a_SOURCES =	\
 	assemble.cc	\
 	assemble.hh	\
 	coff.h		\
 	directive.hh	\
-	driver.cc	\
 	dtv-define.cc	\
 	dtv-times.cc	\
 	elf.h		\
-	error.cc	\
-	error.hh	\
 	expr.hh		\
 	gen-coff.cc	\
 	gen-coff.hh	\
@@ -54,10 +53,17 @@ sasm_SOURCES =		\
 	insts-rotshf.cc	\
 	insts-str.cc	\
 	insts-zo.cc	\
-	intel-lex.ll	\
-	intel-parse.yy	\
 	memloc.cc	\
 	opcodes.h	\
 	registers.cc	\
 	util.cc		\
 	util.hh
+
+sasm_SOURCES =		\
+	driver.cc	\
+	error.cc	\
+	error.hh	\
+	intel-lex.ll	\
+	intel-parse.yy
+
+sasm_LDADD = libsasm.a

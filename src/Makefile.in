@@ -14,6 +14,7 @@
 
 @SET_MAKE@
 
+
 VPATH = @srcdir@
 am__is_gnu_make = { \
   if test -z '$(MAKELEVEL)'; then \
@@ -98,23 +99,34 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_sasm_OBJECTS = assemble.$(OBJEXT) driver.$(OBJEXT) \
-	dtv-define.$(OBJEXT) dtv-times.$(OBJEXT) error.$(OBJEXT) \
-	gen-coff.$(OBJEXT) gen-elf.$(OBJEXT) inst-call.$(OBJEXT) \
-	inst-callf.$(OBJEXT) inst-dec.$(OBJEXT) inst-div.$(OBJEXT) \
-	inst-idiv.$(OBJEXT) inst-imul.$(OBJEXT) inst-in.$(OBJEXT) \
-	inst-inc.$(OBJEXT) inst-int.$(OBJEXT) inst-jmp.$(OBJEXT) \
-	inst-jmpf.$(OBJEXT) inst-lea.$(OBJEXT) inst-mov.$(OBJEXT) \
-	inst-mul.$(OBJEXT) inst-neg.$(OBJEXT) inst-not.$(OBJEXT) \
-	inst-pop.$(OBJEXT) inst-push.$(OBJEXT) inst-repnz.$(OBJEXT) \
-	inst-repz.$(OBJEXT) inst-ret.$(OBJEXT) inst-out.$(OBJEXT) \
-	inst-test.$(OBJEXT) inst-xchg.$(OBJEXT) insts-arith.$(OBJEXT) \
-	insts-ascii.$(OBJEXT) insts-jf.$(OBJEXT) insts-loop.$(OBJEXT) \
-	insts-rotshf.$(OBJEXT) insts-str.$(OBJEXT) insts-zo.$(OBJEXT) \
-	intel-lex.$(OBJEXT) intel-parse.$(OBJEXT) memloc.$(OBJEXT) \
+LIBRARIES = $(noinst_LIBRARIES)
+AR = ar
+ARFLAGS = cru
+AM_V_AR = $(am__v_AR_@AM_V@)
+am__v_AR_ = $(am__v_AR_@AM_DEFAULT_V@)
+am__v_AR_0 = @echo "  AR      " $@;
+am__v_AR_1 = 
+libsasm_a_AR = $(AR) $(ARFLAGS)
+libsasm_a_LIBADD =
+am_libsasm_a_OBJECTS = assemble.$(OBJEXT) dtv-define.$(OBJEXT) \
+	dtv-times.$(OBJEXT) gen-coff.$(OBJEXT) gen-elf.$(OBJEXT) \
+	inst-call.$(OBJEXT) inst-callf.$(OBJEXT) inst-dec.$(OBJEXT) \
+	inst-div.$(OBJEXT) inst-idiv.$(OBJEXT) inst-imul.$(OBJEXT) \
+	inst-in.$(OBJEXT) inst-inc.$(OBJEXT) inst-int.$(OBJEXT) \
+	inst-jmp.$(OBJEXT) inst-jmpf.$(OBJEXT) inst-lea.$(OBJEXT) \
+	inst-mov.$(OBJEXT) inst-mul.$(OBJEXT) inst-neg.$(OBJEXT) \
+	inst-not.$(OBJEXT) inst-pop.$(OBJEXT) inst-push.$(OBJEXT) \
+	inst-repnz.$(OBJEXT) inst-repz.$(OBJEXT) inst-ret.$(OBJEXT) \
+	inst-out.$(OBJEXT) inst-test.$(OBJEXT) inst-xchg.$(OBJEXT) \
+	insts-arith.$(OBJEXT) insts-ascii.$(OBJEXT) insts-jf.$(OBJEXT) \
+	insts-loop.$(OBJEXT) insts-rotshf.$(OBJEXT) \
+	insts-str.$(OBJEXT) insts-zo.$(OBJEXT) memloc.$(OBJEXT) \
 	registers.$(OBJEXT) util.$(OBJEXT)
+libsasm_a_OBJECTS = $(am_libsasm_a_OBJECTS)
+am_sasm_OBJECTS = driver.$(OBJEXT) error.$(OBJEXT) intel-lex.$(OBJEXT) \
+	intel-parse.$(OBJEXT)
 sasm_OBJECTS = $(am_sasm_OBJECTS)
-sasm_LDADD = $(LDADD)
+sasm_DEPENDENCIES = libsasm.a
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -191,8 +203,8 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(sasm_SOURCES)
-DIST_SOURCES = $(sasm_SOURCES)
+SOURCES = $(libsasm_a_SOURCES) $(sasm_SOURCES)
+DIST_SOURCES = $(libsasm_a_SOURCES) $(sasm_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -320,17 +332,15 @@ AM_CFLAGS = -std=gnu99 -Wall -pedantic -Werror=implicit -fno-common
 AM_CXXFLAGS = -std=gnu++11 -Wall -pedantic -fno-exceptions -frtti
 AM_YFLAGS = -d -Wno-yacc -Wcex
 BUILT_SOURCES = intel-parse.hh
-sasm_SOURCES = \
+noinst_LIBRARIES = libsasm.a
+libsasm_a_SOURCES = \
 	assemble.cc	\
 	assemble.hh	\
 	coff.h		\
 	directive.hh	\
-	driver.cc	\
 	dtv-define.cc	\
 	dtv-times.cc	\
 	elf.h		\
-	error.cc	\
-	error.hh	\
 	expr.hh		\
 	gen-coff.cc	\
 	gen-coff.hh	\
@@ -368,14 +378,20 @@ sasm_SOURCES = \
 	insts-rotshf.cc	\
 	insts-str.cc	\
 	insts-zo.cc	\
-	intel-lex.ll	\
-	intel-parse.yy	\
 	memloc.cc	\
 	opcodes.h	\
 	registers.cc	\
 	util.cc		\
 	util.hh
 
+sasm_SOURCES = \
+	driver.cc	\
+	error.cc	\
+	error.hh	\
+	intel-lex.ll	\
+	intel-parse.yy
+
+sasm_LDADD = libsasm.a
 all: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) all-am
 
@@ -452,6 +468,14 @@ uninstall-binPROGRAMS:
 
 clean-binPROGRAMS:
 	-test -z "$(bin_PROGRAMS)" || rm -f $(bin_PROGRAMS)
+
+clean-noinstLIBRARIES:
+	-test -z "$(noinst_LIBRARIES)" || rm -f $(noinst_LIBRARIES)
+
+libsasm.a: $(libsasm_a_OBJECTS) $(libsasm_a_DEPENDENCIES) $(EXTRA_libsasm_a_DEPENDENCIES) 
+	$(AM_V_at)-rm -f libsasm.a
+	$(AM_V_AR)$(libsasm_a_AR) libsasm.a $(libsasm_a_OBJECTS) $(libsasm_a_LIBADD)
+	$(AM_V_at)$(RANLIB) libsasm.a
 intel-parse.hh: intel-parse.cc
 	@if test ! -f $@; then rm -f intel-parse.cc; else :; fi
 	@if test ! -f $@; then $(MAKE) $(AM_MAKEFLAGS) intel-parse.cc; else :; fi
@@ -624,7 +648,7 @@ distdir-am: $(DISTFILES)
 check-am: all-am
 check: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) check-am
-all-am: Makefile $(PROGRAMS)
+all-am: Makefile $(PROGRAMS) $(LIBRARIES)
 installdirs:
 	for dir in "$(DESTDIR)$(bindir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
@@ -667,7 +691,8 @@ maintainer-clean-generic:
 	-test -z "$(BUILT_SOURCES)" || rm -f $(BUILT_SOURCES)
 clean: clean-am
 
-clean-am: clean-binPROGRAMS clean-generic mostlyclean-am
+clean-am: clean-binPROGRAMS clean-generic clean-noinstLIBRARIES \
+	mostlyclean-am
 
 distclean: distclean-am
 		-rm -f ./$(DEPDIR)/assemble.Po
@@ -821,18 +846,18 @@ uninstall-am: uninstall-binPROGRAMS
 .MAKE: all check install install-am install-exec install-strip
 
 .PHONY: CTAGS GTAGS TAGS all all-am am--depfiles check check-am clean \
-	clean-binPROGRAMS clean-generic cscopelist-am ctags ctags-am \
-	distclean distclean-compile distclean-generic distclean-tags \
-	distdir dvi dvi-am html html-am info info-am install \
-	install-am install-binPROGRAMS install-data install-data-am \
-	install-dvi install-dvi-am install-exec install-exec-am \
-	install-html install-html-am install-info install-info-am \
-	install-man install-pdf install-pdf-am install-ps \
-	install-ps-am install-strip installcheck installcheck-am \
-	installdirs maintainer-clean maintainer-clean-generic \
-	mostlyclean mostlyclean-compile mostlyclean-generic pdf pdf-am \
-	ps ps-am tags tags-am uninstall uninstall-am \
-	uninstall-binPROGRAMS
+	clean-binPROGRAMS clean-generic clean-noinstLIBRARIES \
+	cscopelist-am ctags ctags-am distclean distclean-compile \
+	distclean-generic distclean-tags distdir dvi dvi-am html \
+	html-am info info-am install install-am install-binPROGRAMS \
+	install-data install-data-am install-dvi install-dvi-am \
+	install-exec install-exec-am install-html install-html-am \
+	install-info install-info-am install-man install-pdf \
+	install-pdf-am install-ps install-ps-am install-strip \
+	installcheck installcheck-am installdirs maintainer-clean \
+	maintainer-clean-generic mostlyclean mostlyclean-compile \
+	mostlyclean-generic pdf pdf-am ps ps-am tags tags-am uninstall \
+	uninstall-am uninstall-binPROGRAMS
 
 .PRECIOUS: Makefile
 
