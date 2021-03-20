@@ -121,6 +121,16 @@ ELF32Object::shstrtab_match (Elf32_Word start, const char *str)
   return 0;
 }
 
+void
+ELF32Object::fix_relocation_link_info (void)
+{
+  for (ELF32Section &section : shtable)
+    {
+      if (section.type == SHT_REL || section.type == SHT_RELA)
+        section.link = shtable.size () - 2;
+    }
+}
+
 Elf32_Word
 ELF32Object::add_section (std::string name, Elf32_Word type, Elf32_Word flags,
 			  Elf32_Word addralign)
@@ -207,6 +217,26 @@ ELF32Object::add_symbol (AsmLabel *sym)
   return true;
 }
 
+Elf32_Word
+ELF32Object::relocate_from (Elf32_Word target, std::string section,
+                            Elf32_Addr offset, unsigned char type)
+{
+  Elf32_Word from_sectid = search_section (section);
+  if (from_sectid == 0)
+    return 0;
+  Elf32_Word rel_sectid = search_section (".rel" + section);
+  if (rel_sectid == 0)
+    rel_sectid = add_section (".rel" + section, SHT_REL, 0, 4);
+  ELF32Section &rel_section = shtable[rel_sectid];
+  Elf32_Rel rel;
+  rel.r_offset = offset;
+  rel.r_info = ELF32_R_INFO (target, type);
+  rel_section.info = from_sectid;
+  for (size_t i = 0; i < sizeof (Elf32_Rel); i++)
+    rel_section.data.push_back (((unsigned char *) &rel)[i]);
+  return rel_sectid;
+}
+
 bool
 ELF32Object::write (FILE *stream)
 {
@@ -264,6 +294,8 @@ ELF32Object::write (FILE *stream)
   shtable.push_back (shstrtab);
   shtable.push_back (symtab);
   shtable.push_back (strtab);
+
+  fix_relocation_link_info ();
 
   /* Write section data */
   Elf32_Off offset = align (0x40 + shtable.size () * sizeof (Elf32_Shdr), 16);

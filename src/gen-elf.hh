@@ -54,6 +54,7 @@ class ELF32Object
   ELF32Section strtab {19, SHT_STRTAB, 0, 1};
 
   Elf32_Word shstrtab_match (Elf32_Word start, const char *str);
+  void fix_relocation_link_info (void);
 
 public:
   std::vector <ELF32Section> shtable;
@@ -65,6 +66,8 @@ public:
   Elf32_Word section_symbol (Elf32_Word section);
   bool assemble_inst (AsmInst *inst, Elf32_Word section);
   bool add_symbol (AsmLabel *sym);
+  Elf32_Word relocate_from (Elf32_Word target, std::string section,
+			    Elf32_Addr offset, unsigned char type);
   bool write (FILE *stream);
 };
 
