@@ -112,12 +112,13 @@ public:
   virtual ~AsmLine (void) = default;
 };
 
-class AsmIdentifier : public AsmLine
+class AsmIdentifier : public AsmLine, public AsmPointer
 {
 public:
   std::string name;
 
   AsmIdentifier (std::string name) : name (std::move (name)) {}
+  uint32_t get_addr (void);
 };
 
 class AsmInst : public AsmLine
@@ -174,12 +175,12 @@ class AsmInstCALL : public AsmInst
 {
 public:
   AsmStorage *op;
-  uint32_t rel;
+  AsmPointer *rel;
   size_t size;
 
-  AsmInstCALL (uint32_t rel, size_t size) :
+  AsmInstCALL (AsmPointer *rel, size_t size) :
     op (nullptr), rel (rel), size (size) {}
-  AsmInstCALL (AsmStorage *op) : op (op), rel (0), size (op->width ()) {}
+  AsmInstCALL (AsmStorage *op) : op (op), rel (nullptr), size (op->width ()) {}
   size_t width (const AsmContext &ctx);
   bool assemble (std::vector <unsigned char> &result,
 		 const AsmContext &ctx);
@@ -285,10 +286,10 @@ class AsmInstJF : public AsmInst
 {
 public:
   AsmInstJFType type;
-  uint32_t rel;
+  AsmPointer *rel;
   size_t size;
 
-  AsmInstJF (AsmInstJFType type, uint32_t rel, size_t size) :
+  AsmInstJF (AsmInstJFType type, AsmPointer *rel, size_t size) :
     type (type), rel (rel), size (size) {}
   size_t width (const AsmContext &ctx);
   bool assemble (std::vector <unsigned char> &result,
@@ -299,12 +300,12 @@ class AsmInstJMP : public AsmInst
 {
 public:
   AsmStorage *op;
-  uint32_t rel;
+  AsmPointer *rel;
   size_t size;
 
-  AsmInstJMP (uint32_t rel, size_t size) :
+  AsmInstJMP (AsmPointer *rel, size_t size) :
     op (nullptr), rel (rel), size (size) {}
-  AsmInstJMP (AsmStorage *op) : op (op), rel (0), size (op->width ()) {}
+  AsmInstJMP (AsmStorage *op) : op (op), rel (nullptr), size (op->width ()) {}
   size_t width (const AsmContext &ctx);
   bool assemble (std::vector <unsigned char> &result,
 		 const AsmContext &ctx);

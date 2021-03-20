@@ -150,12 +150,13 @@ bool
 AsmInstJF::assemble (std::vector <unsigned char> &result,
 		     const AsmContext &ctx)
 {
-  long long r = (long long) rel - curraddr;
+  long long r = (long long) rel->get_addr () - curraddr;
   if (r > INT8_MIN + 2 && r < INT8_MAX - 2)
     {
       if (!write_rel8_opcode (type, result))
 	return false;
-      result.push_back ((unsigned char) rel - (unsigned char) curraddr);
+      result.push_back ((unsigned char) rel->get_addr () -
+			(unsigned char) curraddr);
       return true;
     }
   else
@@ -167,7 +168,7 @@ AsmInstJF::assemble (std::vector <unsigned char> &result,
       result.push_back (ASM_OPCODE_2BYTE_INST);
       if (!write_relx_opcode (type, result))
 	return false;
-      write_address (rel - curraddr, ctx, result);
+      write_address (rel->get_addr () - curraddr, ctx, result);
       return true;
     }
 }

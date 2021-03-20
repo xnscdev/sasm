@@ -22,13 +22,14 @@
 
 static bool
 assemble_rel (std::vector <unsigned char> &result,
-	      const AsmContext &ctx, uint32_t addr, size_t size)
+	      const AsmContext &ctx, AsmPointer *addr, size_t size)
 {
-  long long rel = (long long) addr - curraddr;
+  long long rel = (long long) addr->get_addr () - curraddr;
   if (rel > INT8_MIN + 2 && rel < INT8_MAX - 2)
     {
       result.push_back (ASM_OPCODE_JMP_REL8);
-      result.push_back ((unsigned char) addr - (unsigned char) curraddr);
+      result.push_back ((unsigned char) addr->get_addr () -
+			(unsigned char) curraddr);
       return true;
     }
   else
@@ -38,7 +39,7 @@ assemble_rel (std::vector <unsigned char> &result,
       else if (size != ctx.bytes)
 	result.push_back (ASM_OPCODE_OPSIZE_OVR);
       result.push_back (ASM_OPCODE_JMP_RELX);
-      write_address (addr - curraddr, ctx, result);
+      write_address (addr->get_addr () - curraddr, ctx, result);
       return true;
     }
 }
@@ -66,7 +67,7 @@ AsmInstJMP::width (const AsmContext &ctx)
 {
   if (op == nullptr)
     {
-      long long r = (long long) rel - curraddr;
+      long long r = (long long) rel->get_addr () - curraddr;
       return r > INT8_MIN + 2 && r < INT8_MAX - 2 ? 2 : ctx.bytes +
 	(size != ctx.bytes) + 1;
     }

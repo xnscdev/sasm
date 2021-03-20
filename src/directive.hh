@@ -37,6 +37,17 @@ public:
 		 const AsmContext &ctx);
 };
 
+class AsmInstSECTION : public AsmDirective
+{
+public:
+  std::string name;
+
+  AsmInstSECTION (std::string name) : name (std::move (name)) {}
+  size_t width (const AsmContext &ctx);
+  bool assemble (std::vector <unsigned char> &result,
+		 const AsmContext &ctx);
+};
+
 class AsmInstTIMES : public AsmDirective
 {
 public:

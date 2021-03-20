@@ -19,11 +19,16 @@
 #ifndef _UTIL_HH
 #define _UTIL_HH
 
+#include <map>
+#include <set>
 #include <vector>
 #include "expr.hh"
 
 #define CAST(t, x) dynamic_cast <t> (x)
 #define ISINSTANCE(t, x) (CAST (t, x) != nullptr)
+
+extern std::map <std::string, uint32_t> label_addrs;
+extern std::set <std::string> global_syms;
 
 void write_int16_le (int16_t n, std::vector <unsigned char> &result);
 void write_int32_le (int32_t n, std::vector <unsigned char> &result);

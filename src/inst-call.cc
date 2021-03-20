@@ -22,14 +22,14 @@
 
 static bool
 assemble_rel (std::vector <unsigned char> &result,
-	      const AsmContext &ctx, uint32_t addr, size_t size)
+	      const AsmContext &ctx, AsmPointer *rel, size_t size)
 {
   if (size == 1)
     return false;
   else if (size != ctx.bytes)
     result.push_back (ASM_OPCODE_OPSIZE_OVR);
   result.push_back (ASM_OPCODE_CALL_RELX);
-  write_address (addr - curraddr, ctx, result);
+  write_address (rel->get_addr () - curraddr, ctx, result);
   return true;
 }
 

@@ -1,5 +1,5 @@
 /*************************************************************************
- * gen-obj.hh -- This file is part of sasm.                              *
+ * dtv-section.cc -- This file is part of sasm.                          *
  * Copyright (C) 2021                                                    *
  *                                                                       *
  * This program is free software: you can redistribute it and/or modify  *
@@ -16,45 +16,22 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>. *
  *************************************************************************/
 
-#ifndef _GEN_OBJ_HH
-#define _GEN_OBJ_HH
+#include "directive.hh"
+#include "gen-obj.hh"
+#include "util.hh"
 
-#include "gen-coff.hh"
-#include "gen-elf.hh"
+extern Object *result;
 
-/* Supported object formats */
-
-enum class ObjectFileFormat
+size_t
+AsmInstSECTION::width (const AsmContext &ctx)
 {
-  NONE = 0, /* Invalid value */
-  BINARY32, /* 32-bit raw machine code */
-  ELF32, /* 32-bit ELF relocatable */
-  COFF32 /* 32-bit COFF relocatable */
-};
+  return 0;
+}
 
-/* Wrapper class for all types of code generation */
-
-class Object
+bool
+AsmInstSECTION::assemble (std::vector <unsigned char> &result,
+			  const AsmContext &ctx)
 {
-  std::vector <unsigned char> binary;
-  ELF32Object elf;
-  COFF32Object coff;
-
-  bool elf_assemble (AsmInst *inst);
-  bool coff_assemble (AsmInst *inst);
-
-public:
-  ObjectFileFormat type;
-  std::vector <AsmLine *> lines;
-  std::string section;
-  AsmContext ctx {4}; /* 32-bit code only */
-
-  Object (ObjectFileFormat type, std::string filename) :
-    elf (filename), coff (filename), type (type) {}
-  void switch_section (std::string new_sect);
-  bool assemble_inst (AsmInst *inst);
-  void add_label (AsmLabel *sym);
-  bool write (FILE *stream);
-};
-
-#endif
+  ::result->switch_section (name);
+  return true;
+}

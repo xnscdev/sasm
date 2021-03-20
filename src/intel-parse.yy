@@ -21,8 +21,11 @@
 #define _COFF_DISABLE_DEFINES /* Prevent name clashes with Yacc defines */
 
 #include <string>
+#include "directive.hh"
+#include "error.hh"
 #include "gen-obj.hh"
 #include "intel-parse.hh"
+#include "util.hh"
 
 int yylex (void);
 void yyerror (const char *s);
@@ -43,6 +46,7 @@ extern Object *result;
   std::string *string;
 
   std::vector <AsmLine *> *lines;
+  AsmPointer *addr;
   AsmImmediate *imm;
   AsmIdentifier *label;
   AsmInst *inst;
@@ -56,6 +60,7 @@ extern Object *result;
 %define parse.error detailed
 
 %token	<string>	T_IDENT "identifier"
+%token	<string>	T_SECTNAME "section name"
 %token	<number>	T_NUMBER "number"
 %token	<number>	T_CHAR "character literal"
 %token T_BYTE "byte"
@@ -110,6 +115,9 @@ extern Object *result;
 %token T_TEST "instruction mnemonic"
 %token T_XCHG "instruction mnemonic"
 
+%token T_SECTION "section directive"
+%token T_GLOBAL "global directive"
+
 %token T_CS "register"
 %token T_DS "register"
 %token T_ES "register"
@@ -144,12 +152,13 @@ extern Object *result;
 %type	<lines>		lines
 %type	<expr>		expression
 %type	<imm>		immediate
-%type	<inst>		instruction arith_inst jf_inst zo_inst
+%type	<inst>		instruction directive arith_inst jf_inst zo_inst
 %type	<obj>		object
 %type	<reg>		reg
 %type	<mem>		memloc
 %type	<storage>	storage
-%type	<number>	size_specifier addr
+%type	<number>	size_specifier
+%type	<addr>		addr
 
 %start program
 
@@ -184,6 +193,7 @@ lines:		instruction
 instruction:	arith_inst
 	|	jf_inst
 	|	zo_inst
+	|	directive
 	;
 
 arith_inst:	T_ARTH storage ',' expression
@@ -196,6 +206,14 @@ jf_inst:	T_JF addr { $$ = new AsmInstJF ($1, $2, 4); }
 	;
 
 zo_inst:	T_ZO { $$ = new AsmInstZO ($1); }
+	;
+
+directive:	T_GLOBAL T_IDENT { global_syms.insert (*$2); delete $2; }
+	|	T_SECTION T_SECTNAME
+		{
+		  $$ = new AsmInstSECTION (*$2);
+		  delete $2;
+		}
 	;
 
 expression:	immediate { $$ = $1; }
@@ -257,7 +275,14 @@ terminator:	';'
 	;
 
 label:		T_IDENT ':' { $$ = new AsmIdentifier (*$1); delete $1; }
+	|	T_IDENT
+		{
+		  warning ("label alone on a line without a colon");
+		  $$ = new AsmIdentifier (*$1);
+		  delete $1;
+		}
 	;
 
-addr:		T_NUMBER /* TODO Allow labels as addresses */
+addr:	        T_IDENT { $$ = new AsmIdentifier (*$1); delete $1; }
+	|	immediate { $$ = $1; }
 	;

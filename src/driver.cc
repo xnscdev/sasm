@@ -134,14 +134,28 @@ main (int argc, char **argv)
   if (yyparse () != 0)
     exit (1);
 
+  /* Resolve all labels and add them to the map */
+  size_t labeladdr = 0;
+  for (AsmLine *line : result->lines)
+    {
+      if (ISINSTANCE (AsmIdentifier *, line))
+	label_addrs[CAST (AsmIdentifier *, line)->name] = labeladdr;
+      else if (ISINSTANCE (AsmInst *, line))
+	labeladdr += CAST (AsmInst *, line)->width (result->ctx);
+    }
+
+  /* Assemble! */
   result->switch_section (".text");
   for (AsmLine *line : result->lines)
     {
       if (ISINSTANCE (AsmIdentifier *, line))
 	{
 	  AsmIdentifier *ident = CAST (AsmIdentifier *, line);
+	  AsmLabelBinding binding =
+	    global_syms.find (ident->name) != global_syms.end () ?
+	    AsmLabelBinding::GLOBAL : AsmLabelBinding::LOCAL;
 	  AsmLabel *label =
-	    new AsmLabel (ident->name, result->section, AsmLabelBinding::LOCAL,
+	    new AsmLabel (ident->name, result->section, binding,
 			  AsmLabelType::NONE, 0);
 	  result->add_label (label);
 	}

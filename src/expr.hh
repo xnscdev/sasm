@@ -47,6 +47,12 @@ public:
   AsmContext (unsigned char bytes) : bytes (bytes) {}
 };
 
+class AsmPointer
+{
+public:
+  virtual uint32_t get_addr (void) = 0;
+};
+
 class AsmExpr
 {
 public:
@@ -59,12 +65,13 @@ public:
   virtual size_t width (void) = 0;
 };
 
-class AsmImmediate : public AsmExpr
+class AsmImmediate : public AsmExpr, public AsmPointer
 {
 public:
   long long value;
 
   AsmImmediate (long long value) : value (value) {}
+  uint32_t get_addr (void);
 };
 
 class AsmRegister : public AsmStorage

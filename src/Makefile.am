@@ -14,6 +14,7 @@ libsasm_a_SOURCES =	\
 	coff.h		\
 	directive.hh	\
 	dtv-define.cc	\
+	dtv-section.cc	\
 	dtv-times.cc	\
 	elf.h		\
 	expr.hh		\
@@ -57,6 +58,7 @@ libsasm_a_SOURCES =	\
 	insts-zo.cc	\
 	memloc.cc	\
 	opcodes.h	\
+	pointer.cc	\
 	registers.cc	\
 	util.cc		\
 	util.hh

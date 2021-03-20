@@ -20,6 +20,9 @@
 #include "opcodes.h"
 #include "util.hh"
 
+std::map <std::string, uint32_t> label_addrs;
+std::set <std::string> global_syms;
+
 void
 write_int16_le (int16_t n, std::vector <unsigned char> &result)
 {
