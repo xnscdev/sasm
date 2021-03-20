@@ -158,7 +158,7 @@ extern Object *result;
 %type	<lines>		lines
 %type	<expr>		expression
 %type	<imm>		immediate
-%type	<inst>		instruction directive ascii_inst call_inst
+%type	<inst>		instruction directive ascii_inst call_inst port_inst
 %type	<obj>		object
 %type	<reg>		reg
 %type	<mem>		memloc
@@ -210,6 +210,7 @@ instruction:	T_ARTH storage ',' expression
 	|	T_IDIV storage { $$ = new AsmInstIDIV ($2); }
 	|	T_IMUL storage { $$ = new AsmInstIMUL ($2); }
 	|	T_INC storage { $$ = new AsmInstINC ($2); }
+	|	port_inst
 	|	T_MOV storage ',' expression { $$ = new AsmInstMOV ($2, $4); }
 	|	directive
 	;
@@ -230,6 +231,20 @@ call_inst:	T_CALL addr { $$ = new AsmInstCALL ($2, 4); }
 	|	T_CALL storage { $$ = new AsmInstCALL ($2); }
 	|	T_CALL T_NEAR storage { $$ = new AsmInstCALL ($3); }
 	|	T_CALL T_FAR memloc { $$ = new AsmInstCALLF ($3); }
+	;
+
+port_inst:	T_IN T_AL ',' T_NUMBER { $$ = new AsmInstIN ($4, 1); }
+	|	T_IN T_AL ',' T_DX { $$ = new AsmInstIN (1); }
+	|	T_IN T_AX ',' T_NUMBER { $$ = new AsmInstIN ($4, 2); }
+	|	T_IN T_AX ',' T_DX { $$ = new AsmInstIN (2); }
+	|	T_IN T_EAX ',' T_NUMBER { $$ = new AsmInstIN ($4, 4); }
+	|	T_IN T_EAX ',' T_DX { $$ = new AsmInstIN (4); }
+	|	T_OUT T_NUMBER ',' T_AL { $$ = new AsmInstOUT ($2, 1); }
+	|	T_OUT T_DX ',' T_AL { $$ = new AsmInstOUT (1); }
+	|	T_OUT T_NUMBER ',' T_AX { $$ = new AsmInstOUT ($2, 2); }
+	|	T_OUT T_DX ',' T_AX { $$ = new AsmInstOUT (2); }
+	|	T_OUT T_NUMBER ',' T_EAX { $$ = new AsmInstOUT ($2, 4); }
+	|	T_OUT T_DX ',' T_EAX { $$ = new AsmInstOUT (4); }
 	;
 
 directive:	T_GLOBAL T_IDENT { global_syms.insert (*$2); delete $2; }
