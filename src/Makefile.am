@@ -10,7 +10,10 @@ sasm_SOURCES =		\
 	assemble.cc	\
 	assemble.hh	\
 	coff.h		\
+	directive.hh	\
 	driver.cc	\
+	dtv-define.cc	\
+	dtv-times.cc	\
 	elf.h		\
 	error.cc	\
 	error.hh	\

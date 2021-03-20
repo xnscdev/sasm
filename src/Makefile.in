@@ -98,7 +98,8 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_sasm_OBJECTS = assemble.$(OBJEXT) driver.$(OBJEXT) error.$(OBJEXT) \
+am_sasm_OBJECTS = assemble.$(OBJEXT) driver.$(OBJEXT) \
+	dtv-define.$(OBJEXT) dtv-times.$(OBJEXT) error.$(OBJEXT) \
 	gen-elf.$(OBJEXT) inst-call.$(OBJEXT) inst-callf.$(OBJEXT) \
 	inst-dec.$(OBJEXT) inst-div.$(OBJEXT) inst-idiv.$(OBJEXT) \
 	inst-imul.$(OBJEXT) inst-in.$(OBJEXT) inst-inc.$(OBJEXT) \
@@ -130,6 +131,7 @@ DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/build-aux/depcomp
 am__maybe_remake_depfiles = depfiles
 am__depfiles_remade = ./$(DEPDIR)/assemble.Po ./$(DEPDIR)/driver.Po \
+	./$(DEPDIR)/dtv-define.Po ./$(DEPDIR)/dtv-times.Po \
 	./$(DEPDIR)/error.Po ./$(DEPDIR)/gen-elf.Po \
 	./$(DEPDIR)/inst-call.Po ./$(DEPDIR)/inst-callf.Po \
 	./$(DEPDIR)/inst-dec.Po ./$(DEPDIR)/inst-div.Po \
@@ -321,7 +323,10 @@ sasm_SOURCES = \
 	assemble.cc	\
 	assemble.hh	\
 	coff.h		\
+	directive.hh	\
 	driver.cc	\
+	dtv-define.cc	\
+	dtv-times.cc	\
 	elf.h		\
 	error.cc	\
 	error.hh	\
@@ -460,6 +465,8 @@ distclean-compile:
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/assemble.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/driver.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dtv-define.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dtv-times.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/error.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gen-elf.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/inst-call.Po@am__quote@ # am--include-marker
@@ -661,6 +668,8 @@ clean-am: clean-binPROGRAMS clean-generic mostlyclean-am
 distclean: distclean-am
 		-rm -f ./$(DEPDIR)/assemble.Po
 	-rm -f ./$(DEPDIR)/driver.Po
+	-rm -f ./$(DEPDIR)/dtv-define.Po
+	-rm -f ./$(DEPDIR)/dtv-times.Po
 	-rm -f ./$(DEPDIR)/error.Po
 	-rm -f ./$(DEPDIR)/gen-elf.Po
 	-rm -f ./$(DEPDIR)/inst-call.Po
@@ -746,6 +755,8 @@ installcheck-am:
 maintainer-clean: maintainer-clean-am
 		-rm -f ./$(DEPDIR)/assemble.Po
 	-rm -f ./$(DEPDIR)/driver.Po
+	-rm -f ./$(DEPDIR)/dtv-define.Po
+	-rm -f ./$(DEPDIR)/dtv-times.Po
 	-rm -f ./$(DEPDIR)/error.Po
 	-rm -f ./$(DEPDIR)/gen-elf.Po
 	-rm -f ./$(DEPDIR)/inst-call.Po
