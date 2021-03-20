@@ -89,7 +89,7 @@ static void
 parse_options (int argc, char *const *argv)
 {
   int opt;
-  while ((opt = getopt_long (argc, argv, ":fohv", long_options, nullptr)) != -1)
+  while ((opt = getopt_long (argc, argv, ":f:o:hv", long_options, nullptr)) != -1)
     {
       switch (opt)
         {
