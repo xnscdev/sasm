@@ -98,8 +98,10 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_sasm_OBJECTS = driver.$(OBJEXT) error.$(OBJEXT) intel-lex.$(OBJEXT) \
-	intel-parse.$(OBJEXT)
+am_sasm_OBJECTS = assemble.$(OBJEXT) driver.$(OBJEXT) error.$(OBJEXT) \
+	insts-str.$(OBJEXT) insts-zo.$(OBJEXT) intel-lex.$(OBJEXT) \
+	intel-parse.$(OBJEXT) memloc.$(OBJEXT) registers.$(OBJEXT) \
+	util.$(OBJEXT)
 sasm_OBJECTS = $(am_sasm_OBJECTS)
 sasm_LDADD = $(LDADD)
 AM_V_P = $(am__v_P_@AM_V@)
@@ -117,8 +119,11 @@ am__v_at_1 =
 DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/build-aux/depcomp
 am__maybe_remake_depfiles = depfiles
-am__depfiles_remade = ./$(DEPDIR)/driver.Po ./$(DEPDIR)/error.Po \
-	./$(DEPDIR)/intel-lex.Po ./$(DEPDIR)/intel-parse.Po
+am__depfiles_remade = ./$(DEPDIR)/assemble.Po ./$(DEPDIR)/driver.Po \
+	./$(DEPDIR)/error.Po ./$(DEPDIR)/insts-str.Po \
+	./$(DEPDIR)/insts-zo.Po ./$(DEPDIR)/intel-lex.Po \
+	./$(DEPDIR)/intel-parse.Po ./$(DEPDIR)/memloc.Po \
+	./$(DEPDIR)/registers.Po ./$(DEPDIR)/util.Po
 am__mv = mv -f
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
@@ -288,6 +293,8 @@ AM_CXXFLAGS = -std=gnu++11 -Wall -pedantic -fno-exceptions -frtti
 AM_YFLAGS = -d -Wno-yacc -Wcex
 BUILT_SOURCES = intel-parse.hh
 sasm_SOURCES = \
+	assemble.cc	\
+	assemble.hh	\
 	coff.h		\
 	driver.cc	\
 	elf.h		\
@@ -295,9 +302,15 @@ sasm_SOURCES = \
 	error.hh	\
 	expr.hh		\
 	inst.hh		\
+	insts-str.cc	\
+	insts-zo.cc	\
 	intel-lex.ll	\
 	intel-parse.yy	\
-	opcodes.h
+	memloc.cc	\
+	opcodes.h	\
+	registers.cc	\
+	util.cc		\
+	util.hh
 
 all: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) all-am
@@ -389,10 +402,16 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/assemble.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/driver.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/error.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/insts-str.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/insts-zo.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/intel-lex.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/intel-parse.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/memloc.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/registers.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/util.Po@am__quote@ # am--include-marker
 
 $(am__depfiles_remade):
 	@$(MKDIR_P) $(@D)
@@ -554,10 +573,16 @@ clean: clean-am
 clean-am: clean-binPROGRAMS clean-generic mostlyclean-am
 
 distclean: distclean-am
-		-rm -f ./$(DEPDIR)/driver.Po
+		-rm -f ./$(DEPDIR)/assemble.Po
+	-rm -f ./$(DEPDIR)/driver.Po
 	-rm -f ./$(DEPDIR)/error.Po
+	-rm -f ./$(DEPDIR)/insts-str.Po
+	-rm -f ./$(DEPDIR)/insts-zo.Po
 	-rm -f ./$(DEPDIR)/intel-lex.Po
 	-rm -f ./$(DEPDIR)/intel-parse.Po
+	-rm -f ./$(DEPDIR)/memloc.Po
+	-rm -f ./$(DEPDIR)/registers.Po
+	-rm -f ./$(DEPDIR)/util.Po
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-tags
@@ -603,10 +628,16 @@ install-ps-am:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-am
-		-rm -f ./$(DEPDIR)/driver.Po
+		-rm -f ./$(DEPDIR)/assemble.Po
+	-rm -f ./$(DEPDIR)/driver.Po
 	-rm -f ./$(DEPDIR)/error.Po
+	-rm -f ./$(DEPDIR)/insts-str.Po
+	-rm -f ./$(DEPDIR)/insts-zo.Po
 	-rm -f ./$(DEPDIR)/intel-lex.Po
 	-rm -f ./$(DEPDIR)/intel-parse.Po
+	-rm -f ./$(DEPDIR)/memloc.Po
+	-rm -f ./$(DEPDIR)/registers.Po
+	-rm -f ./$(DEPDIR)/util.Po
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 

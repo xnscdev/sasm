@@ -16,8 +16,12 @@ sasm_SOURCES =		\
 	error.hh	\
 	expr.hh		\
 	inst.hh		\
+	insts-str.cc	\
+	insts-zo.cc	\
 	intel-lex.ll	\
 	intel-parse.yy	\
 	memloc.cc	\
 	opcodes.h	\
-	registers.cc
+	registers.cc	\
+	util.cc		\
+	util.hh

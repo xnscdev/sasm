@@ -222,7 +222,36 @@ extern int yydebug;
     T_TEST = 352,                  /* "test"  */
     T_XCHG = 353,                  /* "xchg"  */
     T_XLAT = 354,                  /* "xlat"  */
-    T_XOR = 355                    /* "xor"  */
+    T_XOR = 355,                   /* "xor"  */
+    T_CS = 356,                    /* "cs"  */
+    T_DS = 357,                    /* "ds"  */
+    T_ES = 358,                    /* "es"  */
+    T_FS = 359,                    /* "fs"  */
+    T_GS = 360,                    /* "gs"  */
+    T_AL = 361,                    /* "al"  */
+    T_CL = 362,                    /* "cl"  */
+    T_DL = 363,                    /* "dl"  */
+    T_BL = 364,                    /* "bl"  */
+    T_AH = 365,                    /* "ah"  */
+    T_CH = 366,                    /* "ch"  */
+    T_DH = 367,                    /* "dh"  */
+    T_BH = 368,                    /* "bh"  */
+    T_AX = 369,                    /* "ax"  */
+    T_CX = 370,                    /* "cx"  */
+    T_DX = 371,                    /* "dx"  */
+    T_BX = 372,                    /* "bx"  */
+    T_SP = 373,                    /* "sp"  */
+    T_BP = 374,                    /* "bp"  */
+    T_SI = 375,                    /* "si"  */
+    T_DI = 376,                    /* "di"  */
+    T_EAX = 377,                   /* "eax"  */
+    T_ECX = 378,                   /* "ecx"  */
+    T_EDX = 379,                   /* "edx"  */
+    T_EBX = 380,                   /* "ebx"  */
+    T_ESP = 381,                   /* "esp"  */
+    T_EBP = 382,                   /* "ebp"  */
+    T_ESI = 383,                   /* "esi"  */
+    T_EDI = 384                    /* "edi"  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -329,6 +358,35 @@ extern int yydebug;
 #define T_XCHG 353
 #define T_XLAT 354
 #define T_XOR 355
+#define T_CS 356
+#define T_DS 357
+#define T_ES 358
+#define T_FS 359
+#define T_GS 360
+#define T_AL 361
+#define T_CL 362
+#define T_DL 363
+#define T_BL 364
+#define T_AH 365
+#define T_CH 366
+#define T_DH 367
+#define T_BH 368
+#define T_AX 369
+#define T_CX 370
+#define T_DX 371
+#define T_BX 372
+#define T_SP 373
+#define T_BP 374
+#define T_SI 375
+#define T_DI 376
+#define T_EAX 377
+#define T_ECX 378
+#define T_EDX 379
+#define T_EBX 380
+#define T_ESP 381
+#define T_EBP 382
+#define T_ESI 383
+#define T_EDI 384
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -343,7 +401,7 @@ union YYSTYPE
   AsmExpr *expr;
   AsmTranslationUnit *transunit;
 
-#line 347 "intel-parse.cc"
+#line 405 "intel-parse.cc"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -462,13 +520,42 @@ enum yysymbol_kind_t
   YYSYMBOL_T_XCHG = 98,                    /* "xchg"  */
   YYSYMBOL_T_XLAT = 99,                    /* "xlat"  */
   YYSYMBOL_T_XOR = 100,                    /* "xor"  */
-  YYSYMBOL_101_n_ = 101,                   /* '\n'  */
-  YYSYMBOL_YYACCEPT = 102,                 /* $accept  */
-  YYSYMBOL_program = 103,                  /* program  */
-  YYSYMBOL_translation_unit = 104,         /* translation_unit  */
-  YYSYMBOL_lines = 105,                    /* lines  */
-  YYSYMBOL_expression = 106,               /* expression  */
-  YYSYMBOL_immediate = 107                 /* immediate  */
+  YYSYMBOL_T_CS = 101,                     /* "cs"  */
+  YYSYMBOL_T_DS = 102,                     /* "ds"  */
+  YYSYMBOL_T_ES = 103,                     /* "es"  */
+  YYSYMBOL_T_FS = 104,                     /* "fs"  */
+  YYSYMBOL_T_GS = 105,                     /* "gs"  */
+  YYSYMBOL_T_AL = 106,                     /* "al"  */
+  YYSYMBOL_T_CL = 107,                     /* "cl"  */
+  YYSYMBOL_T_DL = 108,                     /* "dl"  */
+  YYSYMBOL_T_BL = 109,                     /* "bl"  */
+  YYSYMBOL_T_AH = 110,                     /* "ah"  */
+  YYSYMBOL_T_CH = 111,                     /* "ch"  */
+  YYSYMBOL_T_DH = 112,                     /* "dh"  */
+  YYSYMBOL_T_BH = 113,                     /* "bh"  */
+  YYSYMBOL_T_AX = 114,                     /* "ax"  */
+  YYSYMBOL_T_CX = 115,                     /* "cx"  */
+  YYSYMBOL_T_DX = 116,                     /* "dx"  */
+  YYSYMBOL_T_BX = 117,                     /* "bx"  */
+  YYSYMBOL_T_SP = 118,                     /* "sp"  */
+  YYSYMBOL_T_BP = 119,                     /* "bp"  */
+  YYSYMBOL_T_SI = 120,                     /* "si"  */
+  YYSYMBOL_T_DI = 121,                     /* "di"  */
+  YYSYMBOL_T_EAX = 122,                    /* "eax"  */
+  YYSYMBOL_T_ECX = 123,                    /* "ecx"  */
+  YYSYMBOL_T_EDX = 124,                    /* "edx"  */
+  YYSYMBOL_T_EBX = 125,                    /* "ebx"  */
+  YYSYMBOL_T_ESP = 126,                    /* "esp"  */
+  YYSYMBOL_T_EBP = 127,                    /* "ebp"  */
+  YYSYMBOL_T_ESI = 128,                    /* "esi"  */
+  YYSYMBOL_T_EDI = 129,                    /* "edi"  */
+  YYSYMBOL_130_n_ = 130,                   /* '\n'  */
+  YYSYMBOL_YYACCEPT = 131,                 /* $accept  */
+  YYSYMBOL_program = 132,                  /* program  */
+  YYSYMBOL_translation_unit = 133,         /* translation_unit  */
+  YYSYMBOL_lines = 134,                    /* lines  */
+  YYSYMBOL_expression = 135,               /* expression  */
+  YYSYMBOL_immediate = 136                 /* immediate  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -793,7 +880,7 @@ union yyalloc
 #define YYLAST   4
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  102
+#define YYNTOKENS  131
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  6
 /* YYNRULES -- Number of rules.  */
@@ -802,7 +889,7 @@ union yyalloc
 #define YYNSTATES  11
 
 /* YYMAXUTOK -- Last valid token kind.  */
-#define YYMAXUTOK   355
+#define YYMAXUTOK   384
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -814,10 +901,10 @@ union yyalloc
 
 /* YYTRANSLATE[TOKEN-NUM] -- Symbol number corresponding to TOKEN-NUM
    as returned by yylex.  */
-static const yytype_int8 yytranslate[] =
+static const yytype_uint8 yytranslate[] =
 {
        0,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-     101,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+     130,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
@@ -851,14 +938,17 @@ static const yytype_int8 yytranslate[] =
       65,    66,    67,    68,    69,    70,    71,    72,    73,    74,
       75,    76,    77,    78,    79,    80,    81,    82,    83,    84,
       85,    86,    87,    88,    89,    90,    91,    92,    93,    94,
-      95,    96,    97,    98,    99,   100
+      95,    96,    97,    98,    99,   100,   101,   102,   103,   104,
+     105,   106,   107,   108,   109,   110,   111,   112,   113,   114,
+     115,   116,   117,   118,   119,   120,   121,   122,   123,   124,
+     125,   126,   127,   128,   129
 };
 
 #if YYDEBUG
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,   152,   152,   155,   156,   159,   160,   163,   166
+       0,   183,   183,   186,   187,   190,   191,   194,   197
 };
 #endif
 
@@ -886,8 +976,10 @@ yysymbol_name (yysymbol_kind_t yysymbol)
   "outs", "pop", "popa", "popf", "push", "pusha", "pushf", "rcl", "rcr",
   "repnz", "repz", "ret", "rol", "ror", "sahf", "sar", "sbb", "scas",
   "shl", "shr", "stc", "std", "stos", "sti", "sub", "test", "xchg", "xlat",
-  "xor", "'\\n'", "$accept", "program", "translation_unit", "lines",
-  "expression", "immediate", YY_NULLPTR
+  "xor", "cs", "ds", "es", "fs", "gs", "al", "cl", "dl", "bl", "ah", "ch",
+  "dh", "bh", "ax", "cx", "dx", "bx", "sp", "bp", "si", "di", "eax", "ecx",
+  "edx", "ebx", "esp", "ebp", "esi", "edi", "'\\n'", "$accept", "program",
+  "translation_unit", "lines", "expression", "immediate", YY_NULLPTR
   };
   return yy_sname[yysymbol];
 }
@@ -908,11 +1000,14 @@ static const yytype_int16 yytoknum[] =
      325,   326,   327,   328,   329,   330,   331,   332,   333,   334,
      335,   336,   337,   338,   339,   340,   341,   342,   343,   344,
      345,   346,   347,   348,   349,   350,   351,   352,   353,   354,
-     355,    10
+     355,   356,   357,   358,   359,   360,   361,   362,   363,   364,
+     365,   366,   367,   368,   369,   370,   371,   372,   373,   374,
+     375,   376,   377,   378,   379,   380,   381,   382,   383,   384,
+      10
 };
 #endif
 
-#define YYPACT_NINF (-100)
+#define YYPACT_NINF (-129)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -924,10 +1019,10 @@ static const yytype_int16 yytoknum[] =
 
   /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
      STATE-NUM.  */
-static const yytype_int8 yypact[] =
+static const yytype_int16 yypact[] =
 {
-      -4,  -100,     1,  -100,    -4,   -99,  -100,  -100,   -98,  -100,
-    -100
+      -4,  -129,     1,  -129,    -4,  -128,  -129,  -129,  -127,  -129,
+    -129
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -940,9 +1035,9 @@ static const yytype_int8 yydefact[] =
 };
 
   /* YYPGOTO[NTERM-NUM].  */
-static const yytype_int8 yypgoto[] =
+static const yytype_int16 yypgoto[] =
 {
-    -100,  -100,  -100,  -100,     0,  -100
+    -129,  -129,  -129,  -129,     0,  -129
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
@@ -959,23 +1054,23 @@ static const yytype_int8 yytable[] =
        1,     7,     9,    10,     8
 };
 
-static const yytype_int8 yycheck[] =
+static const yytype_uint8 yycheck[] =
 {
-       4,     0,   101,   101,     4
+       4,     0,   130,   130,     4
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
      symbol of state STATE-NUM.  */
-static const yytype_int8 yystos[] =
+static const yytype_uint8 yystos[] =
 {
-       0,     4,   103,   104,   105,   106,   107,     0,   106,   101,
-     101
+       0,     4,   132,   133,   134,   135,   136,     0,   135,   130,
+     130
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
-static const yytype_int8 yyr1[] =
+static const yytype_uint8 yyr1[] =
 {
-       0,   102,   103,   104,   104,   105,   105,   106,   107
+       0,   131,   132,   133,   133,   134,   134,   135,   136
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
@@ -1670,25 +1765,25 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* program: translation_unit  */
-#line 152 "intel-parse.yy"
+#line 183 "intel-parse.yy"
                                  { result = (yyvsp[0].transunit); }
-#line 1676 "intel-parse.cc"
+#line 1771 "intel-parse.cc"
     break;
 
   case 4: /* translation_unit: lines  */
-#line 156 "intel-parse.yy"
+#line 187 "intel-parse.yy"
                       { (yyval.transunit) = new AsmTranslationUnit (filename); }
-#line 1682 "intel-parse.cc"
+#line 1777 "intel-parse.cc"
     break;
 
   case 8: /* immediate: "number"  */
-#line 166 "intel-parse.yy"
+#line 197 "intel-parse.yy"
                          { (yyval.expr) = new AsmImmediate ((yyvsp[0].number)); printf ("%lld\n", (yyvsp[0].number)); }
-#line 1688 "intel-parse.cc"
+#line 1783 "intel-parse.cc"
     break;
 
 
-#line 1692 "intel-parse.cc"
+#line 1787 "intel-parse.cc"
 
       default: break;
     }

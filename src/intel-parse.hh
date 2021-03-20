@@ -151,7 +151,36 @@ extern int yydebug;
     T_TEST = 352,                  /* "test"  */
     T_XCHG = 353,                  /* "xchg"  */
     T_XLAT = 354,                  /* "xlat"  */
-    T_XOR = 355                    /* "xor"  */
+    T_XOR = 355,                   /* "xor"  */
+    T_CS = 356,                    /* "cs"  */
+    T_DS = 357,                    /* "ds"  */
+    T_ES = 358,                    /* "es"  */
+    T_FS = 359,                    /* "fs"  */
+    T_GS = 360,                    /* "gs"  */
+    T_AL = 361,                    /* "al"  */
+    T_CL = 362,                    /* "cl"  */
+    T_DL = 363,                    /* "dl"  */
+    T_BL = 364,                    /* "bl"  */
+    T_AH = 365,                    /* "ah"  */
+    T_CH = 366,                    /* "ch"  */
+    T_DH = 367,                    /* "dh"  */
+    T_BH = 368,                    /* "bh"  */
+    T_AX = 369,                    /* "ax"  */
+    T_CX = 370,                    /* "cx"  */
+    T_DX = 371,                    /* "dx"  */
+    T_BX = 372,                    /* "bx"  */
+    T_SP = 373,                    /* "sp"  */
+    T_BP = 374,                    /* "bp"  */
+    T_SI = 375,                    /* "si"  */
+    T_DI = 376,                    /* "di"  */
+    T_EAX = 377,                   /* "eax"  */
+    T_ECX = 378,                   /* "ecx"  */
+    T_EDX = 379,                   /* "edx"  */
+    T_EBX = 380,                   /* "ebx"  */
+    T_ESP = 381,                   /* "esp"  */
+    T_EBP = 382,                   /* "ebp"  */
+    T_ESI = 383,                   /* "esi"  */
+    T_EDI = 384                    /* "edi"  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -258,6 +287,35 @@ extern int yydebug;
 #define T_XCHG 353
 #define T_XLAT 354
 #define T_XOR 355
+#define T_CS 356
+#define T_DS 357
+#define T_ES 358
+#define T_FS 359
+#define T_GS 360
+#define T_AL 361
+#define T_CL 362
+#define T_DL 363
+#define T_BL 364
+#define T_AH 365
+#define T_CH 366
+#define T_DH 367
+#define T_BH 368
+#define T_AX 369
+#define T_CX 370
+#define T_DX 371
+#define T_BX 372
+#define T_SP 373
+#define T_BP 374
+#define T_SI 375
+#define T_DI 376
+#define T_EAX 377
+#define T_ECX 378
+#define T_EDX 379
+#define T_EBX 380
+#define T_ESP 381
+#define T_EBP 382
+#define T_ESI 383
+#define T_EDI 384
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -272,7 +330,7 @@ union YYSTYPE
   AsmExpr *expr;
   AsmTranslationUnit *transunit;
 
-#line 276 "intel-parse.hh"
+#line 334 "intel-parse.hh"
 
 };
 typedef union YYSTYPE YYSTYPE;
