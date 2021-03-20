@@ -107,37 +107,41 @@ extern int yydebug;
     T_STOS = 308,                  /* T_STOS  */
     T_TEST = 309,                  /* T_TEST  */
     T_XCHG = 310,                  /* T_XCHG  */
-    T_SECTION = 311,               /* "section directive"  */
-    T_GLOBAL = 312,                /* "global directive"  */
-    T_CS = 313,                    /* "register"  */
-    T_DS = 314,                    /* T_DS  */
-    T_ES = 315,                    /* T_ES  */
-    T_FS = 316,                    /* T_FS  */
-    T_GS = 317,                    /* T_GS  */
-    T_AL = 318,                    /* T_AL  */
-    T_CL = 319,                    /* T_CL  */
-    T_DL = 320,                    /* T_DL  */
-    T_BL = 321,                    /* T_BL  */
-    T_AH = 322,                    /* T_AH  */
-    T_CH = 323,                    /* T_CH  */
-    T_DH = 324,                    /* T_DH  */
-    T_BH = 325,                    /* T_BH  */
-    T_AX = 326,                    /* T_AX  */
-    T_CX = 327,                    /* T_CX  */
-    T_DX = 328,                    /* T_DX  */
-    T_BX = 329,                    /* T_BX  */
-    T_SP = 330,                    /* T_SP  */
-    T_BP = 331,                    /* T_BP  */
-    T_SI = 332,                    /* T_SI  */
-    T_DI = 333,                    /* T_DI  */
-    T_EAX = 334,                   /* T_EAX  */
-    T_ECX = 335,                   /* T_ECX  */
-    T_EDX = 336,                   /* T_EDX  */
-    T_EBX = 337,                   /* T_EBX  */
-    T_ESP = 338,                   /* T_ESP  */
-    T_EBP = 339,                   /* T_EBP  */
-    T_ESI = 340,                   /* T_ESI  */
-    T_EDI = 341                    /* T_EDI  */
+    T_DB = 311,                    /* "directive"  */
+    T_DW = 312,                    /* T_DW  */
+    T_DD = 313,                    /* T_DD  */
+    T_DQ = 314,                    /* T_DQ  */
+    T_SECTION = 315,               /* "section directive"  */
+    T_GLOBAL = 316,                /* "global directive"  */
+    T_CS = 317,                    /* "register"  */
+    T_DS = 318,                    /* T_DS  */
+    T_ES = 319,                    /* T_ES  */
+    T_FS = 320,                    /* T_FS  */
+    T_GS = 321,                    /* T_GS  */
+    T_AL = 322,                    /* T_AL  */
+    T_CL = 323,                    /* T_CL  */
+    T_DL = 324,                    /* T_DL  */
+    T_BL = 325,                    /* T_BL  */
+    T_AH = 326,                    /* T_AH  */
+    T_CH = 327,                    /* T_CH  */
+    T_DH = 328,                    /* T_DH  */
+    T_BH = 329,                    /* T_BH  */
+    T_AX = 330,                    /* T_AX  */
+    T_CX = 331,                    /* T_CX  */
+    T_DX = 332,                    /* T_DX  */
+    T_BX = 333,                    /* T_BX  */
+    T_SP = 334,                    /* T_SP  */
+    T_BP = 335,                    /* T_BP  */
+    T_SI = 336,                    /* T_SI  */
+    T_DI = 337,                    /* T_DI  */
+    T_EAX = 338,                   /* T_EAX  */
+    T_ECX = 339,                   /* T_ECX  */
+    T_EDX = 340,                   /* T_EDX  */
+    T_EBX = 341,                   /* T_EBX  */
+    T_ESP = 342,                   /* T_ESP  */
+    T_EBP = 343,                   /* T_EBP  */
+    T_ESI = 344,                   /* T_ESI  */
+    T_EDI = 345                    /* T_EDI  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -199,37 +203,41 @@ extern int yydebug;
 #define T_STOS 308
 #define T_TEST 309
 #define T_XCHG 310
-#define T_SECTION 311
-#define T_GLOBAL 312
-#define T_CS 313
-#define T_DS 314
-#define T_ES 315
-#define T_FS 316
-#define T_GS 317
-#define T_AL 318
-#define T_CL 319
-#define T_DL 320
-#define T_BL 321
-#define T_AH 322
-#define T_CH 323
-#define T_DH 324
-#define T_BH 325
-#define T_AX 326
-#define T_CX 327
-#define T_DX 328
-#define T_BX 329
-#define T_SP 330
-#define T_BP 331
-#define T_SI 332
-#define T_DI 333
-#define T_EAX 334
-#define T_ECX 335
-#define T_EDX 336
-#define T_EBX 337
-#define T_ESP 338
-#define T_EBP 339
-#define T_ESI 340
-#define T_EDI 341
+#define T_DB 311
+#define T_DW 312
+#define T_DD 313
+#define T_DQ 314
+#define T_SECTION 315
+#define T_GLOBAL 316
+#define T_CS 317
+#define T_DS 318
+#define T_ES 319
+#define T_FS 320
+#define T_GS 321
+#define T_AL 322
+#define T_CL 323
+#define T_DL 324
+#define T_BL 325
+#define T_AH 326
+#define T_CH 327
+#define T_DH 328
+#define T_BH 329
+#define T_AX 330
+#define T_CX 331
+#define T_DX 332
+#define T_BX 333
+#define T_SP 334
+#define T_BP 335
+#define T_SI 336
+#define T_DI 337
+#define T_EAX 338
+#define T_ECX 339
+#define T_EDX 340
+#define T_EBX 341
+#define T_ESP 342
+#define T_EBP 343
+#define T_ESI 344
+#define T_EDI 345
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -255,7 +263,7 @@ union YYSTYPE
   AsmMemoryLoc *mem;
   Object *obj;
 
-#line 259 "../../src/intel-parse.hh"
+#line 267 "../../src/intel-parse.hh"
 
 };
 typedef union YYSTYPE YYSTYPE;

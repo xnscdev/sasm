@@ -163,6 +163,10 @@
 "ebp"                       return T_EBP;
 "esi"                       return T_ESI;
 "edi"                       return T_EDI;
+"db"                        return T_DB;
+"dw"                        return T_DW;
+"dd"                        return T_DD;
+"dq"                        return T_DQ;
 "section"                   return T_SECTION;
 "global"                    return T_GLOBAL;
 [a-zA-Z_][a-zA-Z0-9_]*      SAVE_STRING; return T_IDENT;

@@ -115,6 +115,11 @@ extern Object *result;
 %token T_TEST "instruction mnemonic"
 %token T_XCHG "instruction mnemonic"
 
+%token T_DB "directive"
+%token T_DW "directive"
+%token T_DD "directive"
+%token T_DQ "directive"
+
 %token T_SECTION "section directive"
 %token T_GLOBAL "global directive"
 
@@ -157,7 +162,7 @@ extern Object *result;
 %type	<reg>		reg
 %type	<mem>		memloc
 %type	<storage>	storage
-%type	<number>	size_specifier
+%type	<number>	size_specifier define_size
 %type	<addr>		addr
 
 %start program
@@ -214,6 +219,7 @@ directive:	T_GLOBAL T_IDENT { global_syms.insert (*$2); delete $2; }
 		  $$ = new AsmInstSECTION (*$2);
 		  delete $2;
 		}
+	|	define_size T_NUMBER { $$ = new AsmInstDEFINE ($1, $2); }
 	;
 
 expression:	immediate { $$ = $1; }
@@ -285,4 +291,10 @@ label:		T_IDENT ':' { $$ = new AsmIdentifier (*$1); delete $1; }
 
 addr:	        T_IDENT { $$ = new AsmIdentifier (*$1); delete $1; }
 	|	immediate { $$ = $1; }
+	;
+
+define_size:	T_DB { $$ = 1; }
+	|	T_DW { $$ = 2; }
+	|	T_DD { $$ = 4; }
+	|	T_DQ { $$ = 8; }
 	;
