@@ -11,5 +11,6 @@ sasm_SOURCES =		\
 	error.cc	\
 	error.hh	\
 	expr.hh		\
+	inst.hh		\
 	intel-lex.ll	\
 	intel-parse.yy

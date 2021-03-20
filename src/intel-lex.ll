@@ -112,7 +112,7 @@
 "rcl"                       return T_RCL;
 "rcr"                       return T_RCR;
 "repnz"                     return T_REPNZ;
-"repz"                      return T_REPZ;
+"repz"|"rep"                return T_REPZ;
 "ret"                       return T_RET;
 "rol"                       return T_ROL;
 "ror"                       return T_ROR;
