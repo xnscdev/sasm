@@ -72,6 +72,7 @@ extern Object *result;
 %token	<arith>		T_ARTH "instruction mnemonic"
 %token	<jf>		T_JF "instruction mnemonic"
 %token	<zo>		T_ZO "instruction mnemonic"
+%token	<zos>		T_ZOS "instruction mnemonic"
 
 %token T_AAD "instruction mnemonic"
 %token T_AAM "instruction mnemonic"
@@ -158,6 +159,7 @@ extern Object *result;
 %type	<expr>		expression
 %type	<imm>		immediate
 %type	<inst>		instruction directive arith_inst jf_inst zo_inst
+%type	<inst>		zos_inst ascii_inst mov_inst
 %type	<obj>		object
 %type	<reg>		reg
 %type	<mem>		memloc
@@ -198,6 +200,9 @@ lines:		instruction
 instruction:	arith_inst
 	|	jf_inst
 	|	zo_inst
+	|	zos_inst
+	|	ascii_inst
+	|	mov_inst
 	|	directive
 	;
 
@@ -211,6 +216,18 @@ jf_inst:	T_JF addr { $$ = new AsmInstJF ($1, $2, 4); }
 	;
 
 zo_inst:	T_ZO { $$ = new AsmInstZO ($1); }
+	;
+
+zos_inst:	T_ZOS size_specifier { $$ = new AsmInstZOS ($1, $2); }
+	;
+
+mov_inst:	T_MOV storage ',' expression { $$ = new AsmInstMOV ($2, $4); }
+	;
+
+ascii_inst:	T_AAD T_NUMBER { $$ = new AsmInstAAD ($2); }
+	|	T_AAD { $$ = new AsmInstAAD (); }
+	|	T_AAM T_NUMBER { $$ = new AsmInstAAM ($2); }
+	|	T_AAM { $$ = new AsmInstAAM (); }
 	;
 
 directive:	T_GLOBAL T_IDENT { global_syms.insert (*$2); delete $2; }
