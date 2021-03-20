@@ -17,15 +17,20 @@ sasm_SOURCES =		\
 	expr.hh		\
 	inst.hh		\
 	inst-dec.cc	\
+	inst-div.cc	\
+	inst-idiv.cc	\
+	inst-imul.cc	\
 	inst-in.cc	\
 	inst-inc.cc	\
 	inst-int.cc	\
+	inst-mul.cc	\
 	inst-neg.cc	\
 	inst-not.cc	\
 	inst-repnz.cc	\
 	inst-repz.cc	\
 	inst-ret.cc	\
 	inst-out.cc	\
+	insts-arith.cc	\
 	insts-ascii.cc	\
 	insts-loop.cc	\
 	insts-str.cc	\
