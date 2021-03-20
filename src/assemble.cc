@@ -20,10 +20,24 @@
 
 uint32_t curraddr;
 
+static uint32_t reloc_inst;
+static bool reloc;
+
 bool
 assemble (AsmInst *inst, std::vector <unsigned char> &result,
 	  const AsmContext &ctx)
 {
   curraddr += inst->width (ctx);
-  return inst->assemble (result, ctx);
+  bool ret = inst->assemble (result, ctx);
+  if (reloc)
+    ; /* TODO Add relocation entry */
+  reloc = false;
+  return ret;
+}
+
+void
+mark_reloc (uint32_t ip)
+{
+  reloc_inst = ip;
+  reloc = true;
 }

@@ -25,5 +25,6 @@ extern uint32_t curraddr;
 
 bool assemble (AsmInst *inst, std::vector <unsigned char> &result,
 	       const AsmContext &ctx);
+void mark_reloc (uint32_t ip);
 
 #endif

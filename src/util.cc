@@ -16,6 +16,7 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>. *
  *************************************************************************/
 
+#include "assemble.hh"
 #include "opcodes.h"
 #include "util.hh"
 
@@ -109,6 +110,8 @@ write_operand (const AsmRegister *reg, const AsmStorage *rm,
 	{
 	  result.push_back (regid | 5);
 	  write_int32_le (loc->disp, result);
+	  if (loc->relocate)
+	    mark_reloc (curraddr + 1);
 	  return true;
 	}
 
@@ -160,7 +163,7 @@ write_operand (const AsmRegister *reg, const AsmStorage *rm,
 	  result.push_back (ss << 6 | loc->index->id << 3 | loc->base->id);
 	}
 
-      if (mod == 1)
+      if (mod == 1 && !loc->relocate)
 	result.push_back (loc->disp);
       else
 	{
@@ -168,6 +171,8 @@ write_operand (const AsmRegister *reg, const AsmStorage *rm,
 	    write_int32_le (loc->disp, result);
 	  else if (loc->base->id == AsmRegister::EBP->id)
 	    write_int32_le (0, result);
+	  if (loc->relocate)
+	    mark_reloc (curraddr + (loc->index != nullptr ? 2 : 1));
 	}
       return true;
     }
