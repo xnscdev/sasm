@@ -99,6 +99,10 @@ CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_sasm_OBJECTS = assemble.$(OBJEXT) driver.$(OBJEXT) error.$(OBJEXT) \
+	inst-dec.$(OBJEXT) inst-in.$(OBJEXT) inst-inc.$(OBJEXT) \
+	inst-int.$(OBJEXT) inst-neg.$(OBJEXT) inst-not.$(OBJEXT) \
+	inst-repnz.$(OBJEXT) inst-repz.$(OBJEXT) inst-ret.$(OBJEXT) \
+	inst-out.$(OBJEXT) insts-ascii.$(OBJEXT) insts-loop.$(OBJEXT) \
 	insts-str.$(OBJEXT) insts-zo.$(OBJEXT) intel-lex.$(OBJEXT) \
 	intel-parse.$(OBJEXT) memloc.$(OBJEXT) registers.$(OBJEXT) \
 	util.$(OBJEXT)
@@ -120,7 +124,13 @@ DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/build-aux/depcomp
 am__maybe_remake_depfiles = depfiles
 am__depfiles_remade = ./$(DEPDIR)/assemble.Po ./$(DEPDIR)/driver.Po \
-	./$(DEPDIR)/error.Po ./$(DEPDIR)/insts-str.Po \
+	./$(DEPDIR)/error.Po ./$(DEPDIR)/inst-dec.Po \
+	./$(DEPDIR)/inst-in.Po ./$(DEPDIR)/inst-inc.Po \
+	./$(DEPDIR)/inst-int.Po ./$(DEPDIR)/inst-neg.Po \
+	./$(DEPDIR)/inst-not.Po ./$(DEPDIR)/inst-out.Po \
+	./$(DEPDIR)/inst-repnz.Po ./$(DEPDIR)/inst-repz.Po \
+	./$(DEPDIR)/inst-ret.Po ./$(DEPDIR)/insts-ascii.Po \
+	./$(DEPDIR)/insts-loop.Po ./$(DEPDIR)/insts-str.Po \
 	./$(DEPDIR)/insts-zo.Po ./$(DEPDIR)/intel-lex.Po \
 	./$(DEPDIR)/intel-parse.Po ./$(DEPDIR)/memloc.Po \
 	./$(DEPDIR)/registers.Po ./$(DEPDIR)/util.Po
@@ -302,6 +312,18 @@ sasm_SOURCES = \
 	error.hh	\
 	expr.hh		\
 	inst.hh		\
+	inst-dec.cc	\
+	inst-in.cc	\
+	inst-inc.cc	\
+	inst-int.cc	\
+	inst-neg.cc	\
+	inst-not.cc	\
+	inst-repnz.cc	\
+	inst-repz.cc	\
+	inst-ret.cc	\
+	inst-out.cc	\
+	insts-ascii.cc	\
+	insts-loop.cc	\
 	insts-str.cc	\
 	insts-zo.cc	\
 	intel-lex.ll	\
@@ -405,6 +427,18 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/assemble.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/driver.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/error.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/inst-dec.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/inst-in.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/inst-inc.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/inst-int.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/inst-neg.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/inst-not.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/inst-out.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/inst-repnz.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/inst-repz.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/inst-ret.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/insts-ascii.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/insts-loop.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/insts-str.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/insts-zo.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/intel-lex.Po@am__quote@ # am--include-marker
@@ -576,6 +610,18 @@ distclean: distclean-am
 		-rm -f ./$(DEPDIR)/assemble.Po
 	-rm -f ./$(DEPDIR)/driver.Po
 	-rm -f ./$(DEPDIR)/error.Po
+	-rm -f ./$(DEPDIR)/inst-dec.Po
+	-rm -f ./$(DEPDIR)/inst-in.Po
+	-rm -f ./$(DEPDIR)/inst-inc.Po
+	-rm -f ./$(DEPDIR)/inst-int.Po
+	-rm -f ./$(DEPDIR)/inst-neg.Po
+	-rm -f ./$(DEPDIR)/inst-not.Po
+	-rm -f ./$(DEPDIR)/inst-out.Po
+	-rm -f ./$(DEPDIR)/inst-repnz.Po
+	-rm -f ./$(DEPDIR)/inst-repz.Po
+	-rm -f ./$(DEPDIR)/inst-ret.Po
+	-rm -f ./$(DEPDIR)/insts-ascii.Po
+	-rm -f ./$(DEPDIR)/insts-loop.Po
 	-rm -f ./$(DEPDIR)/insts-str.Po
 	-rm -f ./$(DEPDIR)/insts-zo.Po
 	-rm -f ./$(DEPDIR)/intel-lex.Po
@@ -631,6 +677,18 @@ maintainer-clean: maintainer-clean-am
 		-rm -f ./$(DEPDIR)/assemble.Po
 	-rm -f ./$(DEPDIR)/driver.Po
 	-rm -f ./$(DEPDIR)/error.Po
+	-rm -f ./$(DEPDIR)/inst-dec.Po
+	-rm -f ./$(DEPDIR)/inst-in.Po
+	-rm -f ./$(DEPDIR)/inst-inc.Po
+	-rm -f ./$(DEPDIR)/inst-int.Po
+	-rm -f ./$(DEPDIR)/inst-neg.Po
+	-rm -f ./$(DEPDIR)/inst-not.Po
+	-rm -f ./$(DEPDIR)/inst-out.Po
+	-rm -f ./$(DEPDIR)/inst-repnz.Po
+	-rm -f ./$(DEPDIR)/inst-repz.Po
+	-rm -f ./$(DEPDIR)/inst-ret.Po
+	-rm -f ./$(DEPDIR)/insts-ascii.Po
+	-rm -f ./$(DEPDIR)/insts-loop.Po
 	-rm -f ./$(DEPDIR)/insts-str.Po
 	-rm -f ./$(DEPDIR)/insts-zo.Po
 	-rm -f ./$(DEPDIR)/intel-lex.Po

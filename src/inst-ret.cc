@@ -1,5 +1,5 @@
 /*************************************************************************
- * util.hh -- This file is part of sasm.                                 *
+ * inst-ret.cc -- This file is part of sasm.                             *
  * Copyright (C) 2021                                                    *
  *                                                                       *
  * This program is free software: you can redistribute it and/or modify  *
@@ -16,33 +16,39 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>. *
  *************************************************************************/
 
-#ifndef _UTIL_HH
-#define _UTIL_HH
+#include "inst.hh"
+#include "opcodes.h"
+#include "util.hh"
 
-#include <vector>
-#include "expr.hh"
+size_t
+AsmInstRET::width (const AsmContext &ctx)
+{
+  return bytes == 0 ? 1 : 3;
+}
 
-#define CAST(t, x) dynamic_cast <t> (x)
-#define ISINSTANCE(t, x) (CAST (t, x) != nullptr)
-
-void write_int16_le (int16_t n, std::vector <unsigned char> &result);
-void write_int32_le (int32_t n, std::vector <unsigned char> &result);
-void write_int64_le (int64_t n, std::vector <unsigned char> &result);
-void write_imm (long long n, size_t width, std::vector <unsigned char> &result);
-void write_address (long long n, const AsmContext &ctx,
-		    std::vector <unsigned char> &result);
-
-void print_int16_le (int16_t n, FILE *stream);
-void print_int32_le (int32_t n, FILE *stream);
-
-bool write_operand (const AsmRegister *reg, const AsmStorage *rm,
-		    const AsmContext &ctx, std::vector <unsigned char> &result);
-ssize_t operand_width (const AsmRegister *reg, const AsmStorage *rm,
-		       const AsmContext &ctx);
-
-AsmRegister *default_segment (const AsmMemoryLoc *loc);
-unsigned char segment_prefix (const AsmRegister *segment);
-
-uint32_t align (uint32_t n, size_t alignment);
-
-#endif
+bool
+AsmInstRET::assemble (std::vector <unsigned char> &result,
+		      const AsmContext &ctx)
+{
+  if (far)
+    {
+      if (bytes == 0)
+	result.push_back (ASM_OPCODE_RETF);
+      else
+	{
+	  result.push_back (ASM_OPCODE_RETF_IMM16);
+	  write_int16_le (bytes, result);
+	}
+    }
+  else
+    {
+      if (bytes == 0)
+	result.push_back (ASM_OPCODE_RETN);
+      else
+	{
+	  result.push_back (ASM_OPCODE_RETN_IMM16);
+	  write_int16_le (bytes, result);
+	}
+    }
+  return true;
+}

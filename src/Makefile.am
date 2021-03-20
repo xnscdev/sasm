@@ -16,10 +16,18 @@ sasm_SOURCES =		\
 	error.hh	\
 	expr.hh		\
 	inst.hh		\
+	inst-dec.cc	\
 	inst-in.cc	\
+	inst-inc.cc	\
+	inst-int.cc	\
 	inst-neg.cc	\
 	inst-not.cc	\
+	inst-repnz.cc	\
+	inst-repz.cc	\
+	inst-ret.cc	\
 	inst-out.cc	\
+	insts-ascii.cc	\
+	insts-loop.cc	\
 	insts-str.cc	\
 	insts-zo.cc	\
 	intel-lex.ll	\

@@ -1,5 +1,5 @@
 /*************************************************************************
- * util.hh -- This file is part of sasm.                                 *
+ * insts-ascii.cc -- This file is part of sasm.                          *
  * Copyright (C) 2021                                                    *
  *                                                                       *
  * This program is free software: you can redistribute it and/or modify  *
@@ -16,33 +16,36 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>. *
  *************************************************************************/
 
-#ifndef _UTIL_HH
-#define _UTIL_HH
+#include "inst.hh"
+#include "opcodes.h"
+#include "util.hh"
 
-#include <vector>
-#include "expr.hh"
+size_t
+AsmInstAAD::width (const AsmContext &ctx)
+{
+  return 2;
+}
 
-#define CAST(t, x) dynamic_cast <t> (x)
-#define ISINSTANCE(t, x) (CAST (t, x) != nullptr)
+bool
+AsmInstAAD::assemble (std::vector <unsigned char> &result,
+		      const AsmContext &ctx)
+{
+  result.push_back (ASM_OPCODE_AAD);
+  result.push_back (base);
+  return true;
+}
 
-void write_int16_le (int16_t n, std::vector <unsigned char> &result);
-void write_int32_le (int32_t n, std::vector <unsigned char> &result);
-void write_int64_le (int64_t n, std::vector <unsigned char> &result);
-void write_imm (long long n, size_t width, std::vector <unsigned char> &result);
-void write_address (long long n, const AsmContext &ctx,
-		    std::vector <unsigned char> &result);
+size_t
+AsmInstAAM::width (const AsmContext &ctx)
+{
+  return 2;
+}
 
-void print_int16_le (int16_t n, FILE *stream);
-void print_int32_le (int32_t n, FILE *stream);
-
-bool write_operand (const AsmRegister *reg, const AsmStorage *rm,
-		    const AsmContext &ctx, std::vector <unsigned char> &result);
-ssize_t operand_width (const AsmRegister *reg, const AsmStorage *rm,
-		       const AsmContext &ctx);
-
-AsmRegister *default_segment (const AsmMemoryLoc *loc);
-unsigned char segment_prefix (const AsmRegister *segment);
-
-uint32_t align (uint32_t n, size_t alignment);
-
-#endif
+bool
+AsmInstAAM::assemble (std::vector <unsigned char> &result,
+		      const AsmContext &ctx)
+{
+  result.push_back (ASM_OPCODE_AAM);
+  result.push_back (base);
+  return true;
+}
