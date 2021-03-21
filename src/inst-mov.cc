@@ -16,6 +16,7 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>. *
  *************************************************************************/
 
+#include "assemble.hh"
 #include "inst.hh"
 #include "opcodes.h"
 #include "util.hh"
@@ -122,6 +123,8 @@ assemble_r_m (std::vector <unsigned char> &result,
         {
 	  result.push_back (ASM_OPCODE_MOV_AL_MOFFS8);
 	  write_address (src->disp, ctx, result);
+	  mark_reloc (curraddr +
+		      (src->segment != default_segment (src) ? 2 : 1));
 	  return true;
 	}
       else
@@ -138,6 +141,9 @@ assemble_r_m (std::vector <unsigned char> &result,
         {
 	  result.push_back (ASM_OPCODE_MOV_AX_MOFFSX);
 	  write_address (src->disp, ctx, result);
+	  mark_reloc (curraddr + 1 +
+		      (src->segment != default_segment (src)) +
+		      (dest->width () != ctx.bytes));
 	  return true;
 	}
       else
@@ -193,6 +199,8 @@ assemble_m_r (std::vector <unsigned char> &result,
         {
 	  result.push_back (ASM_OPCODE_MOV_MOFFS8_AL);
 	  write_address (dest->disp, ctx, result);
+	  mark_reloc (curraddr +
+		      (dest->segment != default_segment (dest) ? 2 : 1));
 	  return true;
 	}
       else
@@ -209,6 +217,9 @@ assemble_m_r (std::vector <unsigned char> &result,
         {
 	  result.push_back (ASM_OPCODE_MOV_MOFFSX_AX);
 	  write_address (dest->disp, ctx, result);
+	  mark_reloc (curraddr + 1 +
+		      (dest->segment != default_segment (dest)) +
+		      (src->width () != ctx.bytes));
 	  return true;
 	}
       else

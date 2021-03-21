@@ -28,6 +28,6 @@ extern bool reloc;
 
 bool assemble (AsmInst *inst, std::vector <unsigned char> &result,
 	       const AsmContext &ctx);
-void mark_reloc (uint32_t ip, std::string section);
+void mark_reloc (uint32_t ip);
 
 #endif

@@ -19,6 +19,7 @@
 #ifndef _GEN_OBJ_HH
 #define _GEN_OBJ_HH
 
+#include <map>
 #include "gen-coff.hh"
 #include "gen-elf.hh"
 
@@ -46,6 +47,7 @@ class Object
 public:
   ObjectFileFormat type;
   std::vector <AsmLine *> lines;
+  std::map <std::string, uint32_t> addrspace;
   std::string section;
   AsmContext ctx {4}; /* 32-bit code only */
 
@@ -54,6 +56,7 @@ public:
   void switch_section (std::string new_sect);
   bool assemble_inst (AsmInst *inst);
   void add_label (AsmLabel *sym);
+  std::string section_from_addr (uint32_t addr);
   bool write (FILE *stream);
 };
 

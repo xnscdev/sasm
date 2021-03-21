@@ -16,6 +16,7 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>. *
  *************************************************************************/
 
+#include "assemble.hh"
 #include "inst.hh"
 #include "opcodes.h"
 #include "util.hh"
@@ -42,6 +43,7 @@ assemble_rel (std::vector <unsigned char> &result,
     result.push_back (ASM_OPCODE_OPSIZE_OVR);
   result.push_back (ASM_OPCODE_JMP_RELX);
   write_address (addr->get_addr () - curraddr, ctx, result);
+  mark_reloc (curraddr - ctx.bytes);
   return true;
 }
 

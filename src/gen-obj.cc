@@ -123,6 +123,7 @@ void
 Object::switch_section (std::string new_sect)
 {
   section = new_sect;
+  addrspace[section] = curraddr;
   uint32_t id;
   switch (type)
     {
@@ -183,6 +184,22 @@ Object::add_label (AsmLabel *sym)
     default:
       break; /* -Wswitch */
     }
+}
+
+std::string
+Object::section_from_addr (uint32_t addr)
+{
+  std::string section;
+  uint32_t best = 0;
+  for (std::pair <std::string, uint32_t> p : addrspace)
+    {
+      if (p.second >= best && p.second < addr)
+	{
+	  section = p.first;
+	  best = p.second;
+	}
+    }
+  return section;
 }
 
 bool

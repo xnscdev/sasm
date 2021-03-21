@@ -17,6 +17,9 @@
  *************************************************************************/
 
 #include "assemble.hh"
+#include "gen-obj.hh"
+
+extern Object *result;
 
 uint32_t curraddr;
 uint32_t reloc_inst;
@@ -32,9 +35,13 @@ assemble (AsmInst *inst, std::vector <unsigned char> &result,
 }
 
 void
-mark_reloc (uint32_t ip, std::string section)
+mark_reloc (uint32_t ip)
 {
-  reloc_inst = ip;
-  reloc_section = section;
-  reloc = true;
+  std::string test = result->section_from_addr (ip);
+  if (test != result->section)
+    {
+      reloc_inst = ip;
+      reloc_section = test;
+      reloc = true;
+    }
 }
