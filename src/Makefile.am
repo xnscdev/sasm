@@ -12,7 +12,6 @@ libsasm_a_SOURCES =	\
 	assemble.cc	\
 	assemble.hh	\
 	coff.h		\
-	directive.hh	\
 	dtv-define.cc	\
 	dtv-section.cc	\
 	dtv-times.cc	\

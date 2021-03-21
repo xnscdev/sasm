@@ -249,7 +249,7 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 40 "../../src/intel-parse.yy"
+#line 39 "../../src/intel-parse.yy"
 
   AsmInstARITHType arith;
   AsmInstJFType jf;
@@ -263,6 +263,7 @@ union YYSTYPE
   AsmPointer *addr;
   AsmImmediate *imm;
   AsmIdentifier *label;
+  AsmDirective *directive;
   AsmInst *inst;
   AsmStringInst *strinst;
   AsmExpr *expr;
@@ -271,7 +272,7 @@ union YYSTYPE
   AsmMemoryLoc *mem;
   Object *obj;
 
-#line 275 "../../src/intel-parse.hh"
+#line 276 "../../src/intel-parse.hh"
 
 };
 typedef union YYSTYPE YYSTYPE;

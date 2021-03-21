@@ -21,7 +21,6 @@
 #define _COFF_DISABLE_DEFINES /* Prevent name clashes with Yacc defines */
 
 #include <string>
-#include "directive.hh"
 #include "error.hh"
 #include "gen-obj.hh"
 #include "intel-parse.hh"
@@ -50,6 +49,7 @@ extern Object *result;
   AsmPointer *addr;
   AsmImmediate *imm;
   AsmIdentifier *label;
+  AsmDirective *directive;
   AsmInst *inst;
   AsmStringInst *strinst;
   AsmExpr *expr;
@@ -162,12 +162,13 @@ extern Object *result;
 %type	<lines>		lines
 %type	<expr>		expression
 %type	<imm>		immediate
-%type	<inst>		instruction directive ascii_inst call_inst port_inst
+%type	<directive>	directive
+%type	<inst>		instruction ascii_inst call_inst port_inst
 %type	<inst>		jmp_inst rep_inst
 %type	<strinst>	string_inst
 %type	<obj>		object
-%type	<reg>		reg
-%type	<mem>		memloc
+%type	<reg>		reg segment
+%type	<mem>		memloc deref
 %type	<storage>	storage
 %type	<number>	size_specifier define_size
 %type	<addr>		addr
@@ -217,7 +218,7 @@ instruction:	T_ARTH storage ',' expression
 	|	T_IMUL storage { $$ = new AsmInstIMUL ($2); }
 	|	T_INC storage { $$ = new AsmInstINC ($2); }
 	|	port_inst
-	|	T_INT T_NUMBER { $$ = new AsmInstINT (2); }
+	|	T_INT T_NUMBER { $$ = new AsmInstINT ($2); }
 	|	jmp_inst
 	|	T_LEA reg ',' memloc { $$ = new AsmInstLEA ($2, $4); }
 	|	T_LOOP addr { $$ = new AsmInstLOOP ($2); }
@@ -248,7 +249,7 @@ instruction:	T_ARTH storage ',' expression
 	|	T_ROTSHF storage ',' T_CL { $$ = new AsmInstROTSHF ($1, $2); }
 	|	T_TEST storage ',' expression { $$ = new AsmInstTEST ($2, $4); }
 	|	T_XCHG storage ',' storage { $$ = new AsmInstXCHG ($2, $4); }
-	|	directive
+	|	directive { $$ = $1; }
 	;
 
 ascii_inst:	T_AAD T_NUMBER { $$ = new AsmInstAAD ($2); }
@@ -302,7 +303,12 @@ rep_inst:	T_REPNZ string_inst { $$ = new AsmInstREPNZ ($2); }
 	|	T_REPZ string_inst { $$ = new AsmInstREPZ ($2); }
 	;
 
-directive:	T_GLOBAL T_IDENT { global_syms.insert (*$2); delete $2; }
+directive:	T_GLOBAL T_IDENT
+		{
+		  $$ = nullptr;
+		  global_syms.insert (*$2);
+		  delete $2;
+		}
 	|	T_SECTION T_SECTNAME
 		{
 		  $$ = new AsmInstSECTION (*$2);
@@ -322,18 +328,59 @@ storage:	reg { $$ = $1; }
 	|	memloc { $$ = $1; }
 	;
 
-memloc:		size_specifier '[' T_NUMBER ']'
+memloc:		size_specifier '[' deref ']' { $$ = $3; $$->size = $1; }
+	|	size_specifier '[' segment ':' deref ']'
 		{
-		  $$ = new AsmMemoryLoc (nullptr, nullptr, 0, $3,
-					 AsmRegister::DS, $1);
+		  $$ = $5;
+		  $$->segment = $3;
+		  $$->size = $1;
 		}
 	;
 
-reg:		T_CS { $$ = AsmRegister::CS; }
-	|       T_DS { $$ = AsmRegister::DS; }
-	|       T_ES { $$ = AsmRegister::ES; }
-	|       T_FS { $$ = AsmRegister::FS; }
-	|       T_GS { $$ = AsmRegister::GS; }
+deref:		T_NUMBER
+	        {
+		  $$ = new AsmMemoryLoc (nullptr, nullptr, 0, $1,
+					 AsmRegister::DS, 0);
+		}
+	|	reg
+		{
+		  $$ = new AsmMemoryLoc ($1, nullptr, 0, 0,
+					 $1->id == AsmRegister::EBP->id ?
+					 AsmRegister::SS : AsmRegister::DS, 0);
+		}
+	|	reg '+' T_NUMBER
+	        {
+		  $$ = new AsmMemoryLoc ($1, nullptr, 0, $3,
+					 $1->id == AsmRegister::EBP->id ?
+					 AsmRegister::SS : AsmRegister::DS, 0);
+		}
+	|	reg '+' reg
+		{
+		  $$ = new AsmMemoryLoc ($1, $3, 1, 0,
+					 $1->id == AsmRegister::EBP->id ?
+					 AsmRegister::SS : AsmRegister::DS, 0);
+		}
+	|	reg '+' reg '+' T_NUMBER
+		{
+		  $$ = new AsmMemoryLoc ($1, $3, 1, $5,
+					 $1->id == AsmRegister::EBP->id ?
+					 AsmRegister::SS : AsmRegister::DS, 0);
+		}
+	|	reg '+' reg '*' T_NUMBER
+		{
+		  $$ = new AsmMemoryLoc ($1, $3, $5, 0,
+					 $1->id == AsmRegister::EBP->id ?
+					 AsmRegister::SS : AsmRegister::DS, 0);
+		}
+	|	reg '+' reg '*' T_NUMBER '+' T_NUMBER
+		{
+		  $$ = new AsmMemoryLoc ($1, $3, $5, $7,
+					 $1->id == AsmRegister::EBP->id ?
+					 AsmRegister::SS : AsmRegister::DS, 0);
+		}
+	;
+
+reg:	        segment
 	|       T_AL { $$ = AsmRegister::AL; }
 	|       T_CL { $$ = AsmRegister::CL; }
 	|       T_DL { $$ = AsmRegister::DL; }
@@ -358,6 +405,13 @@ reg:		T_CS { $$ = AsmRegister::CS; }
 	|       T_EBP { $$ = AsmRegister::EBP; }
 	|       T_ESI { $$ = AsmRegister::ESI; }
 	|       T_EDI { $$ = AsmRegister::EDI; }
+	;
+
+segment:	T_CS { $$ = AsmRegister::CS; }
+	|       T_DS { $$ = AsmRegister::DS; }
+	|       T_ES { $$ = AsmRegister::ES; }
+	|       T_FS { $$ = AsmRegister::FS; }
+	|       T_GS { $$ = AsmRegister::GS; }
 	;
 
 size_specifier:	T_BYTE { $$ = 1; }
