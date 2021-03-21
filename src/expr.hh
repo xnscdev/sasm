@@ -57,9 +57,6 @@ class AsmExpr
 {
 public:
   virtual ~AsmExpr (void) = default;
-
-protected:
-  YYLTYPE *loc;
 };
 
 class AsmStorage : public AsmExpr
