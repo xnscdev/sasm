@@ -141,34 +141,39 @@ write_relx_opcode (AsmInstJFType type,
 size_t
 AsmInstJF::width (const AsmContext &ctx)
 {
-  long long r = (long long) rel - curraddr;
-  return r > INT8_MIN + 2 && r < INT8_MAX - 2 ? 2 : ctx.bytes +
-    (size != ctx.bytes) + 2;
+  if (ISINSTANCE (AsmImmediate *, rel))
+    {
+      long long r = (long long) rel->get_addr () - curraddr;
+      return r > INT8_MIN + 2 && r < INT8_MAX - 2 ? 2 : ctx.bytes +
+	(size != ctx.bytes) + 2;
+    }
+  return (size != ctx.bytes ? 3 : 2) + ctx.bytes;
 }
 
 bool
 AsmInstJF::assemble (std::vector <unsigned char> &result,
 		     const AsmContext &ctx)
 {
-  long long r = (long long) rel->get_addr () - curraddr;
-  if (r > INT8_MIN + 2 && r < INT8_MAX - 2)
+  if (ISINSTANCE (AsmImmediate *, rel))
     {
-      if (!write_rel8_opcode (type, result))
-	return false;
-      result.push_back ((unsigned char) rel->get_addr () -
-			(unsigned char) curraddr);
-      return true;
+      long long r = (long long) rel->get_addr () - curraddr;
+      if (r > INT8_MIN + 2 && r < INT8_MAX - 2)
+	{
+	  if (!write_rel8_opcode (type, result))
+	    return false;
+	  result.push_back ((unsigned char) rel->get_addr () -
+			    (unsigned char) curraddr);
+	  return true;
+	}
     }
-  else
-    {
-      if (size == 1)
-	return false;
-      else if (size != ctx.bytes)
-	result.push_back (ASM_OPCODE_OPSIZE_OVR);
-      result.push_back (ASM_OPCODE_2BYTE_INST);
-      if (!write_relx_opcode (type, result))
-	return false;
-      write_address (rel->get_addr () - curraddr, ctx, result);
-      return true;
-    }
+
+  if (size == 1)
+    return false;
+  else if (size != ctx.bytes)
+    result.push_back (ASM_OPCODE_OPSIZE_OVR);
+  result.push_back (ASM_OPCODE_2BYTE_INST);
+  if (!write_relx_opcode (type, result))
+    return false;
+  write_address (rel->get_addr () - curraddr, ctx, result);
+  return true;
 }

@@ -16,6 +16,7 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>. *
  *************************************************************************/
 
+#include <iostream>
 #include "error.hh"
 #include "inst.hh"
 #include "util.hh"
@@ -29,11 +30,12 @@ AsmImmediate::get_addr (void)
 uint32_t
 AsmIdentifier::get_addr (void)
 {
-  std::map <std::string, uint32_t>::iterator it = label_addrs.find (name);
-  if (it == label_addrs.end ())
+  for (std::map <std::string, uint32_t>::iterator it = label_addrs.begin ();
+       it != label_addrs.end (); it++)
     {
-      error ("undefined identifier: " + name);
-      return 0;
+      if (name == it->first)
+	return it->second;
     }
-  return it->second;
+  error ("undefined identifier: " + name);
+  return 0;
 }

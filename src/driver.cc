@@ -89,7 +89,8 @@ static void
 parse_options (int argc, char *const *argv)
 {
   int opt;
-  while ((opt = getopt_long (argc, argv, ":f:o:hv", long_options, nullptr)) != -1)
+  while ((opt = getopt_long (argc, argv, ":f:o:hv", long_options,
+			     nullptr)) != -1)
     {
       switch (opt)
         {
@@ -139,9 +140,9 @@ main (int argc, char **argv)
   for (AsmLine *line : result->lines)
     {
       if (ISINSTANCE (AsmIdentifier *, line))
-	label_addrs[CAST (AsmIdentifier *, line)->name] = labeladdr;
+        label_addrs[CAST (AsmIdentifier *, line)->name] = labeladdr;
       else if (ISINSTANCE (AsmInst *, line))
-	labeladdr += CAST (AsmInst *, line)->width (result->ctx);
+        labeladdr += CAST (AsmInst *, line)->width (result->ctx);
     }
 
   /* Assemble! */
