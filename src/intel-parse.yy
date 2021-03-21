@@ -60,6 +60,7 @@ extern Object *result;
 }
 
 %define parse.error detailed
+%locations
 
 %token	<string>	T_IDENT "identifier"
 %token	<string>	T_SECTNAME "section name"

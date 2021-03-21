@@ -62,9 +62,3 @@ fatal_error (std::string str)
   std::cerr << str << std::endl;
   exit (1);
 }
-
-void
-yyerror (const char *msg)
-{
-  error (std::to_string (yylineno) + ": " + msg);
-}

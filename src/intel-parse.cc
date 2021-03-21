@@ -356,9 +356,23 @@ typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_DECLARED 1
 #endif
 
+/* Location type.  */
+#if ! defined YYLTYPE && ! defined YYLTYPE_IS_DECLARED
+typedef struct YYLTYPE YYLTYPE;
+struct YYLTYPE
+{
+  int first_line;
+  int first_column;
+  int last_line;
+  int last_column;
+};
+# define YYLTYPE_IS_DECLARED 1
+# define YYLTYPE_IS_TRIVIAL 1
+#endif
+
 
 extern YYSTYPE yylval;
-
+extern YYLTYPE yylloc;
 int yyparse (void);
 
 #endif /* !YY_YY__SRC_INTEL_PARSE_HH_INCLUDED  */
@@ -752,13 +766,15 @@ void free (void *); /* INFRINGES ON USER NAME SPACE */
 
 #if (! defined yyoverflow \
      && (! defined __cplusplus \
-         || (defined YYSTYPE_IS_TRIVIAL && YYSTYPE_IS_TRIVIAL)))
+         || (defined YYLTYPE_IS_TRIVIAL && YYLTYPE_IS_TRIVIAL \
+             && defined YYSTYPE_IS_TRIVIAL && YYSTYPE_IS_TRIVIAL)))
 
 /* A type that is properly aligned for any stack member.  */
 union yyalloc
 {
   yy_state_t yyss_alloc;
   YYSTYPE yyvs_alloc;
+  YYLTYPE yyls_alloc;
 };
 
 /* The size of the maximum gap between one aligned stack and the next.  */
@@ -767,8 +783,9 @@ union yyalloc
 /* The size of an array large to enough to hold all stacks, each with
    N elements.  */
 # define YYSTACK_BYTES(N) \
-     ((N) * (YYSIZEOF (yy_state_t) + YYSIZEOF (YYSTYPE)) \
-      + YYSTACK_GAP_MAXIMUM)
+     ((N) * (YYSIZEOF (yy_state_t) + YYSIZEOF (YYSTYPE) \
+             + YYSIZEOF (YYLTYPE)) \
+      + 2 * YYSTACK_GAP_MAXIMUM)
 
 # define YYCOPY_NEEDED 1
 
@@ -880,20 +897,20 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   180,   180,   183,   191,   196,   201,   202,   203,   206,
-     210,   211,   212,   213,   214,   215,   216,   217,   218,   219,
-     220,   221,   222,   223,   224,   225,   226,   227,   228,   229,
-     230,   234,   235,   236,   237,   238,   239,   240,   241,   242,
-     243,   244,   245,   249,   250,   251,   252,   255,   256,   257,
-     258,   261,   262,   263,   264,   268,   269,   270,   273,   274,
-     275,   276,   277,   278,   279,   280,   281,   282,   283,   284,
-     287,   288,   289,   290,   294,   295,   296,   299,   302,   303,
-     306,   312,   317,   320,   321,   324,   327,   328,   331,   332,
-     340,   345,   351,   357,   363,   369,   375,   383,   384,   385,
-     386,   387,   388,   389,   390,   391,   392,   393,   394,   395,
-     396,   397,   398,   399,   400,   401,   402,   403,   404,   405,
-     406,   407,   410,   411,   412,   413,   414,   417,   418,   419,
-     422,   423,   426,   427,   435,   436,   439,   440,   441,   442
+       0,   181,   181,   184,   192,   197,   202,   203,   204,   207,
+     211,   212,   213,   214,   215,   216,   217,   218,   219,   220,
+     221,   222,   223,   224,   225,   226,   227,   228,   229,   230,
+     231,   235,   236,   237,   238,   239,   240,   241,   242,   243,
+     244,   245,   246,   250,   251,   252,   253,   256,   257,   258,
+     259,   262,   263,   264,   265,   269,   270,   271,   274,   275,
+     276,   277,   278,   279,   280,   281,   282,   283,   284,   285,
+     288,   289,   290,   291,   295,   296,   297,   300,   303,   304,
+     307,   313,   318,   321,   322,   325,   328,   329,   332,   333,
+     341,   346,   352,   358,   364,   370,   376,   384,   385,   386,
+     387,   388,   389,   390,   391,   392,   393,   394,   395,   396,
+     397,   398,   399,   400,   401,   402,   403,   404,   405,   406,
+     407,   408,   411,   412,   413,   414,   415,   418,   419,   420,
+     423,   424,   427,   428,   436,   437,   440,   441,   442,   443
 };
 #endif
 
@@ -1263,6 +1280,32 @@ enum { YYENOMEM = -2 };
    Use YYerror or YYUNDEF. */
 #define YYERRCODE YYUNDEF
 
+/* YYLLOC_DEFAULT -- Set CURRENT to span from RHS[1] to RHS[N].
+   If N is 0, then set CURRENT to the empty location which ends
+   the previous symbol: RHS[0] (always defined).  */
+
+#ifndef YYLLOC_DEFAULT
+# define YYLLOC_DEFAULT(Current, Rhs, N)                                \
+    do                                                                  \
+      if (N)                                                            \
+        {                                                               \
+          (Current).first_line   = YYRHSLOC (Rhs, 1).first_line;        \
+          (Current).first_column = YYRHSLOC (Rhs, 1).first_column;      \
+          (Current).last_line    = YYRHSLOC (Rhs, N).last_line;         \
+          (Current).last_column  = YYRHSLOC (Rhs, N).last_column;       \
+        }                                                               \
+      else                                                              \
+        {                                                               \
+          (Current).first_line   = (Current).last_line   =              \
+            YYRHSLOC (Rhs, 0).last_line;                                \
+          (Current).first_column = (Current).last_column =              \
+            YYRHSLOC (Rhs, 0).last_column;                              \
+        }                                                               \
+    while (0)
+#endif
+
+#define YYRHSLOC(Rhs, K) ((Rhs)[K])
+
 
 /* Enable debugging if requested.  */
 #if YYDEBUG
@@ -1278,10 +1321,49 @@ do {                                            \
     YYFPRINTF Args;                             \
 } while (0)
 
-/* This macro is provided for backward compatibility. */
+
+/* YY_LOCATION_PRINT -- Print the location on the stream.
+   This macro was not mandated originally: define only if we know
+   we won't break user code: when these are the locations we know.  */
+
 # ifndef YY_LOCATION_PRINT
-#  define YY_LOCATION_PRINT(File, Loc) ((void) 0)
-# endif
+#  if defined YYLTYPE_IS_TRIVIAL && YYLTYPE_IS_TRIVIAL
+
+/* Print *YYLOCP on YYO.  Private, do not rely on its existence. */
+
+YY_ATTRIBUTE_UNUSED
+static int
+yy_location_print_ (FILE *yyo, YYLTYPE const * const yylocp)
+{
+  int res = 0;
+  int end_col = 0 != yylocp->last_column ? yylocp->last_column - 1 : 0;
+  if (0 <= yylocp->first_line)
+    {
+      res += YYFPRINTF (yyo, "%d", yylocp->first_line);
+      if (0 <= yylocp->first_column)
+        res += YYFPRINTF (yyo, ".%d", yylocp->first_column);
+    }
+  if (0 <= yylocp->last_line)
+    {
+      if (yylocp->first_line < yylocp->last_line)
+        {
+          res += YYFPRINTF (yyo, "-%d", yylocp->last_line);
+          if (0 <= end_col)
+            res += YYFPRINTF (yyo, ".%d", end_col);
+        }
+      else if (0 <= end_col && yylocp->first_column < end_col)
+        res += YYFPRINTF (yyo, "-%d", end_col);
+    }
+  return res;
+ }
+
+#   define YY_LOCATION_PRINT(File, Loc)          \
+  yy_location_print_ (File, &(Loc))
+
+#  else
+#   define YY_LOCATION_PRINT(File, Loc) ((void) 0)
+#  endif
+# endif /* !defined YY_LOCATION_PRINT */
 
 
 # define YY_SYMBOL_PRINT(Title, Kind, Value, Location)                    \
@@ -1290,7 +1372,7 @@ do {                                                                      \
     {                                                                     \
       YYFPRINTF (stderr, "%s ", Title);                                   \
       yy_symbol_print (stderr,                                            \
-                  Kind, Value); \
+                  Kind, Value, Location); \
       YYFPRINTF (stderr, "\n");                                           \
     }                                                                     \
 } while (0)
@@ -1302,10 +1384,11 @@ do {                                                                      \
 
 static void
 yy_symbol_value_print (FILE *yyo,
-                       yysymbol_kind_t yykind, YYSTYPE const * const yyvaluep)
+                       yysymbol_kind_t yykind, YYSTYPE const * const yyvaluep, YYLTYPE const * const yylocationp)
 {
   FILE *yyoutput = yyo;
   YY_USE (yyoutput);
+  YY_USE (yylocationp);
   if (!yyvaluep)
     return;
 # ifdef YYPRINT
@@ -1324,12 +1407,14 @@ yy_symbol_value_print (FILE *yyo,
 
 static void
 yy_symbol_print (FILE *yyo,
-                 yysymbol_kind_t yykind, YYSTYPE const * const yyvaluep)
+                 yysymbol_kind_t yykind, YYSTYPE const * const yyvaluep, YYLTYPE const * const yylocationp)
 {
   YYFPRINTF (yyo, "%s %s (",
              yykind < YYNTOKENS ? "token" : "nterm", yysymbol_name (yykind));
 
-  yy_symbol_value_print (yyo, yykind, yyvaluep);
+  YY_LOCATION_PRINT (yyo, *yylocationp);
+  YYFPRINTF (yyo, ": ");
+  yy_symbol_value_print (yyo, yykind, yyvaluep, yylocationp);
   YYFPRINTF (yyo, ")");
 }
 
@@ -1362,7 +1447,7 @@ do {                                                            \
 `------------------------------------------------*/
 
 static void
-yy_reduce_print (yy_state_t *yyssp, YYSTYPE *yyvsp,
+yy_reduce_print (yy_state_t *yyssp, YYSTYPE *yyvsp, YYLTYPE *yylsp,
                  int yyrule)
 {
   int yylno = yyrline[yyrule];
@@ -1376,7 +1461,8 @@ yy_reduce_print (yy_state_t *yyssp, YYSTYPE *yyvsp,
       YYFPRINTF (stderr, "   $%d = ", yyi + 1);
       yy_symbol_print (stderr,
                        YY_ACCESSING_SYMBOL (+yyssp[yyi + 1 - yynrhs]),
-                       &yyvsp[(yyi + 1) - (yynrhs)]);
+                       &yyvsp[(yyi + 1) - (yynrhs)],
+                       &(yylsp[(yyi + 1) - (yynrhs)]));
       YYFPRINTF (stderr, "\n");
     }
 }
@@ -1384,7 +1470,7 @@ yy_reduce_print (yy_state_t *yyssp, YYSTYPE *yyvsp,
 # define YY_REDUCE_PRINT(Rule)          \
 do {                                    \
   if (yydebug)                          \
-    yy_reduce_print (yyssp, yyvsp, Rule); \
+    yy_reduce_print (yyssp, yyvsp, yylsp, Rule); \
 } while (0)
 
 /* Nonzero means print parse trace.  It is left uninitialized so that
@@ -1420,6 +1506,7 @@ typedef struct
 {
   yy_state_t *yyssp;
   yysymbol_kind_t yytoken;
+  YYLTYPE *yylloc;
 } yypcontext_t;
 
 /* Put in YYARG at most YYARGN of the expected tokens given the
@@ -1643,9 +1730,10 @@ yysyntax_error (YYPTRDIFF_T *yymsg_alloc, char **yymsg,
 
 static void
 yydestruct (const char *yymsg,
-            yysymbol_kind_t yykind, YYSTYPE *yyvaluep)
+            yysymbol_kind_t yykind, YYSTYPE *yyvaluep, YYLTYPE *yylocationp)
 {
   YY_USE (yyvaluep);
+  YY_USE (yylocationp);
   if (!yymsg)
     yymsg = "Deleting";
   YY_SYMBOL_PRINT (yymsg, yykind, yyvaluep, yylocationp);
@@ -1661,6 +1749,12 @@ int yychar;
 
 /* The semantic value of the lookahead symbol.  */
 YYSTYPE yylval;
+/* Location data for the lookahead symbol.  */
+YYLTYPE yylloc
+# if defined YYLTYPE_IS_TRIVIAL && YYLTYPE_IS_TRIVIAL
+  = { 1, 1, 1, 1 }
+# endif
+;
 /* Number of syntax errors so far.  */
 int yynerrs;
 
@@ -1694,6 +1788,11 @@ yyparse (void)
     YYSTYPE *yyvs = yyvsa;
     YYSTYPE *yyvsp = yyvs;
 
+    /* The location stack: array, bottom, top.  */
+    YYLTYPE yylsa[YYINITDEPTH];
+    YYLTYPE *yyls = yylsa;
+    YYLTYPE *yylsp = yyls;
+
   int yyn;
   /* The return value of yyparse.  */
   int yyresult;
@@ -1702,13 +1801,17 @@ yyparse (void)
   /* The variables used to return semantic value and location from the
      action routines.  */
   YYSTYPE yyval;
+  YYLTYPE yyloc;
+
+  /* The locations where the error started and ended.  */
+  YYLTYPE yyerror_range[3];
 
   /* Buffer for error messages, and its allocated size.  */
   char yymsgbuf[128];
   char *yymsg = yymsgbuf;
   YYPTRDIFF_T yymsg_alloc = sizeof yymsgbuf;
 
-#define YYPOPSTACK(N)   (yyvsp -= (N), yyssp -= (N))
+#define YYPOPSTACK(N)   (yyvsp -= (N), yyssp -= (N), yylsp -= (N))
 
   /* The number of symbols on the RHS of the reduced rule.
      Keep to zero when no symbol should be popped.  */
@@ -1717,6 +1820,7 @@ yyparse (void)
   YYDPRINTF ((stderr, "Starting parse\n"));
 
   yychar = YYEMPTY; /* Cause a token to be read.  */
+  yylsp[0] = yylloc;
   goto yysetstate;
 
 
@@ -1755,6 +1859,7 @@ yysetstate:
            memory.  */
         yy_state_t *yyss1 = yyss;
         YYSTYPE *yyvs1 = yyvs;
+        YYLTYPE *yyls1 = yyls;
 
         /* Each stack pointer address is followed by the size of the
            data in use in that stack, in bytes.  This used to be a
@@ -1763,9 +1868,11 @@ yysetstate:
         yyoverflow (YY_("memory exhausted"),
                     &yyss1, yysize * YYSIZEOF (*yyssp),
                     &yyvs1, yysize * YYSIZEOF (*yyvsp),
+                    &yyls1, yysize * YYSIZEOF (*yylsp),
                     &yystacksize);
         yyss = yyss1;
         yyvs = yyvs1;
+        yyls = yyls1;
       }
 # else /* defined YYSTACK_RELOCATE */
       /* Extend the stack our own way.  */
@@ -1784,6 +1891,7 @@ yysetstate:
           goto yyexhaustedlab;
         YYSTACK_RELOCATE (yyss_alloc, yyss);
         YYSTACK_RELOCATE (yyvs_alloc, yyvs);
+        YYSTACK_RELOCATE (yyls_alloc, yyls);
 #  undef YYSTACK_RELOCATE
         if (yyss1 != yyssa)
           YYSTACK_FREE (yyss1);
@@ -1792,6 +1900,7 @@ yysetstate:
 
       yyssp = yyss + yysize - 1;
       yyvsp = yyvs + yysize - 1;
+      yylsp = yyls + yysize - 1;
 
       YY_IGNORE_USELESS_CAST_BEGIN
       YYDPRINTF ((stderr, "Stack size increased to %ld\n",
@@ -1844,6 +1953,7 @@ yybackup:
          loop in error recovery. */
       yychar = YYUNDEF;
       yytoken = YYSYMBOL_YYerror;
+      yyerror_range[1] = yylloc;
       goto yyerrlab1;
     }
   else
@@ -1877,6 +1987,7 @@ yybackup:
   YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
   *++yyvsp = yylval;
   YY_IGNORE_MAYBE_UNINITIALIZED_END
+  *++yylsp = yylloc;
 
   /* Discard the shifted token.  */
   yychar = YYEMPTY;
@@ -1910,848 +2021,850 @@ yyreduce:
      GCC warning that YYVAL may be used uninitialized.  */
   yyval = yyvsp[1-yylen];
 
-
+  /* Default location. */
+  YYLLOC_DEFAULT (yyloc, (yylsp - yylen), yylen);
+  yyerror_range[1] = yyloc;
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
   case 2: /* program: object  */
-#line 180 "../../src/intel-parse.yy"
+#line 181 "../../src/intel-parse.yy"
                        { result = (yyvsp[0].obj); }
-#line 1921 "../../src/intel-parse.cc"
+#line 2034 "../../src/intel-parse.cc"
     break;
 
   case 3: /* object: lines  */
-#line 184 "../../src/intel-parse.yy"
+#line 185 "../../src/intel-parse.yy"
                 {
 		  (yyval.obj) = new Object (format, filename);
 		  (yyval.obj)->lines = *(yyvsp[0].lines);
 		  delete (yyvsp[0].lines);
 		}
-#line 1931 "../../src/intel-parse.cc"
+#line 2044 "../../src/intel-parse.cc"
     break;
 
   case 4: /* lines: instruction  */
-#line 192 "../../src/intel-parse.yy"
+#line 193 "../../src/intel-parse.yy"
                 {
 		  (yyval.lines) = new std::vector <AsmLine *> ();
 		  (yyval.lines)->push_back ((yyvsp[0].inst));
 		}
-#line 1940 "../../src/intel-parse.cc"
+#line 2053 "../../src/intel-parse.cc"
     break;
 
   case 5: /* lines: label  */
-#line 197 "../../src/intel-parse.yy"
+#line 198 "../../src/intel-parse.yy"
                 {
 		  (yyval.lines) = new std::vector <AsmLine *> ();
 		  (yyval.lines)->push_back ((yyvsp[0].label));
 		}
-#line 1949 "../../src/intel-parse.cc"
+#line 2062 "../../src/intel-parse.cc"
     break;
 
   case 6: /* lines: lines terminator instruction  */
-#line 201 "../../src/intel-parse.yy"
+#line 202 "../../src/intel-parse.yy"
                                              { (yyvsp[-2].lines)->push_back ((yyvsp[0].inst)); }
-#line 1955 "../../src/intel-parse.cc"
+#line 2068 "../../src/intel-parse.cc"
     break;
 
   case 7: /* lines: lines terminator label  */
-#line 202 "../../src/intel-parse.yy"
+#line 203 "../../src/intel-parse.yy"
                                        { (yyvsp[-2].lines)->push_back ((yyvsp[0].label)); }
-#line 1961 "../../src/intel-parse.cc"
+#line 2074 "../../src/intel-parse.cc"
     break;
 
   case 9: /* instruction: "instruction mnemonic" storage ',' expression  */
-#line 207 "../../src/intel-parse.yy"
+#line 208 "../../src/intel-parse.yy"
                 {
 		  (yyval.inst) = new AsmInstARITH ((yyvsp[-3].arith), (yyvsp[-2].storage), (yyvsp[0].expr));
 		}
-#line 1969 "../../src/intel-parse.cc"
+#line 2082 "../../src/intel-parse.cc"
     break;
 
   case 10: /* instruction: T_JF addr  */
-#line 210 "../../src/intel-parse.yy"
+#line 211 "../../src/intel-parse.yy"
                           { (yyval.inst) = new AsmInstJF ((yyvsp[-1].jf), (yyvsp[0].addr), 4); }
-#line 1975 "../../src/intel-parse.cc"
+#line 2088 "../../src/intel-parse.cc"
     break;
 
   case 11: /* instruction: T_ZO  */
-#line 211 "../../src/intel-parse.yy"
+#line 212 "../../src/intel-parse.yy"
                      { (yyval.inst) = new AsmInstZO ((yyvsp[0].zo)); }
-#line 1981 "../../src/intel-parse.cc"
+#line 2094 "../../src/intel-parse.cc"
     break;
 
   case 12: /* instruction: string_inst  */
-#line 212 "../../src/intel-parse.yy"
+#line 213 "../../src/intel-parse.yy"
                             { (yyval.inst) = (yyvsp[0].strinst); }
-#line 1987 "../../src/intel-parse.cc"
+#line 2100 "../../src/intel-parse.cc"
     break;
 
   case 15: /* instruction: T_DEC storage  */
-#line 215 "../../src/intel-parse.yy"
+#line 216 "../../src/intel-parse.yy"
                               { (yyval.inst) = new AsmInstDEC ((yyvsp[0].storage)); }
-#line 1993 "../../src/intel-parse.cc"
+#line 2106 "../../src/intel-parse.cc"
     break;
 
   case 16: /* instruction: T_DIV storage  */
-#line 216 "../../src/intel-parse.yy"
+#line 217 "../../src/intel-parse.yy"
                               { (yyval.inst) = new AsmInstDIV ((yyvsp[0].storage)); }
-#line 1999 "../../src/intel-parse.cc"
+#line 2112 "../../src/intel-parse.cc"
     break;
 
   case 17: /* instruction: T_IDIV storage  */
-#line 217 "../../src/intel-parse.yy"
+#line 218 "../../src/intel-parse.yy"
                                { (yyval.inst) = new AsmInstIDIV ((yyvsp[0].storage)); }
-#line 2005 "../../src/intel-parse.cc"
+#line 2118 "../../src/intel-parse.cc"
     break;
 
   case 18: /* instruction: T_IMUL storage  */
-#line 218 "../../src/intel-parse.yy"
+#line 219 "../../src/intel-parse.yy"
                                { (yyval.inst) = new AsmInstIMUL ((yyvsp[0].storage)); }
-#line 2011 "../../src/intel-parse.cc"
+#line 2124 "../../src/intel-parse.cc"
     break;
 
   case 19: /* instruction: T_INC storage  */
-#line 219 "../../src/intel-parse.yy"
+#line 220 "../../src/intel-parse.yy"
                               { (yyval.inst) = new AsmInstINC ((yyvsp[0].storage)); }
-#line 2017 "../../src/intel-parse.cc"
+#line 2130 "../../src/intel-parse.cc"
     break;
 
   case 21: /* instruction: T_INT "number"  */
-#line 221 "../../src/intel-parse.yy"
+#line 222 "../../src/intel-parse.yy"
                                { (yyval.inst) = new AsmInstINT ((yyvsp[0].number)); }
-#line 2023 "../../src/intel-parse.cc"
+#line 2136 "../../src/intel-parse.cc"
     break;
 
   case 23: /* instruction: T_LEA reg ',' memloc  */
-#line 223 "../../src/intel-parse.yy"
+#line 224 "../../src/intel-parse.yy"
                                      { (yyval.inst) = new AsmInstLEA ((yyvsp[-2].reg), (yyvsp[0].mem)); }
-#line 2029 "../../src/intel-parse.cc"
+#line 2142 "../../src/intel-parse.cc"
     break;
 
   case 24: /* instruction: T_LOOP addr  */
-#line 224 "../../src/intel-parse.yy"
+#line 225 "../../src/intel-parse.yy"
                             { (yyval.inst) = new AsmInstLOOP ((yyvsp[0].addr)); }
-#line 2035 "../../src/intel-parse.cc"
+#line 2148 "../../src/intel-parse.cc"
     break;
 
   case 25: /* instruction: T_LOOPNZ addr  */
-#line 225 "../../src/intel-parse.yy"
+#line 226 "../../src/intel-parse.yy"
                               { (yyval.inst) = new AsmInstLOOPNZ ((yyvsp[0].addr)); }
-#line 2041 "../../src/intel-parse.cc"
+#line 2154 "../../src/intel-parse.cc"
     break;
 
   case 26: /* instruction: T_LOOPZ addr  */
-#line 226 "../../src/intel-parse.yy"
+#line 227 "../../src/intel-parse.yy"
                              { (yyval.inst) = new AsmInstLOOPZ ((yyvsp[0].addr)); }
-#line 2047 "../../src/intel-parse.cc"
+#line 2160 "../../src/intel-parse.cc"
     break;
 
   case 27: /* instruction: T_MOV storage ',' expression  */
-#line 227 "../../src/intel-parse.yy"
+#line 228 "../../src/intel-parse.yy"
                                              { (yyval.inst) = new AsmInstMOV ((yyvsp[-2].storage), (yyvsp[0].expr)); }
-#line 2053 "../../src/intel-parse.cc"
+#line 2166 "../../src/intel-parse.cc"
     break;
 
   case 28: /* instruction: T_MUL storage  */
-#line 228 "../../src/intel-parse.yy"
+#line 229 "../../src/intel-parse.yy"
                               { (yyval.inst) = new AsmInstMUL ((yyvsp[0].storage)); }
-#line 2059 "../../src/intel-parse.cc"
+#line 2172 "../../src/intel-parse.cc"
     break;
 
   case 29: /* instruction: T_NEG storage  */
-#line 229 "../../src/intel-parse.yy"
+#line 230 "../../src/intel-parse.yy"
                               { (yyval.inst) = new AsmInstNEG ((yyvsp[0].storage)); }
-#line 2065 "../../src/intel-parse.cc"
+#line 2178 "../../src/intel-parse.cc"
     break;
 
   case 30: /* instruction: T_NOP  */
-#line 231 "../../src/intel-parse.yy"
+#line 232 "../../src/intel-parse.yy"
                 {
 		  (yyval.inst) = new AsmInstXCHG (AsmRegister::EAX, AsmRegister::EAX);
 		}
-#line 2073 "../../src/intel-parse.cc"
+#line 2186 "../../src/intel-parse.cc"
     break;
 
   case 31: /* instruction: T_NOT storage  */
-#line 234 "../../src/intel-parse.yy"
+#line 235 "../../src/intel-parse.yy"
                               { (yyval.inst) = new AsmInstNOT ((yyvsp[0].storage)); }
-#line 2079 "../../src/intel-parse.cc"
+#line 2192 "../../src/intel-parse.cc"
     break;
 
   case 32: /* instruction: T_POP storage  */
-#line 235 "../../src/intel-parse.yy"
+#line 236 "../../src/intel-parse.yy"
                               { (yyval.inst) = new AsmInstPOP ((yyvsp[0].storage)); }
-#line 2085 "../../src/intel-parse.cc"
+#line 2198 "../../src/intel-parse.cc"
     break;
 
   case 33: /* instruction: T_PUSH storage  */
-#line 236 "../../src/intel-parse.yy"
+#line 237 "../../src/intel-parse.yy"
                                { (yyval.inst) = new AsmInstPUSH ((yyvsp[0].storage)); }
-#line 2091 "../../src/intel-parse.cc"
+#line 2204 "../../src/intel-parse.cc"
     break;
 
   case 35: /* instruction: T_RET  */
-#line 238 "../../src/intel-parse.yy"
+#line 239 "../../src/intel-parse.yy"
                       { (yyval.inst) = new AsmInstRET (false); }
-#line 2097 "../../src/intel-parse.cc"
+#line 2210 "../../src/intel-parse.cc"
     break;
 
   case 36: /* instruction: T_RET "near"  */
-#line 239 "../../src/intel-parse.yy"
+#line 240 "../../src/intel-parse.yy"
                              { (yyval.inst) = new AsmInstRET (false); }
-#line 2103 "../../src/intel-parse.cc"
+#line 2216 "../../src/intel-parse.cc"
     break;
 
   case 37: /* instruction: T_RET "number"  */
-#line 240 "../../src/intel-parse.yy"
+#line 241 "../../src/intel-parse.yy"
                                { (yyval.inst) = new AsmInstRET (false, (yyvsp[0].number)); }
-#line 2109 "../../src/intel-parse.cc"
+#line 2222 "../../src/intel-parse.cc"
     break;
 
   case 38: /* instruction: T_RET "near" "number"  */
-#line 241 "../../src/intel-parse.yy"
+#line 242 "../../src/intel-parse.yy"
                                       { (yyval.inst) = new AsmInstRET (false, (yyvsp[0].number)); }
-#line 2115 "../../src/intel-parse.cc"
+#line 2228 "../../src/intel-parse.cc"
     break;
 
   case 39: /* instruction: T_RET "far"  */
-#line 242 "../../src/intel-parse.yy"
+#line 243 "../../src/intel-parse.yy"
                             { (yyval.inst) = new AsmInstRET (true); }
-#line 2121 "../../src/intel-parse.cc"
+#line 2234 "../../src/intel-parse.cc"
     break;
 
   case 40: /* instruction: T_RET "far" "number"  */
-#line 243 "../../src/intel-parse.yy"
+#line 244 "../../src/intel-parse.yy"
                                      { (yyval.inst) = new AsmInstRET (true, (yyvsp[0].number)); }
-#line 2127 "../../src/intel-parse.cc"
+#line 2240 "../../src/intel-parse.cc"
     break;
 
   case 41: /* instruction: T_ROTSHF storage  */
-#line 244 "../../src/intel-parse.yy"
+#line 245 "../../src/intel-parse.yy"
                                  { (yyval.inst) = new AsmInstROTSHF ((yyvsp[-1].rotshf), (yyvsp[0].storage), 1); }
-#line 2133 "../../src/intel-parse.cc"
+#line 2246 "../../src/intel-parse.cc"
     break;
 
   case 42: /* instruction: T_ROTSHF storage ',' "number"  */
-#line 246 "../../src/intel-parse.yy"
+#line 247 "../../src/intel-parse.yy"
                 {
 		  (yyval.inst) = new AsmInstROTSHF ((yyvsp[-3].rotshf), (yyvsp[-2].storage), (yyvsp[0].number));
 		}
-#line 2141 "../../src/intel-parse.cc"
+#line 2254 "../../src/intel-parse.cc"
     break;
 
   case 43: /* instruction: T_ROTSHF storage ',' T_CL  */
-#line 249 "../../src/intel-parse.yy"
+#line 250 "../../src/intel-parse.yy"
                                           { (yyval.inst) = new AsmInstROTSHF ((yyvsp[-3].rotshf), (yyvsp[-2].storage)); }
-#line 2147 "../../src/intel-parse.cc"
+#line 2260 "../../src/intel-parse.cc"
     break;
 
   case 44: /* instruction: T_TEST storage ',' expression  */
-#line 250 "../../src/intel-parse.yy"
+#line 251 "../../src/intel-parse.yy"
                                               { (yyval.inst) = new AsmInstTEST ((yyvsp[-2].storage), (yyvsp[0].expr)); }
-#line 2153 "../../src/intel-parse.cc"
+#line 2266 "../../src/intel-parse.cc"
     break;
 
   case 45: /* instruction: T_XCHG storage ',' storage  */
-#line 251 "../../src/intel-parse.yy"
+#line 252 "../../src/intel-parse.yy"
                                            { (yyval.inst) = new AsmInstXCHG ((yyvsp[-2].storage), (yyvsp[0].storage)); }
-#line 2159 "../../src/intel-parse.cc"
+#line 2272 "../../src/intel-parse.cc"
     break;
 
   case 46: /* instruction: directive  */
-#line 252 "../../src/intel-parse.yy"
+#line 253 "../../src/intel-parse.yy"
                           { (yyval.inst) = (yyvsp[0].directive); }
-#line 2165 "../../src/intel-parse.cc"
+#line 2278 "../../src/intel-parse.cc"
     break;
 
   case 47: /* ascii_inst: T_AAD "number"  */
-#line 255 "../../src/intel-parse.yy"
+#line 256 "../../src/intel-parse.yy"
                                { (yyval.inst) = new AsmInstAAD ((yyvsp[0].number)); }
-#line 2171 "../../src/intel-parse.cc"
+#line 2284 "../../src/intel-parse.cc"
     break;
 
   case 48: /* ascii_inst: T_AAD  */
-#line 256 "../../src/intel-parse.yy"
+#line 257 "../../src/intel-parse.yy"
                       { (yyval.inst) = new AsmInstAAD (); }
-#line 2177 "../../src/intel-parse.cc"
+#line 2290 "../../src/intel-parse.cc"
     break;
 
   case 49: /* ascii_inst: T_AAM "number"  */
-#line 257 "../../src/intel-parse.yy"
+#line 258 "../../src/intel-parse.yy"
                                { (yyval.inst) = new AsmInstAAM ((yyvsp[0].number)); }
-#line 2183 "../../src/intel-parse.cc"
+#line 2296 "../../src/intel-parse.cc"
     break;
 
   case 50: /* ascii_inst: T_AAM  */
-#line 258 "../../src/intel-parse.yy"
+#line 259 "../../src/intel-parse.yy"
                       { (yyval.inst) = new AsmInstAAM (); }
-#line 2189 "../../src/intel-parse.cc"
+#line 2302 "../../src/intel-parse.cc"
     break;
 
   case 51: /* call_inst: T_CALL addr  */
-#line 261 "../../src/intel-parse.yy"
+#line 262 "../../src/intel-parse.yy"
                             { (yyval.inst) = new AsmInstCALL ((yyvsp[0].addr), 4); }
-#line 2195 "../../src/intel-parse.cc"
+#line 2308 "../../src/intel-parse.cc"
     break;
 
   case 52: /* call_inst: T_CALL "near" addr  */
-#line 262 "../../src/intel-parse.yy"
+#line 263 "../../src/intel-parse.yy"
                                    { (yyval.inst) = new AsmInstCALL ((yyvsp[0].addr), 4); }
-#line 2201 "../../src/intel-parse.cc"
+#line 2314 "../../src/intel-parse.cc"
     break;
 
   case 53: /* call_inst: T_CALL "number" ':' "number"  */
-#line 263 "../../src/intel-parse.yy"
+#line 264 "../../src/intel-parse.yy"
                                              { (yyval.inst) = new AsmInstCALLF ((yyvsp[-2].number), (yyvsp[0].number)); }
-#line 2207 "../../src/intel-parse.cc"
+#line 2320 "../../src/intel-parse.cc"
     break;
 
   case 54: /* call_inst: T_CALL "far" "number" ':' "number"  */
-#line 265 "../../src/intel-parse.yy"
+#line 266 "../../src/intel-parse.yy"
                 {
 		  (yyval.inst) = new AsmInstCALLF ((yyvsp[-2].number), (yyvsp[0].number));
 		}
-#line 2215 "../../src/intel-parse.cc"
+#line 2328 "../../src/intel-parse.cc"
     break;
 
   case 55: /* call_inst: T_CALL storage  */
-#line 268 "../../src/intel-parse.yy"
+#line 269 "../../src/intel-parse.yy"
                                { (yyval.inst) = new AsmInstCALL ((yyvsp[0].storage)); }
-#line 2221 "../../src/intel-parse.cc"
+#line 2334 "../../src/intel-parse.cc"
     break;
 
   case 56: /* call_inst: T_CALL "near" storage  */
-#line 269 "../../src/intel-parse.yy"
+#line 270 "../../src/intel-parse.yy"
                                       { (yyval.inst) = new AsmInstCALL ((yyvsp[0].storage)); }
-#line 2227 "../../src/intel-parse.cc"
+#line 2340 "../../src/intel-parse.cc"
     break;
 
   case 57: /* call_inst: T_CALL "far" memloc  */
-#line 270 "../../src/intel-parse.yy"
+#line 271 "../../src/intel-parse.yy"
                                     { (yyval.inst) = new AsmInstCALLF ((yyvsp[0].mem)); }
-#line 2233 "../../src/intel-parse.cc"
+#line 2346 "../../src/intel-parse.cc"
     break;
 
   case 58: /* port_inst: T_IN T_AL ',' "number"  */
-#line 273 "../../src/intel-parse.yy"
+#line 274 "../../src/intel-parse.yy"
                                        { (yyval.inst) = new AsmInstIN ((yyvsp[0].number), 1); }
-#line 2239 "../../src/intel-parse.cc"
+#line 2352 "../../src/intel-parse.cc"
     break;
 
   case 59: /* port_inst: T_IN T_AL ',' T_DX  */
-#line 274 "../../src/intel-parse.yy"
+#line 275 "../../src/intel-parse.yy"
                                    { (yyval.inst) = new AsmInstIN (1); }
-#line 2245 "../../src/intel-parse.cc"
+#line 2358 "../../src/intel-parse.cc"
     break;
 
   case 60: /* port_inst: T_IN T_AX ',' "number"  */
-#line 275 "../../src/intel-parse.yy"
+#line 276 "../../src/intel-parse.yy"
                                        { (yyval.inst) = new AsmInstIN ((yyvsp[0].number), 2); }
-#line 2251 "../../src/intel-parse.cc"
+#line 2364 "../../src/intel-parse.cc"
     break;
 
   case 61: /* port_inst: T_IN T_AX ',' T_DX  */
-#line 276 "../../src/intel-parse.yy"
+#line 277 "../../src/intel-parse.yy"
                                    { (yyval.inst) = new AsmInstIN (2); }
-#line 2257 "../../src/intel-parse.cc"
+#line 2370 "../../src/intel-parse.cc"
     break;
 
   case 62: /* port_inst: T_IN T_EAX ',' "number"  */
-#line 277 "../../src/intel-parse.yy"
+#line 278 "../../src/intel-parse.yy"
                                         { (yyval.inst) = new AsmInstIN ((yyvsp[0].number), 4); }
-#line 2263 "../../src/intel-parse.cc"
+#line 2376 "../../src/intel-parse.cc"
     break;
 
   case 63: /* port_inst: T_IN T_EAX ',' T_DX  */
-#line 278 "../../src/intel-parse.yy"
+#line 279 "../../src/intel-parse.yy"
                                     { (yyval.inst) = new AsmInstIN (4); }
-#line 2269 "../../src/intel-parse.cc"
+#line 2382 "../../src/intel-parse.cc"
     break;
 
   case 64: /* port_inst: T_OUT "number" ',' T_AL  */
-#line 279 "../../src/intel-parse.yy"
+#line 280 "../../src/intel-parse.yy"
                                         { (yyval.inst) = new AsmInstOUT ((yyvsp[-2].number), 1); }
-#line 2275 "../../src/intel-parse.cc"
+#line 2388 "../../src/intel-parse.cc"
     break;
 
   case 65: /* port_inst: T_OUT T_DX ',' T_AL  */
-#line 280 "../../src/intel-parse.yy"
+#line 281 "../../src/intel-parse.yy"
                                     { (yyval.inst) = new AsmInstOUT (1); }
-#line 2281 "../../src/intel-parse.cc"
+#line 2394 "../../src/intel-parse.cc"
     break;
 
   case 66: /* port_inst: T_OUT "number" ',' T_AX  */
-#line 281 "../../src/intel-parse.yy"
+#line 282 "../../src/intel-parse.yy"
                                         { (yyval.inst) = new AsmInstOUT ((yyvsp[-2].number), 2); }
-#line 2287 "../../src/intel-parse.cc"
+#line 2400 "../../src/intel-parse.cc"
     break;
 
   case 67: /* port_inst: T_OUT T_DX ',' T_AX  */
-#line 282 "../../src/intel-parse.yy"
+#line 283 "../../src/intel-parse.yy"
                                     { (yyval.inst) = new AsmInstOUT (2); }
-#line 2293 "../../src/intel-parse.cc"
+#line 2406 "../../src/intel-parse.cc"
     break;
 
   case 68: /* port_inst: T_OUT "number" ',' T_EAX  */
-#line 283 "../../src/intel-parse.yy"
+#line 284 "../../src/intel-parse.yy"
                                          { (yyval.inst) = new AsmInstOUT ((yyvsp[-2].number), 4); }
-#line 2299 "../../src/intel-parse.cc"
+#line 2412 "../../src/intel-parse.cc"
     break;
 
   case 69: /* port_inst: T_OUT T_DX ',' T_EAX  */
-#line 284 "../../src/intel-parse.yy"
+#line 285 "../../src/intel-parse.yy"
                                      { (yyval.inst) = new AsmInstOUT (4); }
-#line 2305 "../../src/intel-parse.cc"
+#line 2418 "../../src/intel-parse.cc"
     break;
 
   case 70: /* jmp_inst: T_JMP addr  */
-#line 287 "../../src/intel-parse.yy"
+#line 288 "../../src/intel-parse.yy"
                            { (yyval.inst) = new AsmInstJMP ((yyvsp[0].addr), 4); }
-#line 2311 "../../src/intel-parse.cc"
+#line 2424 "../../src/intel-parse.cc"
     break;
 
   case 71: /* jmp_inst: T_JMP "near" addr  */
-#line 288 "../../src/intel-parse.yy"
+#line 289 "../../src/intel-parse.yy"
                                   { (yyval.inst) = new AsmInstJMP ((yyvsp[0].addr), 4); }
-#line 2317 "../../src/intel-parse.cc"
+#line 2430 "../../src/intel-parse.cc"
     break;
 
   case 72: /* jmp_inst: T_JMP "number" ':' "number"  */
-#line 289 "../../src/intel-parse.yy"
+#line 290 "../../src/intel-parse.yy"
                                             { (yyval.inst) = new AsmInstJMPF ((yyvsp[-2].number), (yyvsp[0].number)); }
-#line 2323 "../../src/intel-parse.cc"
+#line 2436 "../../src/intel-parse.cc"
     break;
 
   case 73: /* jmp_inst: T_JMP "far" "number" ':' "number"  */
-#line 291 "../../src/intel-parse.yy"
+#line 292 "../../src/intel-parse.yy"
                 {
 		  (yyval.inst) = new AsmInstJMPF ((yyvsp[-2].number), (yyvsp[0].number));
 		}
-#line 2331 "../../src/intel-parse.cc"
+#line 2444 "../../src/intel-parse.cc"
     break;
 
   case 74: /* jmp_inst: T_JMP storage  */
-#line 294 "../../src/intel-parse.yy"
+#line 295 "../../src/intel-parse.yy"
                               { (yyval.inst) = new AsmInstJMP ((yyvsp[0].storage)); }
-#line 2337 "../../src/intel-parse.cc"
+#line 2450 "../../src/intel-parse.cc"
     break;
 
   case 75: /* jmp_inst: T_JMP "near" storage  */
-#line 295 "../../src/intel-parse.yy"
+#line 296 "../../src/intel-parse.yy"
                                      { (yyval.inst) = new AsmInstJMP ((yyvsp[0].storage)); }
-#line 2343 "../../src/intel-parse.cc"
+#line 2456 "../../src/intel-parse.cc"
     break;
 
   case 76: /* jmp_inst: T_JMP "far" memloc  */
-#line 296 "../../src/intel-parse.yy"
+#line 297 "../../src/intel-parse.yy"
                                    { (yyval.inst) = new AsmInstJMPF ((yyvsp[0].mem)); }
-#line 2349 "../../src/intel-parse.cc"
+#line 2462 "../../src/intel-parse.cc"
     break;
 
   case 77: /* string_inst: T_ZOS size_specifier  */
-#line 299 "../../src/intel-parse.yy"
+#line 300 "../../src/intel-parse.yy"
                                      { (yyval.strinst) = new AsmInstZOS ((yyvsp[-1].zos), (yyvsp[0].number)); }
-#line 2355 "../../src/intel-parse.cc"
+#line 2468 "../../src/intel-parse.cc"
     break;
 
   case 78: /* rep_inst: T_REPNZ string_inst  */
-#line 302 "../../src/intel-parse.yy"
+#line 303 "../../src/intel-parse.yy"
                                     { (yyval.inst) = new AsmInstREPNZ ((yyvsp[0].strinst)); }
-#line 2361 "../../src/intel-parse.cc"
+#line 2474 "../../src/intel-parse.cc"
     break;
 
   case 79: /* rep_inst: T_REPZ string_inst  */
-#line 303 "../../src/intel-parse.yy"
+#line 304 "../../src/intel-parse.yy"
                                    { (yyval.inst) = new AsmInstREPZ ((yyvsp[0].strinst)); }
-#line 2367 "../../src/intel-parse.cc"
+#line 2480 "../../src/intel-parse.cc"
     break;
 
   case 80: /* directive: "global directive" "identifier"  */
-#line 307 "../../src/intel-parse.yy"
+#line 308 "../../src/intel-parse.yy"
                 {
 		  (yyval.directive) = nullptr;
 		  global_syms.insert (*(yyvsp[0].string));
 		  delete (yyvsp[0].string);
 		}
-#line 2377 "../../src/intel-parse.cc"
+#line 2490 "../../src/intel-parse.cc"
     break;
 
   case 81: /* directive: "section directive" "section name"  */
-#line 313 "../../src/intel-parse.yy"
+#line 314 "../../src/intel-parse.yy"
                 {
 		  (yyval.directive) = new AsmInstSECTION (*(yyvsp[0].string));
 		  delete (yyvsp[0].string);
 		}
-#line 2386 "../../src/intel-parse.cc"
+#line 2499 "../../src/intel-parse.cc"
     break;
 
   case 82: /* directive: define_size "number"  */
-#line 317 "../../src/intel-parse.yy"
+#line 318 "../../src/intel-parse.yy"
                                      { (yyval.directive) = new AsmInstDEFINE ((yyvsp[-1].number), (yyvsp[0].number)); }
-#line 2392 "../../src/intel-parse.cc"
+#line 2505 "../../src/intel-parse.cc"
     break;
 
   case 83: /* expression: immediate  */
-#line 320 "../../src/intel-parse.yy"
+#line 321 "../../src/intel-parse.yy"
                           { (yyval.expr) = (yyvsp[0].imm); }
-#line 2398 "../../src/intel-parse.cc"
+#line 2511 "../../src/intel-parse.cc"
     break;
 
   case 84: /* expression: storage  */
-#line 321 "../../src/intel-parse.yy"
+#line 322 "../../src/intel-parse.yy"
                         { (yyval.expr) = (yyvsp[0].storage); }
-#line 2404 "../../src/intel-parse.cc"
+#line 2517 "../../src/intel-parse.cc"
     break;
 
   case 85: /* immediate: "number"  */
-#line 324 "../../src/intel-parse.yy"
+#line 325 "../../src/intel-parse.yy"
                          { (yyval.imm) = new AsmImmediate ((yyvsp[0].number)); }
-#line 2410 "../../src/intel-parse.cc"
+#line 2523 "../../src/intel-parse.cc"
     break;
 
   case 86: /* storage: reg  */
-#line 327 "../../src/intel-parse.yy"
+#line 328 "../../src/intel-parse.yy"
                     { (yyval.storage) = (yyvsp[0].reg); }
-#line 2416 "../../src/intel-parse.cc"
+#line 2529 "../../src/intel-parse.cc"
     break;
 
   case 87: /* storage: memloc  */
-#line 328 "../../src/intel-parse.yy"
+#line 329 "../../src/intel-parse.yy"
                        { (yyval.storage) = (yyvsp[0].mem); }
-#line 2422 "../../src/intel-parse.cc"
+#line 2535 "../../src/intel-parse.cc"
     break;
 
   case 88: /* memloc: size_specifier '[' deref ']'  */
-#line 331 "../../src/intel-parse.yy"
+#line 332 "../../src/intel-parse.yy"
                                              { (yyval.mem) = (yyvsp[-1].mem); (yyval.mem)->size = (yyvsp[-3].number); }
-#line 2428 "../../src/intel-parse.cc"
+#line 2541 "../../src/intel-parse.cc"
     break;
 
   case 89: /* memloc: size_specifier '[' segment ':' deref ']'  */
-#line 333 "../../src/intel-parse.yy"
+#line 334 "../../src/intel-parse.yy"
                 {
 		  (yyval.mem) = (yyvsp[-1].mem);
 		  (yyval.mem)->segment = (yyvsp[-3].reg);
 		  (yyval.mem)->size = (yyvsp[-5].number);
 		}
-#line 2438 "../../src/intel-parse.cc"
+#line 2551 "../../src/intel-parse.cc"
     break;
 
   case 90: /* deref: "number"  */
-#line 341 "../../src/intel-parse.yy"
+#line 342 "../../src/intel-parse.yy"
                 {
 		  (yyval.mem) = new AsmMemoryLoc (nullptr, nullptr, 0, (yyvsp[0].number),
 					 AsmRegister::DS, 0);
 		}
-#line 2447 "../../src/intel-parse.cc"
+#line 2560 "../../src/intel-parse.cc"
     break;
 
   case 91: /* deref: reg  */
-#line 346 "../../src/intel-parse.yy"
+#line 347 "../../src/intel-parse.yy"
                 {
 		  (yyval.mem) = new AsmMemoryLoc ((yyvsp[0].reg), nullptr, 0, 0,
 					 (yyvsp[0].reg)->id == AsmRegister::EBP->id ?
 					 AsmRegister::SS : AsmRegister::DS, 0);
 		}
-#line 2457 "../../src/intel-parse.cc"
+#line 2570 "../../src/intel-parse.cc"
     break;
 
   case 92: /* deref: reg '+' "number"  */
-#line 352 "../../src/intel-parse.yy"
+#line 353 "../../src/intel-parse.yy"
                 {
 		  (yyval.mem) = new AsmMemoryLoc ((yyvsp[-2].reg), nullptr, 0, (yyvsp[0].number),
 					 (yyvsp[-2].reg)->id == AsmRegister::EBP->id ?
 					 AsmRegister::SS : AsmRegister::DS, 0);
 		}
-#line 2467 "../../src/intel-parse.cc"
+#line 2580 "../../src/intel-parse.cc"
     break;
 
   case 93: /* deref: reg '+' reg  */
-#line 358 "../../src/intel-parse.yy"
+#line 359 "../../src/intel-parse.yy"
                 {
 		  (yyval.mem) = new AsmMemoryLoc ((yyvsp[-2].reg), (yyvsp[0].reg), 1, 0,
 					 (yyvsp[-2].reg)->id == AsmRegister::EBP->id ?
 					 AsmRegister::SS : AsmRegister::DS, 0);
 		}
-#line 2477 "../../src/intel-parse.cc"
+#line 2590 "../../src/intel-parse.cc"
     break;
 
   case 94: /* deref: reg '+' reg '+' "number"  */
-#line 364 "../../src/intel-parse.yy"
+#line 365 "../../src/intel-parse.yy"
                 {
 		  (yyval.mem) = new AsmMemoryLoc ((yyvsp[-4].reg), (yyvsp[-2].reg), 1, (yyvsp[0].number),
 					 (yyvsp[-4].reg)->id == AsmRegister::EBP->id ?
 					 AsmRegister::SS : AsmRegister::DS, 0);
 		}
-#line 2487 "../../src/intel-parse.cc"
+#line 2600 "../../src/intel-parse.cc"
     break;
 
   case 95: /* deref: reg '+' reg '*' "number"  */
-#line 370 "../../src/intel-parse.yy"
+#line 371 "../../src/intel-parse.yy"
                 {
 		  (yyval.mem) = new AsmMemoryLoc ((yyvsp[-4].reg), (yyvsp[-2].reg), (yyvsp[0].number), 0,
 					 (yyvsp[-4].reg)->id == AsmRegister::EBP->id ?
 					 AsmRegister::SS : AsmRegister::DS, 0);
 		}
-#line 2497 "../../src/intel-parse.cc"
+#line 2610 "../../src/intel-parse.cc"
     break;
 
   case 96: /* deref: reg '+' reg '*' "number" '+' "number"  */
-#line 376 "../../src/intel-parse.yy"
+#line 377 "../../src/intel-parse.yy"
                 {
 		  (yyval.mem) = new AsmMemoryLoc ((yyvsp[-6].reg), (yyvsp[-4].reg), (yyvsp[-2].number), (yyvsp[0].number),
 					 (yyvsp[-6].reg)->id == AsmRegister::EBP->id ?
 					 AsmRegister::SS : AsmRegister::DS, 0);
 		}
-#line 2507 "../../src/intel-parse.cc"
+#line 2620 "../../src/intel-parse.cc"
     break;
 
   case 98: /* reg: T_AL  */
-#line 384 "../../src/intel-parse.yy"
+#line 385 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::AL; }
-#line 2513 "../../src/intel-parse.cc"
+#line 2626 "../../src/intel-parse.cc"
     break;
 
   case 99: /* reg: T_CL  */
-#line 385 "../../src/intel-parse.yy"
+#line 386 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::CL; }
-#line 2519 "../../src/intel-parse.cc"
+#line 2632 "../../src/intel-parse.cc"
     break;
 
   case 100: /* reg: T_DL  */
-#line 386 "../../src/intel-parse.yy"
+#line 387 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::DL; }
-#line 2525 "../../src/intel-parse.cc"
+#line 2638 "../../src/intel-parse.cc"
     break;
 
   case 101: /* reg: T_BL  */
-#line 387 "../../src/intel-parse.yy"
+#line 388 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::BL; }
-#line 2531 "../../src/intel-parse.cc"
+#line 2644 "../../src/intel-parse.cc"
     break;
 
   case 102: /* reg: T_AH  */
-#line 388 "../../src/intel-parse.yy"
+#line 389 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::AH; }
-#line 2537 "../../src/intel-parse.cc"
+#line 2650 "../../src/intel-parse.cc"
     break;
 
   case 103: /* reg: T_CH  */
-#line 389 "../../src/intel-parse.yy"
+#line 390 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::CH; }
-#line 2543 "../../src/intel-parse.cc"
+#line 2656 "../../src/intel-parse.cc"
     break;
 
   case 104: /* reg: T_DH  */
-#line 390 "../../src/intel-parse.yy"
+#line 391 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::DH; }
-#line 2549 "../../src/intel-parse.cc"
+#line 2662 "../../src/intel-parse.cc"
     break;
 
   case 105: /* reg: T_BH  */
-#line 391 "../../src/intel-parse.yy"
+#line 392 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::BH; }
-#line 2555 "../../src/intel-parse.cc"
+#line 2668 "../../src/intel-parse.cc"
     break;
 
   case 106: /* reg: T_AX  */
-#line 392 "../../src/intel-parse.yy"
+#line 393 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::AX; }
-#line 2561 "../../src/intel-parse.cc"
+#line 2674 "../../src/intel-parse.cc"
     break;
 
   case 107: /* reg: T_CX  */
-#line 393 "../../src/intel-parse.yy"
+#line 394 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::CX; }
-#line 2567 "../../src/intel-parse.cc"
+#line 2680 "../../src/intel-parse.cc"
     break;
 
   case 108: /* reg: T_DX  */
-#line 394 "../../src/intel-parse.yy"
+#line 395 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::DX; }
-#line 2573 "../../src/intel-parse.cc"
+#line 2686 "../../src/intel-parse.cc"
     break;
 
   case 109: /* reg: T_BX  */
-#line 395 "../../src/intel-parse.yy"
+#line 396 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::BX; }
-#line 2579 "../../src/intel-parse.cc"
+#line 2692 "../../src/intel-parse.cc"
     break;
 
   case 110: /* reg: T_SP  */
-#line 396 "../../src/intel-parse.yy"
+#line 397 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::SP; }
-#line 2585 "../../src/intel-parse.cc"
+#line 2698 "../../src/intel-parse.cc"
     break;
 
   case 111: /* reg: T_BP  */
-#line 397 "../../src/intel-parse.yy"
+#line 398 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::BP; }
-#line 2591 "../../src/intel-parse.cc"
+#line 2704 "../../src/intel-parse.cc"
     break;
 
   case 112: /* reg: T_SI  */
-#line 398 "../../src/intel-parse.yy"
+#line 399 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::SI; }
-#line 2597 "../../src/intel-parse.cc"
+#line 2710 "../../src/intel-parse.cc"
     break;
 
   case 113: /* reg: T_DI  */
-#line 399 "../../src/intel-parse.yy"
+#line 400 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::DI; }
-#line 2603 "../../src/intel-parse.cc"
+#line 2716 "../../src/intel-parse.cc"
     break;
 
   case 114: /* reg: T_EAX  */
-#line 400 "../../src/intel-parse.yy"
+#line 401 "../../src/intel-parse.yy"
                       { (yyval.reg) = AsmRegister::EAX; }
-#line 2609 "../../src/intel-parse.cc"
+#line 2722 "../../src/intel-parse.cc"
     break;
 
   case 115: /* reg: T_ECX  */
-#line 401 "../../src/intel-parse.yy"
+#line 402 "../../src/intel-parse.yy"
                       { (yyval.reg) = AsmRegister::ECX; }
-#line 2615 "../../src/intel-parse.cc"
+#line 2728 "../../src/intel-parse.cc"
     break;
 
   case 116: /* reg: T_EDX  */
-#line 402 "../../src/intel-parse.yy"
+#line 403 "../../src/intel-parse.yy"
                       { (yyval.reg) = AsmRegister::EDX; }
-#line 2621 "../../src/intel-parse.cc"
+#line 2734 "../../src/intel-parse.cc"
     break;
 
   case 117: /* reg: T_EBX  */
-#line 403 "../../src/intel-parse.yy"
+#line 404 "../../src/intel-parse.yy"
                       { (yyval.reg) = AsmRegister::EBX; }
-#line 2627 "../../src/intel-parse.cc"
+#line 2740 "../../src/intel-parse.cc"
     break;
 
   case 118: /* reg: T_ESP  */
-#line 404 "../../src/intel-parse.yy"
+#line 405 "../../src/intel-parse.yy"
                       { (yyval.reg) = AsmRegister::ESP; }
-#line 2633 "../../src/intel-parse.cc"
+#line 2746 "../../src/intel-parse.cc"
     break;
 
   case 119: /* reg: T_EBP  */
-#line 405 "../../src/intel-parse.yy"
+#line 406 "../../src/intel-parse.yy"
                       { (yyval.reg) = AsmRegister::EBP; }
-#line 2639 "../../src/intel-parse.cc"
+#line 2752 "../../src/intel-parse.cc"
     break;
 
   case 120: /* reg: T_ESI  */
-#line 406 "../../src/intel-parse.yy"
+#line 407 "../../src/intel-parse.yy"
                       { (yyval.reg) = AsmRegister::ESI; }
-#line 2645 "../../src/intel-parse.cc"
+#line 2758 "../../src/intel-parse.cc"
     break;
 
   case 121: /* reg: T_EDI  */
-#line 407 "../../src/intel-parse.yy"
+#line 408 "../../src/intel-parse.yy"
                       { (yyval.reg) = AsmRegister::EDI; }
-#line 2651 "../../src/intel-parse.cc"
+#line 2764 "../../src/intel-parse.cc"
     break;
 
   case 122: /* segment: "register"  */
-#line 410 "../../src/intel-parse.yy"
+#line 411 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::CS; }
-#line 2657 "../../src/intel-parse.cc"
+#line 2770 "../../src/intel-parse.cc"
     break;
 
   case 123: /* segment: T_DS  */
-#line 411 "../../src/intel-parse.yy"
+#line 412 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::DS; }
-#line 2663 "../../src/intel-parse.cc"
+#line 2776 "../../src/intel-parse.cc"
     break;
 
   case 124: /* segment: T_ES  */
-#line 412 "../../src/intel-parse.yy"
+#line 413 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::ES; }
-#line 2669 "../../src/intel-parse.cc"
+#line 2782 "../../src/intel-parse.cc"
     break;
 
   case 125: /* segment: T_FS  */
-#line 413 "../../src/intel-parse.yy"
+#line 414 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::FS; }
-#line 2675 "../../src/intel-parse.cc"
+#line 2788 "../../src/intel-parse.cc"
     break;
 
   case 126: /* segment: T_GS  */
-#line 414 "../../src/intel-parse.yy"
+#line 415 "../../src/intel-parse.yy"
                      { (yyval.reg) = AsmRegister::GS; }
-#line 2681 "../../src/intel-parse.cc"
+#line 2794 "../../src/intel-parse.cc"
     break;
 
   case 127: /* size_specifier: "byte"  */
-#line 417 "../../src/intel-parse.yy"
+#line 418 "../../src/intel-parse.yy"
                        { (yyval.number) = 1; }
-#line 2687 "../../src/intel-parse.cc"
+#line 2800 "../../src/intel-parse.cc"
     break;
 
   case 128: /* size_specifier: "word"  */
-#line 418 "../../src/intel-parse.yy"
+#line 419 "../../src/intel-parse.yy"
                        { (yyval.number) = 2; }
-#line 2693 "../../src/intel-parse.cc"
+#line 2806 "../../src/intel-parse.cc"
     break;
 
   case 129: /* size_specifier: "dword"  */
-#line 419 "../../src/intel-parse.yy"
+#line 420 "../../src/intel-parse.yy"
                         { (yyval.number) = 4; }
-#line 2699 "../../src/intel-parse.cc"
+#line 2812 "../../src/intel-parse.cc"
     break;
 
   case 132: /* label: "identifier" ':'  */
-#line 426 "../../src/intel-parse.yy"
+#line 427 "../../src/intel-parse.yy"
                             { (yyval.label) = new AsmIdentifier (*(yyvsp[-1].string)); delete (yyvsp[-1].string); }
-#line 2705 "../../src/intel-parse.cc"
+#line 2818 "../../src/intel-parse.cc"
     break;
 
   case 133: /* label: "identifier"  */
-#line 428 "../../src/intel-parse.yy"
+#line 429 "../../src/intel-parse.yy"
                 {
 		  warning ("label alone on a line without a colon");
 		  (yyval.label) = new AsmIdentifier (*(yyvsp[0].string));
 		  delete (yyvsp[0].string);
 		}
-#line 2715 "../../src/intel-parse.cc"
+#line 2828 "../../src/intel-parse.cc"
     break;
 
   case 134: /* addr: "identifier"  */
-#line 435 "../../src/intel-parse.yy"
+#line 436 "../../src/intel-parse.yy"
                         { (yyval.addr) = new AsmIdentifier (*(yyvsp[0].string)); delete (yyvsp[0].string); }
-#line 2721 "../../src/intel-parse.cc"
+#line 2834 "../../src/intel-parse.cc"
     break;
 
   case 135: /* addr: immediate  */
-#line 436 "../../src/intel-parse.yy"
+#line 437 "../../src/intel-parse.yy"
                           { (yyval.addr) = (yyvsp[0].imm); }
-#line 2727 "../../src/intel-parse.cc"
+#line 2840 "../../src/intel-parse.cc"
     break;
 
   case 136: /* define_size: "directive"  */
-#line 439 "../../src/intel-parse.yy"
+#line 440 "../../src/intel-parse.yy"
                      { (yyval.number) = 1; }
-#line 2733 "../../src/intel-parse.cc"
+#line 2846 "../../src/intel-parse.cc"
     break;
 
   case 137: /* define_size: T_DW  */
-#line 440 "../../src/intel-parse.yy"
+#line 441 "../../src/intel-parse.yy"
                      { (yyval.number) = 2; }
-#line 2739 "../../src/intel-parse.cc"
+#line 2852 "../../src/intel-parse.cc"
     break;
 
   case 138: /* define_size: T_DD  */
-#line 441 "../../src/intel-parse.yy"
+#line 442 "../../src/intel-parse.yy"
                      { (yyval.number) = 4; }
-#line 2745 "../../src/intel-parse.cc"
+#line 2858 "../../src/intel-parse.cc"
     break;
 
   case 139: /* define_size: T_DQ  */
-#line 442 "../../src/intel-parse.yy"
+#line 443 "../../src/intel-parse.yy"
                      { (yyval.number) = 8; }
-#line 2751 "../../src/intel-parse.cc"
+#line 2864 "../../src/intel-parse.cc"
     break;
 
 
-#line 2755 "../../src/intel-parse.cc"
+#line 2868 "../../src/intel-parse.cc"
 
       default: break;
     }
@@ -2772,6 +2885,7 @@ yyreduce:
   yylen = 0;
 
   *++yyvsp = yyval;
+  *++yylsp = yyloc;
 
   /* Now 'shift' the result of the reduction.  Determine what state
      that goes to, based on the state we popped back to and the rule
@@ -2800,7 +2914,7 @@ yyerrlab:
       ++yynerrs;
       {
         yypcontext_t yyctx
-          = {yyssp, yytoken};
+          = {yyssp, yytoken, &yylloc};
         char const *yymsgp = YY_("syntax error");
         int yysyntax_error_status;
         yysyntax_error_status = yysyntax_error (&yymsg_alloc, &yymsg, &yyctx);
@@ -2831,6 +2945,7 @@ yyerrlab:
       }
     }
 
+  yyerror_range[1] = yylloc;
   if (yyerrstatus == 3)
     {
       /* If just tried and failed to reuse lookahead token after an
@@ -2845,7 +2960,7 @@ yyerrlab:
       else
         {
           yydestruct ("Error: discarding",
-                      yytoken, &yylval);
+                      yytoken, &yylval, &yylloc);
           yychar = YYEMPTY;
         }
     }
@@ -2898,9 +3013,9 @@ yyerrlab1:
       if (yyssp == yyss)
         YYABORT;
 
-
+      yyerror_range[1] = *yylsp;
       yydestruct ("Error: popping",
-                  YY_ACCESSING_SYMBOL (yystate), yyvsp);
+                  YY_ACCESSING_SYMBOL (yystate), yyvsp, yylsp);
       YYPOPSTACK (1);
       yystate = *yyssp;
       YY_STACK_PRINT (yyss, yyssp);
@@ -2910,6 +3025,9 @@ yyerrlab1:
   *++yyvsp = yylval;
   YY_IGNORE_MAYBE_UNINITIALIZED_END
 
+  yyerror_range[2] = yylloc;
+  ++yylsp;
+  YYLLOC_DEFAULT (*yylsp, yyerror_range, 2);
 
   /* Shift the error token.  */
   YY_SYMBOL_PRINT ("Shifting", YY_ACCESSING_SYMBOL (yyn), yyvsp, yylsp);
@@ -2955,7 +3073,7 @@ yyreturn:
          user semantic actions for why this is necessary.  */
       yytoken = YYTRANSLATE (yychar);
       yydestruct ("Cleanup: discarding lookahead",
-                  yytoken, &yylval);
+                  yytoken, &yylval, &yylloc);
     }
   /* Do not reclaim the symbols of the rule whose action triggered
      this YYABORT or YYACCEPT.  */
@@ -2964,7 +3082,7 @@ yyreturn:
   while (yyssp != yyss)
     {
       yydestruct ("Cleanup: popping",
-                  YY_ACCESSING_SYMBOL (+*yyssp), yyvsp);
+                  YY_ACCESSING_SYMBOL (+*yyssp), yyvsp, yylsp);
       YYPOPSTACK (1);
     }
 #ifndef yyoverflow

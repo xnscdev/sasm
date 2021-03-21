@@ -21,11 +21,40 @@
 #define _COFF_DISABLE_DEFINES /* Prevent name clashes with Yacc defines */
 
 #include <string>
+#include "error.hh"
 #include "gen-obj.hh"
 #include "intel-parse.hh"
 
 #define SAVE_NUMBER (yylval.number = std::stoll (yytext, nullptr, 0))
 #define SAVE_STRING (yylval.string = new std::string (yytext, yyleng))
+
+#define YY_USER_ACTION do                       \
+    {                                           \
+      int i;                                    \
+      yylloc.first_line = yylloc.last_line;     \
+      yylloc.first_column = yylloc.last_column; \
+      for (i = 0; yytext[i] != '\0'; i++)       \
+        {                                       \
+          if (yytext[i] == '\n')                \
+            {                                   \
+              yylloc.last_line++;               \
+              yylloc.last_column = 0;           \
+            }                                   \
+          else                                  \
+            yylloc.last_column++;               \
+        }                                       \
+    }                                           \
+  while (false);
+
+void
+yyerror (const char *msg)
+{
+  YYLTYPE *loc = &yylloc;
+  error (std::to_string (loc->first_line) + "." +
+	 std::to_string (loc->first_column) + "-" +
+	 std::to_string (loc->last_line) + "." +
+	 std::to_string (loc->last_column) + ": " + msg);
+}
 
 %}
 
