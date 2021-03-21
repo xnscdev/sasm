@@ -341,9 +341,9 @@ public:
 class AsmInstLOOP : public AsmInst
 {
 public:
-  uint32_t addr;
+  AsmPointer *addr;
 
-  AsmInstLOOP (uint32_t addr) : addr (addr) {}
+  AsmInstLOOP (AsmPointer *addr) : addr (addr) {}
   size_t width (const AsmContext &ctx);
   bool assemble (std::vector <unsigned char> &result,
 		 const AsmContext &ctx);
@@ -352,9 +352,9 @@ public:
 class AsmInstLOOPNZ : public AsmInst
 {
 public:
-  uint32_t addr;
+  AsmPointer *addr;
 
-  AsmInstLOOPNZ (uint32_t addr) : addr (addr) {}
+  AsmInstLOOPNZ (AsmPointer *addr) : addr (addr) {}
   size_t width (const AsmContext &ctx);
   bool assemble (std::vector <unsigned char> &result,
 		 const AsmContext &ctx);
@@ -363,9 +363,9 @@ public:
 class AsmInstLOOPZ : public AsmInst
 {
 public:
-  uint32_t addr;
+  AsmPointer *addr;
 
-  AsmInstLOOPZ (uint32_t addr) : addr (addr) {}
+  AsmInstLOOPZ (AsmPointer *addr) : addr (addr) {}
   size_t width (const AsmContext &ctx);
   bool assemble (std::vector <unsigned char> &result,
 		 const AsmContext &ctx);

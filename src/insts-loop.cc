@@ -30,11 +30,12 @@ bool
 AsmInstLOOP::assemble (std::vector <unsigned char> &result,
 		       const AsmContext &ctx)
 {
-  long long rel = (long long) addr - curraddr;
+  long long rel = (long long) addr->get_addr () - curraddr;
   if (rel <= INT8_MIN + 2 || rel >= INT8_MAX - 2)
     return false;
   result.push_back (ASM_OPCODE_LOOP);
-  result.push_back ((unsigned char) addr - (unsigned char) curraddr);
+  result.push_back ((unsigned char) addr->get_addr () -
+		    (unsigned char) curraddr);
   return true;
 }
 
@@ -48,11 +49,12 @@ bool
 AsmInstLOOPNZ::assemble (std::vector <unsigned char> &result,
 			 const AsmContext &ctx)
 {
-  long long rel = (long long) addr - curraddr;
+  long long rel = (long long) addr->get_addr () - curraddr;
   if (rel <= INT8_MIN + 2 || rel >= INT8_MAX - 2)
     return false;
   result.push_back (ASM_OPCODE_LOOPNZ);
-  result.push_back ((unsigned char) addr - (unsigned char) curraddr);
+  result.push_back ((unsigned char) addr->get_addr () -
+		    (unsigned char) curraddr);
   return true;
 }
 
@@ -66,10 +68,11 @@ bool
 AsmInstLOOPZ::assemble (std::vector <unsigned char> &result,
 			const AsmContext &ctx)
 {
-  long long rel = (long long) addr - curraddr;
+  long long rel = (long long) addr->get_addr () - curraddr;
   if (rel <= INT8_MIN + 2 || rel >= INT8_MAX - 2)
     return false;
   result.push_back (ASM_OPCODE_LOOPZ);
-  result.push_back ((unsigned char) addr - (unsigned char) curraddr);
+  result.push_back ((unsigned char) addr->get_addr () -
+		    (unsigned char) curraddr);
   return true;
 }

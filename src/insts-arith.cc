@@ -234,7 +234,7 @@ assemble_r_imm (std::vector <unsigned char> &result,
       else
 	{
 	  if (src->value < INT8_MIN || src->value > INT8_MAX)
-	    result.push_back (arith_ax_immx_opcode (type));
+	    result.push_back (ASM_OPCODE_ARITH_RM_IMMX);
 	  else
 	    result.push_back (ASM_OPCODE_ARITH_RMX_IMM8);
 	  if (!write_operand (arith_opcode_ext (type), dest, ctx, result))

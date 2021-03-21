@@ -40,6 +40,7 @@ extern Object *result;
 {
   AsmInstARITHType arith;
   AsmInstJFType jf;
+  AsmInstROTSHFType rotshf;
   AsmInstZOType zo;
   AsmInstZOSType zos;
   long long number;
@@ -50,6 +51,7 @@ extern Object *result;
   AsmImmediate *imm;
   AsmIdentifier *label;
   AsmInst *inst;
+  AsmStringInst *strinst;
   AsmExpr *expr;
   AsmStorage *storage;
   AsmRegister *reg;
@@ -73,6 +75,7 @@ extern Object *result;
 %token	<jf>		T_JF "instruction mnemonic"
 %token	<zo>		T_ZO "instruction mnemonic"
 %token	<zos>		T_ZOS "instruction mnemonic"
+%token	<rotshf>	T_ROTSHF "instruction mnemonic"
 
 %token T_AAD "instruction mnemonic"
 %token T_AAM "instruction mnemonic"
@@ -96,6 +99,7 @@ extern Object *result;
 %token T_MOVS "instruction mnemonic"
 %token T_MUL "instruction mnemonic"
 %token T_NEG "instruction mnemonic"
+%token T_NOP "instruction mnemonic"
 %token T_NOT "instruction mnemonic"
 %token T_OUT "instruction mnemonic"
 %token T_OUTS "instruction mnemonic"
@@ -159,6 +163,8 @@ extern Object *result;
 %type	<expr>		expression
 %type	<imm>		immediate
 %type	<inst>		instruction directive ascii_inst call_inst port_inst
+%type	<inst>		jmp_inst rep_inst
+%type	<strinst>	string_inst
 %type	<obj>		object
 %type	<reg>		reg
 %type	<mem>		memloc
@@ -202,7 +208,7 @@ instruction:	T_ARTH storage ',' expression
 		}
 	|	T_JF addr { $$ = new AsmInstJF ($1, $2, 4); }
 	|	T_ZO { $$ = new AsmInstZO ($1); }
-	|	T_ZOS size_specifier { $$ = new AsmInstZOS ($1, $2); }
+	|	string_inst { $$ = $1; }
 	|	ascii_inst
 	|	call_inst
 	|	T_DEC storage { $$ = new AsmInstDEC ($2); }
@@ -211,7 +217,37 @@ instruction:	T_ARTH storage ',' expression
 	|	T_IMUL storage { $$ = new AsmInstIMUL ($2); }
 	|	T_INC storage { $$ = new AsmInstINC ($2); }
 	|	port_inst
+	|	T_INT T_NUMBER { $$ = new AsmInstINT (2); }
+	|	jmp_inst
+	|	T_LEA reg ',' memloc { $$ = new AsmInstLEA ($2, $4); }
+	|	T_LOOP addr { $$ = new AsmInstLOOP ($2); }
+	|	T_LOOPNZ addr { $$ = new AsmInstLOOPNZ ($2); }
+	|	T_LOOPZ addr { $$ = new AsmInstLOOPZ ($2); }
 	|	T_MOV storage ',' expression { $$ = new AsmInstMOV ($2, $4); }
+	|	T_MUL storage { $$ = new AsmInstMUL ($2); }
+	|	T_NEG storage { $$ = new AsmInstNEG ($2); }
+	|	T_NOP
+		{
+		  $$ = new AsmInstXCHG (AsmRegister::EAX, AsmRegister::EAX);
+		}
+	|	T_NOT storage { $$ = new AsmInstNOT ($2); }
+	|	T_POP storage { $$ = new AsmInstPOP ($2); }
+	|	T_PUSH storage { $$ = new AsmInstPUSH ($2); }
+	|	rep_inst
+	|	T_RET { $$ = new AsmInstRET (false); }
+	|	T_RET T_NEAR { $$ = new AsmInstRET (false); }
+	|	T_RET T_NUMBER { $$ = new AsmInstRET (false, $2); }
+	|	T_RET T_NEAR T_NUMBER { $$ = new AsmInstRET (false, $3); }
+	|	T_RET T_FAR { $$ = new AsmInstRET (true); }
+	|	T_RET T_FAR T_NUMBER { $$ = new AsmInstRET (true, $3); }
+	|	T_ROTSHF storage { $$ = new AsmInstROTSHF ($1, $2, 1); }
+	|	T_ROTSHF storage ',' T_NUMBER
+		{
+		  $$ = new AsmInstROTSHF ($1, $2, $4);
+		}
+	|	T_ROTSHF storage ',' T_CL { $$ = new AsmInstROTSHF ($1, $2); }
+	|	T_TEST storage ',' expression { $$ = new AsmInstTEST ($2, $4); }
+	|	T_XCHG storage ',' storage { $$ = new AsmInstXCHG ($2, $4); }
 	|	directive
 	;
 
@@ -245,6 +281,25 @@ port_inst:	T_IN T_AL ',' T_NUMBER { $$ = new AsmInstIN ($4, 1); }
 	|	T_OUT T_DX ',' T_AX { $$ = new AsmInstOUT (2); }
 	|	T_OUT T_NUMBER ',' T_EAX { $$ = new AsmInstOUT ($2, 4); }
 	|	T_OUT T_DX ',' T_EAX { $$ = new AsmInstOUT (4); }
+	;
+
+jmp_inst:	T_JMP addr { $$ = new AsmInstJMP ($2, 4); }
+	|	T_JMP T_NEAR addr { $$ = new AsmInstJMP ($3, 4); }
+	|	T_JMP T_NUMBER ':' T_NUMBER { $$ = new AsmInstJMPF ($2, $4); }
+	|	T_JMP T_FAR T_NUMBER ':' T_NUMBER
+		{
+		  $$ = new AsmInstJMPF ($3, $5);
+		}
+	|	T_JMP storage { $$ = new AsmInstJMP ($2); }
+	|	T_JMP T_NEAR storage { $$ = new AsmInstJMP ($3); }
+	|	T_JMP T_FAR memloc { $$ = new AsmInstJMPF ($3); }
+	;
+
+string_inst:	T_ZOS size_specifier { $$ = new AsmInstZOS ($1, $2); }
+	;
+
+rep_inst:	T_REPNZ string_inst { $$ = new AsmInstREPNZ ($2); }
+	|	T_REPZ string_inst { $$ = new AsmInstREPZ ($2); }
 	;
 
 directive:	T_GLOBAL T_IDENT { global_syms.insert (*$2); delete $2; }
