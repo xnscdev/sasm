@@ -3,3 +3,7 @@
 ._*
 autom4te.cache
 build
+aclocal.m4
+build-aux
+configure
+Makefile.in
